@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<params>
+    <param name="args.eqnlink.style"
+        desc="Specifies how cross references to equations are styled." type="enum">
+        <val default="true">NUMBER</val>
+        <val>TITLE</val>
+        <val>NUMTITLE</val>
+    </param>
+    <param name="args.mathml.processing" desc="Specifies method for processing MathML"
+        type="enum">
+        <val default="true">none</val>
+        <val>mathjax-pre</val>
+        <val>mathjax</val>
+        <val>jeuclid</val>
+    </param>
+</params>

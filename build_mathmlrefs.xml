@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright © Bentley Systems, Incorporated. All rights reserved
+-->
+<project xmlns:dita="http://dita-ot.sourceforge.net"
+   name="equation-and-math-handling">
+
+   <target name="bentley:mathmlrefs" depends="bentley:copy-mathml"
+      description="Copy MathML files to temp for including within topics before XSLT">
+   </target>
+   
+   <target name="bentley:copy-mathml">
+      <echo level="info">*****************************************************************</echo>
+      <echo level="info">* Copy MathML files to temp directory</echo>
+      <echo level="info">*    user.input.dir = ${user.input.dir}</echo>
+      <echo level="info">*    dita.temp.dir = ${dita.temp.dir}</echo>
+      <echo level="info">*****************************************************************</echo>
+      <copy todir="${dita.temp.dir}">
+         <fileset dir="${user.input.dir}" includes="**/*.mml"/>         
+      </copy>
+   </target>
+   
+
+   
+   <!--<target name="bentley:equations" depends="bentley:equations-init"/>-->
+   
+   <target name="bentley:equations-init">
+      <condition property="mathml.processing" value="none">
+         <not>
+            <isset property="args.mathml.processing"/>
+         </not>
+       </condition>
+      <echo level="info">*****************************************************************</echo>
+      <echo level="info">* Log the MathML &amp; equation processing arguments:</echo>
+      <echo level="info">*    args.mathml.processing = ${args.mathml.processing}</echo>
+      <echo level="info">*    args.eqnlink.style = ${args.eqnlink.style}</echo>
+      <echo level="info">*****************************************************************</echo>      
+   </target>
+
+</project>

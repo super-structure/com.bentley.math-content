@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+Copyright © Bentley Systems, Incorporated. All rights reserved
+-->
+<?xml-model href="strings.rnc" type="application/relax-ng-compact-syntax"?>
+<variables>
+     <variable id="Where">où</variable>
+     <variable id="Equation">Équation</variable>
+     <variable id="Equality">=</variable>
+     <variable id="EqnAbbr">Eqn.</variable>
+     <variable id="List of Equations">List of Equations</variable>
+     <variable id="equation-number-separator"> </variable>
+</variables>

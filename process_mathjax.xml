@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project
+    xmlns:if="ant:if"
+    xmlns:unless="ant:unless"
+    xmlns:dita="http://dita-ot.sourceforge.net"
+    name="com.bentley.dita.mathjax"
+>
+
+    <target name="bentley:node.check">
+        <!-- For Unix run node as an executable -->
+        <exec
+            executable="node"
+            dir="${dita.dir}"
+            osfamily="unix"
+            taskname="node"
+            resultproperty="node.result"
+            outputproperty="node.out"
+            failonerror="false"
+            failifexecutionfails="false"
+        >
+            <arg line="-v" />
+        </exec>
+        <!-- For Windows run from a DOS command -->
+        <exec
+            executable="cmd"
+            dir="${dita.dir}"
+            osfamily="windows"
+            taskname="node"
+            resultproperty="node.result"
+            errorproperty="mathjax.node.error"
+            failonerror="true"
+            failifexecutionfails="true"
+        >
+            <arg value="/C" />
+            <arg value="node -v" />
+        </exec>
+
+        <condition property="node.installed">
+            <equals arg1="${node.result}" arg2="0" />
+        </condition>
+
+        <dita-ot-fail unless:set="node.installed" id="MTJX003F" />
+    </target>
+
+    <target name="bentley:mathjax-copy">
+        <property name="mathjax.package.file" value="package.json" />
+        <touch file="${dita.temp.dir}\${mathjax.package.file}" />
+        <tempfile
+            property="mathjax.node.script.file"
+            deleteonexit="false"
+            destdir="${dita.temp.dir}"
+            createfile="true"
+        />
+        <copy
+            file="${dita.plugin.com.bentley.math-content.dir}/resource/mathjax-node.js"
+            toFile="${mathjax.node.script.file}"
+            overwrite="true"
+        />
+        <copy
+            file="${dita.plugin.com.bentley.math-content.dir}/resource/package.json"
+            toFile="${dita.temp.dir}\${mathjax.package.file}"
+            overwrite="true"
+        />
+        <property name="mathjax.package.json" location="${mathjax.package.file}" />
+        <property name="mathjax.node.script" location="${mathjax.node.script.file}" />
+    </target>
+
+    <target name="bentley:mathjax-npm">
+        <exec
+            executable="cmd"
+            dir="${dita.temp.dir}"
+            osfamily="windows"
+            taskname="Install npm packages"
+            resultproperty="mathjax.npm.result"
+            errorproperty="mathjax.npm.error"
+        >
+            <arg value="/C" />
+            <arg
+                value="npm i"
+            />
+        </exec>
+    </target>
+
+    <target name="bentley:mathjax-exec">
+        <exec
+            executable="cmd"
+            dir="${dita.dir}"
+            osfamily="windows"
+            taskname="Actual mathjax work!!"
+            resultproperty="mathjax.node.result"
+            logError="true"
+            failonerror="true"
+            failifexecutionfails="true"
+        >
+            <arg value="/C" />
+            <arg
+                value="node ${mathjax.node.script} ${dita.temp.dir}"
+            />
+        </exec>
+    </target>
+
+    <target name="bentley:mathjax.init" depends="bentley:node.check, bentley:mathjax-copy, bentley:mathjax-npm" />
+    <target name="bentley:mathjax.post" depends="bentley:mathjax-exec" />
+</project>

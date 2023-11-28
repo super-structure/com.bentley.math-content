@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map>
+    <title>Math Content Sample</title>
+    <topicref href="dita_math_content_sample.dita">
+        <topicref href="concept_with_mathml.dita"/>
+    </topicref>
+</map>
