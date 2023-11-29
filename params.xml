@@ -10,7 +10,8 @@
         type="enum">
         <val default="true">none</val>
         <val>mathjax-pre</val>
-        <val>mathjax</val>
+        <val>mathjax-local</val>
+        <val>mathjax-cdn</val>
         <val>jeuclid</val>
     </param>
 </params>
