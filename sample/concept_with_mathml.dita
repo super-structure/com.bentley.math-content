@@ -17,6 +17,42 @@
                         </m:mfrac>
                     </m:math>
                 </mathml>.</equation-inline></p>
+        <p>An <xmlelement>equation-block</xmlelement> element:</p>
+        <equation-block>
+            <mathml>
+                <m:math display="block">
+                    <m:mrow>
+                        <m:mi>x</m:mi>
+                        <m:mo>=</m:mo>
+                        <m:mfrac>
+                            <m:mrow>
+                                <m:mo form="prefix">-</m:mo>
+                                <m:mi>b</m:mi>
+                                <m:mo>±</m:mo>
+                                <m:msqrt>
+                                    <m:msup>
+                                        <m:mi>b</m:mi>
+                                        <m:mn>2</m:mn>
+                                    </m:msup>
+                                    <m:mo>-</m:mo>
+                                    <m:mn>4</m:mn>
+                                    <m:mo>⁢</m:mo>
+                                    <m:mi>a</m:mi>
+                                    <m:mo>⁢</m:mo>
+                                    <m:mi>c</m:mi>
+                                </m:msqrt>
+                            </m:mrow>
+                            <m:mrow>
+                                <m:mn>2</m:mn>
+                                <m:mo>⁢</m:mo>
+                                <m:mi>a</m:mi>
+                            </m:mrow>
+                        </m:mfrac>
+                    </m:mrow>
+                </m:math>
+                
+            </mathml>
+        </equation-block>
         <section>
             <title>Equation Block with Symbology</title>
             <p>A list of symbology definitions can be included in a <xmlelement>dl</xmlelement>.</p>
@@ -140,7 +176,7 @@
                             </m:mrow>
                         </m:math>
                     </mathml>
-                    <equation-number>Eqn 10</equation-number>
+                    <equation-number>Eqn 1</equation-number>
                 </equation-block>
                 <dl outputclass="eqsymbols">
                     <dlentry>
@@ -267,6 +303,16 @@
                     </dlentry>
                 </dl>
             </equation-figure>
+        </section>
+        <section>
+            <title>Math References</title>
+            <p>An <xmlelement>mathref</xmlelement> element to an external <filepath>.mml</filepath> file:</p>
+            <equation-block>
+                <mathml>
+                    <mathmlref href="./MathML/ex1_binomial_coeff.mml"/>
+                </mathml>
+            </equation-block>
+                
         </section>
     </conbody>
 </concept>

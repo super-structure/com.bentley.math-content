@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE math PUBLIC "-//W3C//DTD MathML 3.0//EN" "http://www.w3.org/Math/DTD/mathml3/mathml3.dtd">
+<math>
+    <mrow>
+        <mi>C</mi>
+        <mrow>
+            <mo>(</mo>
+            <mi>n</mi>
+            <mo>, </mo>
+            <mi>k</mi>
+            <mo>)</mo>
+        </mrow>
+        <mo>=</mo>
+        <msubsup>
+            <mi>C</mi>
+            <mi>k</mi>
+            <mi>n</mi>
+        </msubsup>
+        <mo>=</mo>
+        <mmultiscripts>
+            <mi>C</mi>
+            <mi>k</mi>
+            <none/>
+            <mprescripts/>
+            <mi>n</mi>
+            <none/>
+        </mmultiscripts>
+        <mo>=</mo>
+        <mrow>
+            <mo>(</mo>
+            <mfrac linethickness="0">
+                <mi>n</mi>
+                <mi>k</mi>
+            </mfrac>
+            <mo>)</mo>
+        </mrow>
+        <mo>=</mo>
+        <mfrac>
+            <mrow>
+                <mi>n</mi>
+                <mo lspace="0">!</mo>
+            </mrow>
+            <mrow>
+                <mi>k</mi>
+                <mo lspace="0">!</mo>
+                <mo rspace="0.22em">&InvisibleTimes;</mo>
+                <mrow>
+                    <mo>(</mo>
+                    <mrow>
+                        <mi>n</mi>
+                        <mo>&minus;</mo>
+                        <mi>k</mi>
+                    </mrow>
+                    <mo>)</mo>
+                </mrow>
+                <mo lspace="0">!</mo>
+            </mrow>
+        </mfrac>
+    </mrow>
+</math>

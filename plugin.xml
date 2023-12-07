@@ -6,11 +6,12 @@
 *
 ****************************************************************************** -->
 <plugin id="com.bentley.math-content" version="0.2.0">
-    <require plugin="org.dita.pdf2"/>
-    <require plugin="org.dita.html5"/>
     <feature extension="package.version" value="0.2.0"/>
     <feature extension="package.support.name" value="Jason Coleman"/>
     <feature extension="package.support.email" value="jason.coleman@bentley.com"/>
+    
+    <require plugin="org.dita.pdf2"/>
+    <require plugin="org.dita.html5"/>
 
     <extension-point id="dita.mathml.extensions" name="MathML file extension"/>
     
@@ -22,6 +23,9 @@
     
     <!--<feature extension="dita.conductor.html5.param" file="params.xml"/>-->  <!-- best practice is to include params in a separate file? -->
     <feature extension="ant.import" file="build_mathmlrefs.xml"/>
+    <feature extension="dita.xsl.messages" file="resource/messages.xml"/>
+    
+    <feature extension="depend.preprocess.pre" value="bentley:math-content-init"/>
     <feature extension="depend.preprocess.copy-files.pre" value="bentley:mathmlrefs"/>
     <!--<feature extension="ant.import" file="process_mathjax.xml" />
     <feature extension="depend.preprocess.pre" value="bentley:mathjax.init" />
@@ -36,22 +40,38 @@
     <feature extension="dita.xsl.xslfo" value="xsl/fo/equation-domain.xsl" type="file"/>
 
     <feature extension="dita.xsl.strings" file="cfg/common/vars/strings.xml"/>
-    <feature extension="dita.mathml.extensions" value=".mml"/>    
+    <feature extension="dita.mathml.extensions" value=".mml"/>
     
-    <!-- TODO: these will be used in the XSLT sheets, need to pass these on -->
-    <!--<transtype name="base-html" abstract="true" desc="Common">
+    <transtype name="base-html" extends="base-html"
+        desc="Math content parameters for HTML output">
         <param name="args.eqnlink.style"
             desc="Specifies how cross references to equations are styled." type="enum">
-            <val default="true">NUMBER</val>
-            <val>TITLE</val>
-            <val>NUMTITLE</val>
+            <val default="true">full</val>
+            <val>aabr</val>
         </param>
         <param name="args.mathml.processing" desc="Specifies method for processing MathML"
             type="enum">
-            <val default="true" desc="use MathML mark up in the resulting HTML or FO">none</val>
+            <val default="true" desc="use MathML mark up in the resulting HTML">none</val>
             <val desc="Use MathJax-Node to pre-render the MathML into SVG">mathjax-pre</val>
-            <val desc="Use MathML markup in resulting HTML and add MathJax CDN in footer">mathjax</val>
+            <val desc="Use MathML markup in resulting HTML and add link to local copy of MathJax in footer">mathjax-local</val>
+            <val desc="Use MathML markup in resulting HTML and add MathJax CDN in footer">mathjax-cdn</val>
             <val desc="Use JEuclid Java library to pre-render the MathML into SVG">jeuclid</val>
         </param>
-    </transtype>-->
+    </transtype>
+    
+    <transtype name="pdf" extends="pdf" 
+        desc="Math content parameters for PDF output">
+        <param name="args.eqnlink.style"
+            desc="Specifies how cross references to equations are styled." type="enum">
+            <val default="true">full</val>
+            <val>abbr</val>
+        </param>
+        <param name="args.mathml.processing" desc="Specifies method for processing MathML"
+            type="enum">
+            <val default="true" desc="use MathML mark up in the resulting FO">none</val>
+            <val desc="Use MathJax-Node to pre-render the MathML into SVG">mathjax-pre</val>
+            <val desc="Use JEuclid Java library to pre-render the MathML into SVG">jeuclid</val>
+        </param>
+    </transtype>
+    <feature extension="dita.conductor.html5.toc.param" file="params.xml"/>
 </plugin>

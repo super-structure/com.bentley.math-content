@@ -16,6 +16,8 @@
     - XSLT that copies out MML or LaTeX content to a file with a given ID as the filename; preprocess2.topic
     - Run mathjax-node on that external file to produce external SVG; preprocess2.topic
     - Use XSLT again to copy back in the SVG contents; html5.topic & transform.topic2fo
+    - Another possilbe option: [pymathematical](https://github.com/Danmou/pymathematical)?
+    - [TexZilla](http://fred-wang.github.io/TeXZilla/) ([on GitHub](https://github.com/fred-wang/TeXZilla)) - TeX 2 MathML 2 SVG
 * [ ] Provide fetch mechanism for equation number for links to an equation-block or equation-figure (without title)
 * [x] Automatic equation numbering (when `<equation-number>` element is empty)
 * [ ] Special transformation & rendering of definition lists as equation symbols

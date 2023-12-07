@@ -42,7 +42,7 @@ public class MathMLToSVG extends ExtensionFunctionDefinition {
 
 	  @Override
 	  public StructuredQName getFunctionQName() {
-	    return new StructuredQName("MathMLToSVG", "java:com.bentley.mathml.svg.MathMLToSVG", "convert");
+	    return new StructuredQName("mathjax", "https://www.mathjax.org/MathMLToSVG", "mml2svg");
 	  }
 
 	  @Override

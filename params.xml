@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<params>
-    <param name="args.eqnlink.style"
-        desc="Specifies how cross references to equations are styled." type="enum">
-        <val default="true">NUMBER</val>
-        <val>TITLE</val>
-        <val>NUMTITLE</val>
-    </param>
-    <param name="args.mathml.processing" desc="Specifies method for processing MathML"
-        type="enum">
-        <val default="true">none</val>
-        <val>mathjax-pre</val>
-        <val>mathjax-local</val>
-        <val>mathjax-cdn</val>
-        <val>jeuclid</val>
-    </param>
+<params xmlns:if="ant:if">
+    <!-- list of parameters passed to XSLT -->
+    <param
+        name="EQN-PREFIX"
+        expression="${args.eqnlink.style}"
+        if:set="args.eqnlink.style"
+    />
+    <param
+        name="MATH-PROC"
+        expression="${args.mathml.processing}"
+        if:set="args.mathml.processing"
+    />
 </params>
