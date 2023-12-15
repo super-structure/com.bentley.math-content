@@ -18,6 +18,7 @@
             <!-- TODO:
                 - Include flag for using MathJax client-side rendering (vs. pre-render)
                 - Include flag for using local copy of MathJax vs CDN
+                - Move this to the processFTR template
             -->
             <script type="text/javascript" id="MathJax-script" async="true"
                 src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"><xsl:text> </xsl:text></script>

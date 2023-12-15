@@ -142,7 +142,7 @@
                     </mathml>
                     <equation-number>Eqn 10</equation-number>
                 </equation-block>
-                <dl outputclass="eqsymbols">
+                <dl>
                     <dlentry>
                         <dt>
                             <equation-inline>M<sub>u</sub>
