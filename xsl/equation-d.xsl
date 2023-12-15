@@ -65,4 +65,41 @@
         </span>
     </xsl:template>
     
+    <xsl:template match="*[contains(@class,' equation-d/equation-figure ')]//*[contains(@class,'- topic/dl ')]"  name="topic.equation-d.fig.dl">
+        <xsl:if test="preceding-sibling::*[contains(@class,' equation-d/equation-block ')]">
+            <p>
+                <xsl:call-template name="getVariable">
+                    <xsl:with-param name="id" select="'Where'"/>
+                </xsl:call-template>
+            </p>
+        </xsl:if>
+        <dl>
+            <xsl:call-template name="commonattributes">
+                <xsl:with-param name="default-output-class">eqn-dl</xsl:with-param>
+            </xsl:call-template>
+            <xsl:call-template name="setid"/>
+            <xsl:apply-templates mode="eqn-fig-dl"/>
+        </dl>
+    </xsl:template>
+    
+    <xsl:template match="*[contains(@class, ' topic/dt ')]" name="topic.equation-d.fig.dt" mode="eqn-fig-dl">
+        <dt>
+            <xsl:call-template name="commonattributes">
+                <xsl:with-param name="default-output-class">eqn-dt</xsl:with-param>
+            </xsl:call-template>
+            <xsl:call-template name="setid"/>
+            <xsl:apply-templates/>
+        </dt>
+    </xsl:template>
+    
+    <xsl:template match="*[contains(@class, ' topic/dd ')]" name="topic.equation-d.fig.dd" mode="eqn-fig-dl">
+        <dd>
+            <xsl:call-template name="commonattributes">
+                <xsl:with-param name="default-output-class">eqn-dd</xsl:with-param>
+            </xsl:call-template>
+            <xsl:call-template name="setid"/>
+            <xsl:apply-templates/>
+        </dd>
+    </xsl:template>
+    
 </xsl:stylesheet>

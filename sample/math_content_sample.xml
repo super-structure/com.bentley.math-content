@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="https://www.dita-ot.org/project">
+  <context name="Math Content Sample HTML" id="math_content_sample_html">
+    <input href="math_content_sample.ditamap"/>
+  </context>
+  <deliverable name="Math Content Sample HTML5" id="ug_html5">
+    <context idref="math_content_sample_html"/>
+    <output href="./html5-output"/>
+    <publication transtype="html5">
+      
+    </publication>
+  </deliverable>
+</project>
