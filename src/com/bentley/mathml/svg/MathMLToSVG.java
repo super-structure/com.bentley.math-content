@@ -42,7 +42,7 @@ public class MathMLToSVG extends ExtensionFunctionDefinition {
 
 	  @Override
 	  public StructuredQName getFunctionQName() {
-	    return new StructuredQName("MathMLToSVG", "java:com.bentley.mathml.svg.MathMLToSVG", "convert");
+	    return new StructuredQName("mathjax", "https://www.mathjax.org/MathMLToSVG", "mml2svg");
 	  }
 
 	  @Override
@@ -55,6 +55,22 @@ public class MathMLToSVG extends ExtensionFunctionDefinition {
 		return new ExtensionFunctionCall() {
 
 			@Override
+			/* 1) write out mathml contents to file */
+
+			/* 2) use ProcessBuilder to create Node.js call */
+
+			/* 3) perform any necessary post-processing on returned SVG via XSLT 
+			 * Note: Preferably, much of the issues can be handled just using a
+			 *       MathJax config file. a) 'ex' cannot be used for lengths.
+			 *       b) remove @role, @focusable, @data-c
+			 *       c) change @data-mml to @class
+			*/
+
+			/* 4) return SVG string */
+
+			/* error handling? */
+			
+			
 			public Sequence call(XPathContext arg0, Sequence[] arguments) throws XPathException {
 				String mathml = ((StringValue) arguments[0].iterate().next()).getStringValue();
 				DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();

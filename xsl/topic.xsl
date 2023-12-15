@@ -9,11 +9,12 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     exclude-result-prefixes="xs"
     version="2.0">
-
+    
     <xsl:param name="MATH-PROC"/>
     <xsl:param name="MATHJAX-DIR"/>
-
-    <xsl:template match="*[contains(@class,' topic/body ']//mathml" mode="processFTR">
+    
+    <!-- ref: https://www.dita-ot.org/dev/topics/html-customization-plugin-javascript -->
+    <xsl:template match="*[contains(@class,' topic/body ')]//mathml" mode="processFTR">
         <xsl:choose>
             <xsl:when test="$MATH-PROC = 'mathjax-cdn'">
                 <script type="text/javascript" id="MathJax-script" async="true"
@@ -25,6 +26,5 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-
     
 </xsl:stylesheet>

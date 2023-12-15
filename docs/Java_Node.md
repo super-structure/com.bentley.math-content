@@ -9,7 +9,7 @@ For example, using a function like:
 
 The basic principle here is as follows:
 
-* Use the [Integrated extension function](https://www.saxonica.com/html/documentation9.8/extensibility/integratedfunctions/index.html) capability in Saxon HE to create a custom class which uses the `net.sf.saxon.lib.ExtensionFunctionDefinition` API.
+* Use the [Integrated extension function](https://www.saxonica.com/html/documentation9.8/extensibility/integratedfunctions/index.html) capability in Saxon HE to create a custom class which uses the `net.sf.saxon.lib.ExtensionFunctionDefinition` API. Example: [https://stackoverflow.com/a/24508098](https://stackoverflow.com/a/24508098)
 * This Java class simply runs MathJax-Node via the command line and passes on the "input" MathML and returns the "output" SVG
 * The Java class must be compiled into a JAR file and then [added to the DITA-OT class path](https://www.dita-ot.org/dev/topics/plugin-javalib) (via the `dita.conductor.lib.import` extension point).
 * Java class calls MathJax-Node.js via the java.lang.ProcessBuilder API.

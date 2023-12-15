@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE math PUBLIC "-//W3C//DTD MathML 3.0//EN" "http://www.w3.org/Math/DTD/mathml3/mathml3.dtd">
+<math style="font-size: 9pt" display="block">
+    <mrow>
+        <msub>
+            <mi>&gamma;</mi>
+            <mn>1</mn>
+        </msub>
+        <mo>&equiv;</mo>
+        <msub>
+            <mi>&gamma;</mi>
+            <mn>2</mn>
+        </msub>
+        <mo lspace="0.39em" rspace="0.39em">&Longleftrightarrow;</mo>
+        <mrow>
+            <mo>{</mo>
+            <mtable class="thin_column_padding" columnalign="left">
+                <mtr>
+                    <mtd style="text-align: left">
+                        <msub>
+                            <mi>&gamma;</mi>
+                            <mn>1</mn>
+                        </msub>
+                        <mo>&ApplyFunction;</mo>
+                        <mrow>
+                            <mo>(</mo>
+                            <mn>0</mn>
+                            <mo>)</mo>
+                        </mrow>
+                        <mo>=</mo>
+                        <msub>
+                            <mi>&gamma;</mi>
+                            <mn>2</mn>
+                        </msub>
+                        <mo>&ApplyFunction;</mo>
+                        <mrow>
+                            <mo>(</mo>
+                            <mn>0</mn>
+                            <mo>)</mo>
+                        </mrow>
+                        <mo>=</mo>
+                        <mi>p</mi>
+                        <mtext>, and</mtext>
+                    </mtd>
+                </mtr>
+                <mtr>
+                    <mtd style="text-align: left">
+                        <msub>
+                            <mrow>
+                                <mrow>
+                                    <mfrac>
+                                        <mo>&DifferentialD;</mo>
+                                        <mrow>
+                                            <mo rspace="0">&DifferentialD;</mo>
+                                            <mi>t</mi>
+                                        </mrow>
+                                    </mfrac>
+                                    <mo>&ApplyFunction;</mo>
+                                    <mi>&straightphi;</mi>
+                                    <mo>&compfn;</mo>
+                                    <msub>
+                                        <mi>&gamma;</mi>
+                                        <mn>1</mn>
+                                    </msub>
+                                    <mo>&ApplyFunction;</mo>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mi>t</mi>
+                                        <mo>)</mo>
+                                    </mrow>
+                                    <mspace width="0.11em" />
+                                </mrow>
+                                <mo>|</mo>
+                            </mrow>
+                            <mrow>
+                                <mspace width="0.11em" />
+                                <mi>t</mi>
+                                <mo>=</mo>
+                                <mn>0</mn>
+                            </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <msub>
+                            <mrow>
+                                <mrow>
+                                    <mfrac>
+                                        <mo>&DifferentialD;</mo>
+                                        <mrow>
+                                            <mo rspace="0">&DifferentialD;</mo>
+                                            <mi>t</mi>
+                                        </mrow>
+                                    </mfrac>
+                                    <mo>&ApplyFunction;</mo>
+                                    <mi>&straightphi;</mi>
+                                    <mo>&compfn;</mo>
+                                    <msub>
+                                        <mi>&gamma;</mi>
+                                        <mn>2</mn>
+                                    </msub>
+                                    <mo>&ApplyFunction;</mo>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mi>t</mi>
+                                        <mo>)</mo>
+                                    </mrow>
+                                    <mspace width="0.11em" />
+                                </mrow>
+                                <mo>|</mo>
+                            </mrow>
+                            <mrow>
+                                <mspace width="0.11em" />
+                                <mi>t</mi>
+                                <mo>=</mo>
+                                <mn>0</mn>
+                            </mrow>
+                        </msub>
+                    </mtd>
+                </mtr>
+            </mtable>
+        </mrow>
+    </mrow>
+</math>
