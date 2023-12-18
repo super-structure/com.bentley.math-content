@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "fs": "^0.0.1-security",
+    "mathjax": "^3.2.2",
     "mathjax-node": "^2.1.1",
     "path": "^0.12.7",
     "xmldom": "^0.6.0"

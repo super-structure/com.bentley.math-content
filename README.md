@@ -12,6 +12,8 @@ This plugin includes stylesheets for HTML5/XHTML and PDF/FO transformations by m
 ## Prerequisites
 
 Node.js - for pre-rendering of equation content into SVG
+MathJax 3 - potential audit issues?
+    [Hosting your own copy of the MathJax Components](https://www.npmjs.com/package/mathjax#hosting-your-own-copy-of-the-mathjax-components)
 
 
 ## Installation
