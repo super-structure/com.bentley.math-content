@@ -2,6 +2,7 @@ package resource;
 // Java code illustrating start() method
 import java.io.*;
 import java.util.*;
+import java.io.InputStreamReader;
 
 import org.xml.sax.InputSource;
 import javax.xml.parsers.*;
@@ -37,6 +38,8 @@ class ProcessBuilderDemo {
 
         String mmlContentString = readFile("./resource/simple.mml", StandardCharsets.UTF_8);
 
+        String SVGout = null;
+
         String stringContents = null;
         try {
             stringContents = getXmlString(getXmlElement(mmlContentString));
@@ -56,24 +59,20 @@ class ProcessBuilderDemo {
         // creating list of commands
         List<String> commands = new ArrayList<String>();
         commands.add("node"); // command
-        commands.add("call-mathjax.js"); // command
+        commands.add("./resource/call-mathjax.js"); // command
         commands.add(tempMMLFile);
  
         // creating the process
         ProcessBuilder pb = new ProcessBuilder(commands);
-        pb.directory(new File("/Users/jasoncoleman/DITA/dita-ot-4.1.1/plugins/com.bentley.math-content/resource"));
+        //pb.directory(new File("/Users/jasoncoleman/DITA/dita-ot-4.1.1/plugins/com.bentley.math-content/resource"));
         //pb.directory(new File("D:\\DITA\\DITA-OT_4.1.1_Dev\\plugins\\com.bentley.math-content\\resource"));
  
         // starting the process
         Process process = pb.start();
  
         // for reading the output from stream
-        BufferedReader stdInput
-            = new BufferedReader(new InputStreamReader(
-                process.getInputStream()));
-        String nodeOutString = null;
-        while ((nodeOutString = stdInput.readLine()) != null) {
-
+        String nodeOutString = bufferToString(process.getInputStream());
+        
         // This is to build and parse a Document Element 
         // DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         // DocumentBuilder builder;
@@ -83,23 +82,8 @@ class ProcessBuilderDemo {
         // Document document = builder.parse(is);
         // System.out.println(document.getDocumentElement().getTagName());
 
-
-        // Use Saxon XSLT Processor to post-process the SVG string
-        // https://www.saxonica.com/documentation12/index.html#!using-xsl/embedding/s9api-transformation
-        Processor processor = new Processor(false);
-        XsltCompiler compiler = processor.newXsltCompiler();
-        XsltExecutable stylesheet = compiler.compile(new StreamSource(new File("./xsl/mj-svg-clean.xsl")));
-        Serializer outString = processor.newSerializer(new StringWriter());
-        //https://www.saxonica.com/documentation12/index.html#!javadoc/net.sf.saxon.s9api/Serializer@serializeNodeToString
-        outString.setOutputProperty(Serializer.Property.METHOD, "xml");
-        outString.setOutputProperty(Serializer.Property.INDENT, "yes");
-        Xslt30Transformer transformer = stylesheet.load30();
-        // https://www.saxonica.com/documentation12/index.html#!javadoc/net.sf.saxon.s9api/Xslt30Transformer@transform
-        
-        XdmDestination dest = new XdmDestination();
-        transformer.transform(new StreamSource(new StringReader(nodeOutString)), dest);
-        // return the getXdmNode() method as the function output
-        System.out.println(dest.getXdmNode());
+        SVGout = postProcessMJSVG(nodeOutString);
+        System.out.println(SVGout);
 
         // https://stackoverflow.com/questions/70618738/how-to-get-the-transformed-xml-from-saxon-10-6-as-a-string
         // https://stackoverflow.com/a/16652948/1080506
@@ -108,7 +92,7 @@ class ProcessBuilderDemo {
         // PrintWriter outFile = new PrintWriter("simple-out.svg");
         // outFile.println(dest.getXdmNode());
         // outFile.close();
-        }
+        // }
     }
 
 
@@ -144,6 +128,42 @@ class ProcessBuilderDemo {
         outFile.println(contents);
         outFile.close();
         return tempFile.getAbsolutePath();
+    }
+
+    static String bufferToString(InputStream inputStream)
+    throws Exception
+    {
+        // Read the output from stream to a String
+        BufferedReader stdInput = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder result = new StringBuilder();
+        for (String nodeOutString; (nodeOutString = stdInput.readLine()) != null;)
+            { result.append(nodeOutString);}
+            return result.toString();
+    }
+
+    static String postProcessMJSVG(String mathjaxSVString)
+    throws Exception
+    {
+        // perform an XSLT post-processing to make the MathJax
+        // SVG output conform to SVG DTD / schema
+        String standardSVG = null;
+        // Use Saxon XSLT Processor to post-process the SVG string
+        // https://www.saxonica.com/documentation12/index.html#!using-xsl/embedding/s9api-transformation
+        Processor processor = new Processor(false);
+        XsltCompiler compiler = processor.newXsltCompiler();
+        XsltExecutable stylesheet = compiler.compile(new StreamSource(new File("./xsl/mj-svg-clean.xsl")));
+        Serializer outString = processor.newSerializer(new StringWriter());
+        //https://www.saxonica.com/documentation12/index.html#!javadoc/net.sf.saxon.s9api/Serializer@serializeNodeToString
+        outString.setOutputProperty(Serializer.Property.METHOD, "xml");
+        outString.setOutputProperty(Serializer.Property.INDENT, "yes");
+        Xslt30Transformer transformer = stylesheet.load30();
+        // https://www.saxonica.com/documentation12/index.html#!javadoc/net.sf.saxon.s9api/Xslt30Transformer@transform
+        
+        XdmDestination dest = new XdmDestination();
+        transformer.transform(new StreamSource(new StringReader(mathjaxSVString)), dest);
+        // return the getXdmNode() method as the function output
+        standardSVG =  String.valueOf(dest.getXdmNode());
+        return standardSVG;
     }
 
     static String readFile(String path, Charset encoding)

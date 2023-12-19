@@ -3,26 +3,31 @@ package com.bentley.mathml.svg;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.*;
 
-import javax.swing.JLabel;
+// import javax.swing.JLabel;
 
-import org.apache.batik.dom.GenericDOMImplementation;
-import org.apache.batik.svggen.SVGGeneratorContext;
-import org.apache.batik.svggen.SVGGraphics2D;
-import org.apache.batik.svggen.SVGGraphics2DIOException;
-
-import net.sourceforge.jeuclid.MutableLayoutContext;
-import net.sourceforge.jeuclid.context.LayoutContextImpl;
-import net.sourceforge.jeuclid.context.Parameter;
-import net.sourceforge.jeuclid.converter.Converter;
-
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
+import org.w3c.dom.*;
+// import org.w3c.dom.DOMImplementation;
+// import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import javax.xml.parsers.*;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.*;
 
 import net.sf.saxon.expr.XPathContext;
 import net.sf.saxon.lib.ExtensionFunctionCall;
@@ -32,13 +37,14 @@ import net.sf.saxon.om.StructuredQName;
 import net.sf.saxon.trans.XPathException;
 import net.sf.saxon.value.SequenceType;
 import net.sf.saxon.value.StringValue;
+import net.sf.saxon.s9api.Processor;
+import net.sf.saxon.s9api.XsltCompiler;
+import net.sf.saxon.s9api.XsltExecutable;
+import net.sf.saxon.s9api.Serializer;
+import net.sf.saxon.s9api.Xslt30Transformer;
+import net.sf.saxon.s9api.XdmDestination;
 
 public class MathMLToSVG extends ExtensionFunctionDefinition {
-
-	  @Override
-	  public SequenceType[] getArgumentTypes() {
-	    return new SequenceType[] { SequenceType.SINGLE_STRING};
-	  }
 
 	  @Override
 	  public StructuredQName getFunctionQName() {
@@ -46,68 +52,127 @@ public class MathMLToSVG extends ExtensionFunctionDefinition {
 	  }
 
 	  @Override
+	  public SequenceType[] getArgumentTypes() {
+	    return new SequenceType[] { SequenceType.SINGLE_STRING};
+	  }
+    
+	  @Override
 	  public SequenceType getResultType(SequenceType[] suppliedArgumentTypes) {
-	    return SequenceType.SINGLE_STRING;
+		  return SequenceType.SINGLE_STRING;
 	  }
 
-	@Override
-	public ExtensionFunctionCall makeCallExpression() {
-		return new ExtensionFunctionCall() {
-
-			@Override
-			/* 1) write out mathml contents to file */
-
-			/* 2) use ProcessBuilder to create Node.js call */
-
-			/* 3) perform any necessary post-processing on returned SVG via XSLT 
-			 * Note: Preferably, much of the issues can be handled just using a
-			 *       MathJax config file. a) 'ex' cannot be used for lengths.
-			 *       b) remove @role, @focusable, @data-c
-			 *       c) change @data-mml to @class
-			*/
-
-			/* 4) return SVG string */
-
-			/* error handling? */
+	  @Override
+	  public ExtensionFunctionCall makeCallExpression() {
+		  return new ExtensionFunctionCall() {
+			  @Override
+			  public Sequence call(XPathContext arg0, Sequence[] arguments) throws XPathException {
 			
+			String mmlContentString = ((StringValue)arguments[0]).getStringValue();
+			/* 1) read in string contents to an XML element */
+			String stringContents = null;
+			try {
+				stringContents = getXmlString(getXmlElement(mmlContentString));
+			} catch (Exception e) {
+				System.out.println("Coudn't make a node from that string");
+				e.printStackTrace();
+			}
+
+			/* 2) write out mathml contents to file */
+			String tempMMLFile = null;
+			try {
+				tempMMLFile = createTempFile(stringContents);
+			} catch (Exception e) {
+				System.out.println("Couldn't create a file");
+			}
+
+			/* 3) use ProcessBuilder to create Node.js call */
+			// make an array of the commands to pass to Process Builder
+			List<String> commands = new ArrayList<String>();
+			commands.add("node");
+			commands.add("./resource/call-mathjax.js");
+			commands.add(tempMMLFile);
+	
+			// creat & start the process
+			ProcessBuilder pb = new ProcessBuilder(commands);
+        	Process process = pb.start();
+			String nodeOutString = bufferToString(process.getInputStream());
+
+			/* 4) perform any necessary post-processing on returned SVG via XSLT */
+			String SVGout = null;
+			SVGout = postProcessMJSVG(nodeOutString);
 			
-			public Sequence call(XPathContext arg0, Sequence[] arguments) throws XPathException {
-				String mathml = ((StringValue) arguments[0].iterate().next()).getStringValue();
-				DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
-				String svgNS = "http://www.w3.org/2000/svg";
-				Document document = domImpl.createDocument(svgNS, "svg", null);
-				SVGGeneratorContext ctx = SVGGeneratorContext.createDefault(document);
+			/* 5) return SVG string */
+			return SVGout;
+			}
 
-				SVGGraphics2D g2 = new SVGGraphics2D(ctx, true);
+			static Element getXmlElement(String contents)
+			throws Exception
+			{
+				// Builds and parses string contents into an XML element
+				DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+				StringReader sr = new StringReader(contents);
+				InputSource is = new InputSource(sr);
+				Document document = builder.parse(is);
+				return document.getDocumentElement();
+			}
 
-				/*DefaultTeXFont.registerAlphabet(new CyrillicRegistration());
-				DefaultTeXFont.registerAlphabet(new GreekRegistration());*/
+			static String getXmlString(Element node)
+			throws Exception
+			{
+				// Converts an XmL node to a string (_without_ an XML Delcaration)   
+				Transformer transformer = TransformerFactory.newInstance().newTransformer();
+				StringWriter buffer = new StringWriter();
+				transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+				transformer.transform(new DOMSource(node),
+					new StreamResult(buffer));
+				return buffer.toString();
+			}
 
-				MathMLFormula formula = new MathMLFormula(mathml);
-				TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 20);
-				icon.setInsets(new Insets(5, 5, 5, 5));
-				g2.setSVGCanvasSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
-				g2.setColor(Color.white);
-				g2.fillRect(0, 0, icon.getIconWidth(), icon.getIconHeight());
+			static String createTempFile(String contents)
+			throws IOException
+			{
+				File tempDir = new File(System.getProperty("java.io.tmpdir"));
+				File tempFile = File.createTempFile("mathml-","-temp.mml",tempDir);
+				PrintWriter outFile = new PrintWriter(tempFile.getAbsolutePath());
+				outFile.println(contents);
+				outFile.close();
+				return tempFile.getAbsolutePath();
+			}
 
-				JLabel jl = new JLabel();
-				jl.setForeground(new Color(0, 0, 0));
-				icon.paintIcon(jl, g2, 0, 0);
+			static String bufferToString(InputStream inputStream)
+			throws Exception
+			{
+				// Read the output from stream to a String
+				BufferedReader stdInput = new BufferedReader(new InputStreamReader(inputStream));
+				StringBuilder result = new StringBuilder();
+				for (String nodeOutString; (nodeOutString = stdInput.readLine()) != null;)
+					{ result.append(nodeOutString);}
+					return result.toString();
+			}
 
-				boolean useCSS = true;
-				Writer writer = new StringWriter();
-				try {
-					g2.stream(writer, useCSS);
-				} catch (SVGGraphics2DIOException e) {
-					throw new XPathException(e);
-				} finally {
-					try {
-						writer.close();
-					} catch (IOException e) {
-						throw new XPathException(e);
-					}
-				}
-				return StringValue.makeStringValue(writer.toString());
+			static String postProcessMJSVG(String mathjaxSVString)
+			throws Exception
+			{
+				// perform an XSLT post-processing to make the MathJax
+				// SVG output conform to SVG DTD / schema
+				String standardSVG = null;
+				// Use Saxon XSLT Processor to post-process the SVG string
+				// https://www.saxonica.com/documentation12/index.html#!using-xsl/embedding/s9api-transformation
+				Processor processor = new Processor(false);
+				XsltCompiler compiler = processor.newXsltCompiler();
+				XsltExecutable stylesheet = compiler.compile(new StreamSource(new File("./xsl/mj-svg-clean.xsl")));
+				Serializer outString = processor.newSerializer(new StringWriter());
+				//https://www.saxonica.com/documentation12/index.html#!javadoc/net.sf.saxon.s9api/Serializer@serializeNodeToString
+				outString.setOutputProperty(Serializer.Property.METHOD, "xml");
+				outString.setOutputProperty(Serializer.Property.INDENT, "yes");
+				Xslt30Transformer transformer = stylesheet.load30();
+				// https://www.saxonica.com/documentation12/index.html#!javadoc/net.sf.saxon.s9api/Xslt30Transformer@transform
+				
+				XdmDestination dest = new XdmDestination();
+				transformer.transform(new StreamSource(new StringReader(mathjaxSVString)), dest);
+				// return the getXdmNode() method as the function output
+				standardSVG =  String.valueOf(dest.getXdmNode());
+				return standardSVG;
 			}
 		};
 	}
