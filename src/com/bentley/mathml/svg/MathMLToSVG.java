@@ -1,19 +1,13 @@
 package com.bentley.mathml.svg;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Insets;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.io.Writer;
 import java.util.*;
 
 // import javax.swing.JLabel;
@@ -35,8 +29,7 @@ import net.sf.saxon.lib.ExtensionFunctionDefinition;
 import net.sf.saxon.om.Sequence;
 import net.sf.saxon.om.StructuredQName;
 import net.sf.saxon.trans.XPathException;
-import net.sf.saxon.value.SequenceType;
-import net.sf.saxon.value.StringValue;
+import net.sf.saxon.value.*;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.XsltCompiler;
 import net.sf.saxon.s9api.XsltExecutable;
@@ -45,7 +38,14 @@ import net.sf.saxon.s9api.Xslt30Transformer;
 import net.sf.saxon.s9api.XdmDestination;
 
 public class MathMLToSVG extends ExtensionFunctionDefinition {
-
+/**
+ * Returns SVG contents as a string for using in an XSLT stylesheet
+ * 
+ * @param	string	the MathML contents to convert
+ * @return	string 	the SVG rendering of the MathML intput; using MathJax 3.x
+ * @author	Jason T. Coleman
+ * @version 1.00, 19 December, 2023
+ */
 	  @Override
 	  public StructuredQName getFunctionQName() {
 	    return new StructuredQName("mathjax", "https://www.mathjax.org/MathMLToSVG", "mml2svg");
@@ -67,7 +67,8 @@ public class MathMLToSVG extends ExtensionFunctionDefinition {
 			  @Override
 			  public Sequence call(XPathContext arg0, Sequence[] arguments) throws XPathException {
 			
-			String mmlContentString = ((StringValue)arguments[0]).getStringValue();
+			// String mmlContentString = ((StringValue)arguments[0]).getStringValue();
+			String mmlContentString = ((StringValue) arguments[0].iterate().next()).getStringValue();
 			/* 1) read in string contents to an XML element */
 			String stringContents = null;
 			try {
@@ -83,6 +84,7 @@ public class MathMLToSVG extends ExtensionFunctionDefinition {
 				tempMMLFile = createTempFile(stringContents);
 			} catch (Exception e) {
 				System.out.println("Couldn't create a file");
+				e.printStackTrace();
 			}
 
 			/* 3) use ProcessBuilder to create Node.js call */
@@ -94,12 +96,29 @@ public class MathMLToSVG extends ExtensionFunctionDefinition {
 	
 			// creat & start the process
 			ProcessBuilder pb = new ProcessBuilder(commands);
-        	Process process = pb.start();
-			String nodeOutString = bufferToString(process.getInputStream());
+			Process process = null;
+        	try {
+				process = pb.start();
+			} catch (IOException e) {
+				System.out.println("Could not run Process:" + commands.toString());
+				e.printStackTrace();
+			}
+			String nodeOutString = null;
+			try {
+				nodeOutString = bufferToString(process.getInputStream());
+			} catch (Exception e) {
+				System.out.println("Could not collect stream from Process");
+				e.printStackTrace();
+			}
 
 			/* 4) perform any necessary post-processing on returned SVG via XSLT */
-			String SVGout = null;
-			SVGout = postProcessMJSVG(nodeOutString);
+			Sequence SVGout = null;
+			try {
+				SVGout = StringValue.makeStringValue(postProcessMJSVG(nodeOutString));
+			} catch (Exception e) {
+				System.out.println("Could not post-process SVG string in XSLT");
+				e.printStackTrace();
+			}
 			
 			/* 5) return SVG string */
 			return SVGout;
