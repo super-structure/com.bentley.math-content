@@ -3,13 +3,24 @@ package resource;
 import java.io.*;
 import java.util.*;
 
-////import javax.xml.parsers.*;
+import org.xml.sax.InputSource;
+import javax.xml.parsers.*;
 // import javax.xml.parsers.SAXParserFactory;
-// import javax.xml.transform.Source;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.*;
 //import org.xml.sax.InputSource;
 // import org.xml.sax.SAXException;
-//import org.w3c.dom.*;
+import org.w3c.dom.*;
+
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+
 //import org.xml.sax.*;
 // https://code.visualstudio.com/docs/java/java-project#_configure-classpath-for-unmanaged-folders
 import net.sf.saxon.s9api.Processor;
@@ -23,11 +34,30 @@ class ProcessBuilderDemo {
     public static void main(String[] arg) throws Exception 
     // should put this in a try-catch-finally structure instead of using throws
     {
+
+        String mmlContentString = readFile("./resource/simple.mml", StandardCharsets.UTF_8);
+
+        String stringContents = null;
+        try {
+            stringContents = getXmlString(getXmlElement(mmlContentString));
+        } catch (Exception e) {
+            System.out.println("Coudn't make a node from that string");
+            e.printStackTrace();
+        }
+
+        String tempMMLFile = null;
+        try {
+            tempMMLFile = createTempFile(stringContents);
+        } catch (Exception e) {
+            System.out.println("Couldn't create a file");
+        }
+        //System.out.println(tempMMLFile);
+        
         // creating list of commands
         List<String> commands = new ArrayList<String>();
         commands.add("node"); // command
         commands.add("call-mathjax.js"); // command
-        commands.add("simple.mml");
+        commands.add(tempMMLFile);
  
         // creating the process
         ProcessBuilder pb = new ProcessBuilder(commands);
@@ -80,4 +110,48 @@ class ProcessBuilderDemo {
         // outFile.close();
         }
     }
+
+
+    static Element getXmlElement(String contents)
+    throws Exception
+    {
+        // Builds and parses string contents into an XML element
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        StringReader sr = new StringReader(contents);
+        InputSource is = new InputSource(sr);
+        Document document = builder.parse(is);
+        return document.getDocumentElement();
+    }
+
+    static String getXmlString(Element node)
+    throws Exception
+    {
+        // Converts an XmL node to a string (_without_ an XML Delcaration)   
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        StringWriter buffer = new StringWriter();
+        transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+        transformer.transform(new DOMSource(node),
+            new StreamResult(buffer));
+        return buffer.toString();
+    }
+
+    static String createTempFile(String contents)
+    throws IOException
+    {
+        File tempDir = new File(System.getProperty("java.io.tmpdir"));
+        File tempFile = File.createTempFile("mathml-","-temp.mml",tempDir);
+        PrintWriter outFile = new PrintWriter(tempFile.getAbsolutePath());
+        outFile.println(contents);
+        outFile.close();
+        return tempFile.getAbsolutePath();
+    }
+
+    static String readFile(String path, Charset encoding)
+    throws IOException
+    {
+        // This is really just used for testing purposes
+        byte[] encoded = Files.readAllBytes(Paths.get(path));
+        return new String(encoded, encoding);
+    }
+
 }
