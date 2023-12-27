@@ -14,6 +14,6 @@ require('mathjax').init({
     container: false}
   }).then((MathJax) => {
     const svg = MathJax.mathml2svg(xml, {display: true});
-    fs.writeFileSync('simple.svg', MathJax.startup.adaptor.innerHTML(svg),'utf8');
+    //fs.writeFileSync('simple.svg', MathJax.startup.adaptor.innerHTML(svg),'utf8');
     console.log(MathJax.startup.adaptor.innerHTML(svg));
   }).catch((err) => console.log(err.message));

@@ -36,7 +36,7 @@ class ProcessBuilderDemo {
     // should put this in a try-catch-finally structure instead of using throws
     {
 
-        String mmlContentString = readFile("./resource/simple.mml", StandardCharsets.UTF_8);
+        String mmlContentString = readFile("./resource/quad.mml", StandardCharsets.UTF_8);
 
         String SVGout = null;
 
@@ -124,7 +124,9 @@ class ProcessBuilderDemo {
     {
         File tempDir = new File(System.getProperty("java.io.tmpdir"));
         File tempFile = File.createTempFile("mathml-","-temp.mml",tempDir);
-        PrintWriter outFile = new PrintWriter(tempFile.getAbsolutePath());
+        //PrintWriter outFile = new PrintWriter(tempFile.getAbsolutePath());
+		OutputStream outStream = new FileOutputStream(tempFile.getAbsolutePath());
+		PrintWriter outFile = new PrintWriter(new OutputStreamWriter(outStream, "UTF-8"));
         outFile.println(contents);
         outFile.close();
         return tempFile.getAbsolutePath();
