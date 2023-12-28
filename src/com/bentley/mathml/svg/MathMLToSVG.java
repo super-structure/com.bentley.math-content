@@ -86,6 +86,7 @@ public class MathMLToSVG extends ExtensionFunctionDefinition {
 			/* 1) make a string from the element */
 			// TODO: Current going from TinyElementImpl -> String -> Document; can we just get the XML from TinyElementImpl?
 			// TODO: get encoding from source string? Or just always assume UTF-8?
+			// TODO: allow for entitiy names (eg, &beta;)?
 			TinyElementImpl mmlContentTinyELem = (TinyElementImpl) arguments[0];
 			String mmlContentString = null;
 			try {
@@ -137,6 +138,7 @@ public class MathMLToSVG extends ExtensionFunctionDefinition {
 
 			String nodeOutString = ""; // 'prime' the emtpy string
 			try {
+				// prevent buffer from blocking subprocess
 				BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 				String line;
 				while ((line = reader.readLine()) != null)
@@ -236,7 +238,9 @@ public class MathMLToSVG extends ExtensionFunctionDefinition {
 				Processor processor = new Processor(false);
 				XsltCompiler compiler = processor.newXsltCompiler();
 				String path = "D:\\DITA\\DITA-OT_4.1.1_Dev\\plugins\\com.bentley.math-content\\xsl\\mj-svg-clean.xsl";
-				XsltExecutable stylesheet = compiler.compile(new StreamSource(new File(path)));
+				InputStream stream = MathMLToSVG.class.getResourceAsStream("mj-svg-clean.xsl");
+				//XsltExecutable stylesheet = compiler.compile(new StreamSource(new File(path)));
+				XsltExecutable stylesheet = compiler.compile(new StreamSource(stream));
 				Serializer outString = processor.newSerializer(new StringWriter());
 				//https://www.saxonica.com/documentation12/index.html#!javadoc/net.sf.saxon.s9api/Serializer@serializeNodeToString
 				outString.setOutputProperty(Serializer.Property.METHOD, "xml");

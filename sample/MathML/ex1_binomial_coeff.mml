@@ -43,12 +43,12 @@
             <mrow>
                 <mi>k</mi>
                 <mo lspace="0">!</mo>
-                <mo rspace="0.22em">&InvisibleTimes;</mo>
+                <mo rspace="0.22em">⁢</mo>
                 <mrow>
                     <mo>(</mo>
                     <mrow>
                         <mi>n</mi>
-                        <mo>&minus;</mo>
+                        <mo>-</mo>
                         <mi>k</mi>
                     </mrow>
                     <mo>)</mo>
