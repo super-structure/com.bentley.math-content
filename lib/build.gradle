@@ -68,12 +68,13 @@ task dist(type: Zip) {
     println("Making distributable...")
     from("src/main") {
         include "*.xml"
-        include "xsl/**", "cfg/**", "docs/**", "image/**"
+        include "xsl/**", "cfg/**", "docs/**", "sample/**"
     }
     
     from("${rootProject.projectDir}.") {
         include "LICENSE"
         include "README.md"
+        include "image/**"
     }
     from(jar) {
         into "lib"

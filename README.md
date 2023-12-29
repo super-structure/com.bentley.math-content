@@ -7,7 +7,8 @@ DITA Open Toolkit plugin for math content (MathML ~~and LaTeX~~) integration wit
 
 This plugin includes stylesheets for HTML5/XHTML and PDF/FO transformations by means of DITA Open Toolkit extensions.
 
-While browsers have included some support for MathML in recent years, rendering of anything but very basic math content is severaly limited even as of late 2023. However, SVG support is well established in all modern browsers. Therefore, in addition to general stylesheets to support MathML content, this plugin also "pre-renders" the `<mathml>` elements into SVG using MathJax 3.x.
+- XSL transformations for equation and math domain elements; not included in DITA Open Toolkit standard plugins
+- While browsers have included some support for MathML in recent years, rendering of anything but very basic math content is severely limited even as of late 2023. However, SVG support is well established in all modern browsers. Therefore, in addition to general stylesheets to support MathML content, this plugin also "pre-renders" the `<mathml>` elements into SVG using MathJax 3.x.
 
 **In Development**: Refer to [docs](docs/index.md) for roadmap and To Do list.
 
@@ -18,10 +19,20 @@ MathJax 3 - included here
     [Hosting your own copy of the MathJax Components](https://www.npmjs.com/package/mathjax#hosting-your-own-copy-of-the-mathjax-components)
 
 
-## Installation
+## Install
 
 1. Download or clone this repository to your DITA OT `plugins` directory.
 2. Run the `dita --install` command.
+
+## Build
+
+To build the com.bentley.math-content plugin from the source:
+
+1. Run the Gradle build task to generate the compiled Jar file:
+   ```gradle clean build```
+2. Run the Gradle distribution task to generate the plugin package:
+   ```gradle dist build```
+   The distribution package is located in `lib/build/distributions/`.
 
 ## Usage
 
