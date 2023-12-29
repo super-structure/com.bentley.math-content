@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright © Bentley Systems, Incorporated. All rights reserved
+-->
+<project xmlns:dita="http://dita-ot.sourceforge.net"
+   name="equation-and-math-handling">
+   
+   <target name="bentley:math-content-init" depends="bentley:node.check">
+      <!-- depends on a node-check target (ref: fox.jason.prismjs ) -->
+      
+      <!-- set default parameter values; not sure this direct method works: -->
+      <property name="args.eqnlink.style" value="full"/>
+      <!--<property name="args.mathml.processing" value="none"/>-->
+      <property name="args.mathml.processing" value="mathjax-pre"/>
+      
+      <!-- TODO: create error codes and messages -->
+      <dita-ot-fail id="MJXA001W">
+         <condition>
+            <and>
+               <!-- property args.mathml.processing set to mathjax-pre -->
+               <contains string="${args.mathml.processing}" substring="mathjax-pre" />
+               <!-- node.js not available -->
+               <not>
+                  <istrue value="${node.installed}"/>
+               </not>
+            </and>
+         </condition>
+      </dita-ot-fail>
+      <dita-ot-fail id="MJXA002W">
+         <condition>
+            <and>
+               <!-- property args.mathml.processing set to mathjax-cdn or mathjax-local -->
+               <or>
+                  <contains string="${args.mathml.processing}" substring="mathjax-cdn" />
+                  <contains string="${args.mathml.processing}" substring="mathjax-local" />
+               </or>
+               <!-- transtype is/contains pdf -->
+               <contains string="${transtype}" substring="PDF" casesensitive="no"/>
+            </and>
+         </condition>
+      </dita-ot-fail>
+      
+      <!-- are these logged in the main input echo? -->
+      <echo level="info">*****************************************************************</echo>
+      <echo level="info">* Log the MathML &amp; equation processing arguments:</echo>
+      <echo level="info">*    args.mathml.processing = ${args.mathml.processing}</echo>
+      <echo level="info">*    args.eqnlink.style = ${args.eqnlink.style}</echo>
+      <echo level="info">*****************************************************************</echo>
+      <echo level="info">*    node.installed = ${node.installed}</echo>
+      <echo level="info">*****************************************************************</echo>      
+   </target>
+
+   <target name="bentley:mathmlrefs" depends="bentley:copy-mathml-files"
+      description="Copy MathML files to temp for including within topics before XSLT">
+   </target>
+   
+   <target name="bentley:copy-mathml-files">
+      <!--<echo level="info">*****************************************************************</echo>
+      <echo level="info">* Copy MathML files to temp directory</echo>
+      <echo level="info">*    user.input.dir = ${user.input.dir}</echo>
+      <echo level="info">*    dita.temp.dir = ${dita.temp.dir}</echo>
+      <echo level="info">*****************************************************************</echo>-->
+      <copy todir="${dita.temp.dir}">
+         <fileset dir="${user.input.dir}" includes="**/*.mml"/>         
+      </copy>
+   </target>
+   
+
+   
+   <!--<target name="bentley:equations" depends="bentley:equations-init"/>-->
+   
+   <!--<target name="bentley:equations-init">
+      <condition property="mathml.processing" value="none">
+         <not>
+            <isset property="args.mathml.processing"/>
+         </not>
+       </condition>
+      <echo level="info">*****************************************************************</echo>
+      <echo level="info">* Log the MathML &amp; equation processing arguments:</echo>
+      <echo level="info">*    args.mathml.processing = ${args.mathml.processing}</echo>
+      <echo level="info">*    args.eqnlink.style = ${args.eqnlink.style}</echo>
+      <echo level="info">*****************************************************************</echo>      
+   </target>-->
+   
+   <target name="bentley:node.check">
+      <!-- copied from fox.jason.prismjs -->
+      
+      <!-- For Unix run node as an executable -->
+      
+      <exec
+         executable="node"
+         dir="${dita.dir}"
+         taskname="node"
+         resultproperty="node.result"
+         outputproperty="node.out"
+         failonerror="false"
+         failifexecutionfails="false"
+         >
+         <arg line="-v"/>
+      </exec>  <!--  osfamily="unix" -->
+      <!-- For Windows run from a DOS command -->
+      <!--<exec
+         executable="cmd"
+         dir="${dita.dir}"
+         osfamily="windows"
+         taskname="node"
+         resultproperty="node.result"
+         outputproperty="node.out"
+         failonerror="false"
+         failifexecutionfails="false"
+         >
+         <arg value="/C"/>
+         <arg value="node -v"/>
+      </exec>-->
+      
+      <condition property="node.installed">
+         <equals arg1="${node.result}" arg2="0"/>
+      </condition>
+   </target>
+
+</project>
