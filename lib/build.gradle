@@ -1,0 +1,91 @@
+plugins {
+    id 'java-library'
+}
+
+group = "com.bentley"
+version = '0.9.0'
+
+repositories {
+   mavenCentral()
+   maven {
+        setUrl("https://mvnrepository.com/artifact/")
+    }  
+}
+
+dependencies {
+    // Use JUnit Jupiter for testing.
+    testImplementation libs.junit.jupiter
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // This dependency is exported to consumers, that is to say found on their compile classpath.
+    api libs.commons.math3
+
+    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
+    implementation libs.guava
+    // https://mvnrepository.com/artifact/net.sf.saxon/Saxon-HE
+    implementation group: 'net.sf.saxon', name: 'Saxon-HE', version: '12.3'
+    // https://mvnrepository.com/artifact/org.xmlresolver/xmlresolver
+    implementation group: 'org.xmlresolver', name: 'xmlresolver', version: '5.2.0'
+}
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+jar {
+    archivesBaseName = 'MathMLToSVG'
+    
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                   'Implementation-Version': project.version)
+    }
+    exclude('call-mathjax.js','messages.xml','package-lock.json','package.json','node_modules')
+}
+
+task copyTask(type: Copy) {
+    println("copying...")
+    from("src/main/resources") {
+        include "node_modules/**"
+        include "call-mathjax.js", "messages.xml", "package-lock.json", "package.json", "LICENSE.txt"
+    }
+    into layout.buildDirectory.dir("libs")
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    //useJUnitPlatform()
+}
+
+task dist(type: Zip) {
+    // TODO refer to https://github.com/jelovirt/org.lwdita/blob/master/build.gradle
+    println("Making distributable...")
+    from("src/main") {
+        include "*.xml"
+        include "xsl/**", "cfg/**", "docs/**", "image/**"
+    }
+    
+    from("${rootProject.projectDir}.") {
+        include "LICENSE"
+        include "README.md"
+    }
+    from(jar) {
+        into "lib"
+    }
+    from("src/main/resources") {
+        include "node_modules/**"
+        include "call-mathjax.js", "package-lock.json", "package.json", "LICENSE.txt"
+        into "lib"
+    }
+    from("src/main/resources") {
+        include "messages.xml"
+        into "resource"
+    }
+    archiveFileName = "${rootProject.name}-${project.version}.zip"
+}

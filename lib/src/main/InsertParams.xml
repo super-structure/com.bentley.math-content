@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<parameters xmlns:if="ant:if" xmlns:unless="ant:unless">
+    <!-- list of parameters passed to XSLT -->
+    <param
+        name="MATH-PROC"
+        expression="${args.mathml.processing}"
+        if:set="args.mathml.processing"
+        />
+    <param
+        name="EQN-PREFIX"
+        expression="${args.eqnlink.style}"
+        if:set="args.eqnlink.style"
+        />
+</parameters>

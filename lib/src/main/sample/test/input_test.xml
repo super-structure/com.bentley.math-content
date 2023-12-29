@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+    <p>A paragraph.</p>
+    <m:math xmlns:m="http://www.w3.org/1998/Math/MathML">
+        <m:mfrac>
+            <m:mrow>
+                <m:mn>1</m:mn>
+                <m:mo>+</m:mo>
+                <m:msqrt>
+                    <m:mn>4</m:mn>
+                    <m:mi>x</m:mi>
+                </m:msqrt>
+            </m:mrow>
+            <m:mrow>
+                <m:mn>1</m:mn>
+                <m:msup>
+                    <m:mi>x</m:mi>
+                    <m:mn>2</m:mn>
+                </m:msup>
+            </m:mrow>
+        </m:mfrac>
+    </m:math>
+    <p>Moore determinate:</p>
+    <m:math xmlns:m="http://www.w3.org/1998/Math/MathML">
+        <m:mn>1</m:mn>
+        <m:mo>±</m:mo>
+        <m:mi>x</m:mi>
+    </m:math>
+    <p>Another equation:</p>
+    <m:math xmlns:m="http://www.w3.org/1998/Math/MathML">
+        <m:mfrac bevelled="true">
+            <m:mi>a</m:mi>
+            <m:mi>b</m:mi>
+        </m:mfrac>
+    </m:math>
+    <p>Quadratic formula:</p>
+    <m:math xmlns:m="http://www.w3.org/1998/Math/MathML">
+        <m:mfrac>
+            <m:mrow>
+                <m:mo>-</m:mo>
+                <m:mi>b</m:mi>
+                <m:mo>±</m:mo>
+                <m:msqrt>
+                    <m:msup>
+                        <m:mi>b</m:mi>
+                        <m:mn>2</m:mn>
+                    </m:msup>
+                    <m:mo>-</m:mo>
+                    <m:mn>4</m:mn>
+                    <m:mi>a</m:mi>
+                    <m:mi>c</m:mi>
+                </m:msqrt>
+            </m:mrow>
+            <m:mrow>
+                <m:mn>2</m:mn>
+                <m:mi>a</m:mi>
+            </m:mrow>
+        </m:mfrac>
+    </m:math>
+    <p>Greek letters:</p>
+    <m:math xmlns:m="http://www.w3.org/1998/Math/MathML">
+        <m:mtable>
+            <m:mtr>
+                <m:mtd>
+                    <m:mtext>Upper:&#160;</m:mtext>
+                </m:mtd>
+                <m:mtd>
+                    <m:mi>Α</m:mi>
+                    <m:mi>Β</m:mi>
+                    <m:mi>Γ</m:mi>
+                    <m:mi>Δ</m:mi>
+                    <m:mi>Ε</m:mi>
+                    <m:mi>Ζ</m:mi>
+                    <m:mi>Η</m:mi>
+                    <m:mi>Θ</m:mi>
+                    <m:mi>Ι</m:mi>
+                    <m:mi>Κ</m:mi>
+                    <m:mi>Λ</m:mi>
+                    <m:mi>Μ</m:mi>
+                    <m:mi>Ν</m:mi>
+                    <m:mi>Ξ</m:mi>
+                    <m:mi>Ο</m:mi>
+                    <m:mi>Π</m:mi>
+                    <m:mi>Ρ</m:mi>
+                    <m:mi>Σ</m:mi>
+                    <m:mi>Υ</m:mi>
+                    <m:mi>Φ</m:mi>
+                    <m:mi>Χ</m:mi>
+                    <m:mi>Ψ</m:mi>
+                    <m:mi>Ω</m:mi>
+                </m:mtd>
+            </m:mtr>
+            <m:mtr>
+                <m:mtd>
+                    <m:mtext>Lower:&#160;</m:mtext>
+                </m:mtd>
+                <m:mtd>
+                    <m:mi>α</m:mi>
+                    <m:mi>β</m:mi>
+                    <m:mi>γ</m:mi>
+                    <m:mi>δ</m:mi>
+                    <m:mi>ε</m:mi>
+                    <m:mi>ζ</m:mi>
+                    <m:mi>η</m:mi>
+                    <m:mi>θ</m:mi>
+                    <m:mi>ι</m:mi>
+                    <m:mi>κ</m:mi>
+                    <m:mi>λ</m:mi>
+                    <m:mi>μ</m:mi>
+                    <m:mi>ν</m:mi>
+                    <m:mi>ξ</m:mi>
+                    <m:mi>π</m:mi>
+                    <m:mi>ρ</m:mi>
+                    <m:mi>σ</m:mi>
+                    <m:mi>τ</m:mi>
+                    <m:mi>υ</m:mi>
+                    <m:mi>φ</m:mi>
+                    <m:mi>χ</m:mi>
+                    <m:mi>ψ</m:mi>
+                    <m:mi>ω</m:mi>
+                </m:mtd>
+            </m:mtr>
+            <m:mtr>
+                <m:mtd>
+                    <m:mtext>Alternates:&#160;</m:mtext>
+                </m:mtd>
+                <m:mtd>
+                    <m:mi>ϕ</m:mi>
+                    <m:mi>ϴ</m:mi>
+                    <m:mi>∑</m:mi>
+                </m:mtd>
+            </m:mtr>
+        </m:mtable>
+    </m:math>
+    <p>Math operators:</p>
+    <m:math xmlns:m="http://www.w3.org/1998/Math/MathML">
+        <m:mtable>
+            <m:mtr>
+                <m:mtd>
+                    <m:mtext>Upper:&#160;</m:mtext>
+                </m:mtd>
+                <m:mtd>
+                    <m:mo>×</m:mo>
+                    <m:mo>✕</m:mo>
+                </m:mtd>
+            </m:mtr>
+        </m:mtable>
+    </m:math>
+    <p>Steel design equation:</p>
+    <m:math xmlns:m="http://www.w3.org/1998/Math/MathML">
+        <m:mrow>
+            <m:mfrac>
+                <m:mrow>
+                    <m:msub>
+                        <m:mrow>
+                            <m:mi>ω</m:mi>
+                        </m:mrow>
+                        <m:mrow>
+                            <m:mn>2</m:mn>
+                        </m:mrow>
+                    </m:msub>
+                    <m:mi>π</m:mi>
+                </m:mrow>
+                <m:mrow>
+                    <m:mi>L</m:mi>
+                </m:mrow>
+            </m:mfrac>
+            <m:msqrt>
+                <m:mrow>
+                    <m:mi>E</m:mi>
+                    <m:msub>
+                        <m:mrow>
+                            <m:mi>I</m:mi>
+                        </m:mrow>
+                        <m:mrow>
+                            <m:mi>y</m:mi>
+                        </m:mrow>
+                    </m:msub>
+                    <m:mi>G</m:mi>
+                    <m:mi>J</m:mi>
+                    <m:mo>+</m:mo>
+                    <m:msup>
+                        <m:mrow>
+                            <m:mo>(</m:mo>
+                            <m:mfrac>
+                                <m:mrow>
+                                    <m:mi>π</m:mi>
+                                    <m:mi>E</m:mi>
+                                </m:mrow>
+                                <m:mrow>
+                                    <m:mi>L</m:mi>
+                                </m:mrow>
+                            </m:mfrac>
+                            <m:mo>)</m:mo>
+                        </m:mrow>
+                        <m:mrow>
+                            <m:mn>2</m:mn>
+                        </m:mrow>
+                    </m:msup>
+                    <m:msub>
+                        <m:mrow>
+                            <m:mi>I</m:mi>
+                        </m:mrow>
+                        <m:mrow>
+                            <m:mi>y</m:mi>
+                        </m:mrow>
+                    </m:msub>
+                    <m:msub>
+                        <m:mrow>
+                            <m:mi>C</m:mi>
+                        </m:mrow>
+                        <m:mrow>
+                            <m:mi>w</m:mi>
+                        </m:mrow>
+                    </m:msub>
+                </m:mrow>
+            </m:msqrt>
+        </m:mrow>
+    </m:math>
+    <p>Binomial Coefficient</p>
+    <math>
+        <mrow>
+            <mi>C</mi>
+            <mrow>
+                <mo>(</mo>
+                <mi>n</mi>
+                <mo>, </mo>
+                <mi>k</mi>
+                <mo>)</mo>
+            </mrow>
+            <mo>=</mo>
+            <msubsup>
+                <mi>C</mi>
+                <mi>k</mi>
+                <mi>n</mi>
+            </msubsup>
+            <mo>=</mo>
+            <mmultiscripts>
+                <mi>C</mi>
+                <mi>k</mi>
+                <none/>
+                <mprescripts/>
+                <mi>n</mi>
+                <none/>
+            </mmultiscripts>
+            <mo>=</mo>
+            <mrow>
+                <mo>(</mo>
+                <mfrac linethickness="0">
+                    <mi>n</mi>
+                    <mi>k</mi>
+                </mfrac>
+                <mo>)</mo>
+            </mrow>
+            <mo>=</mo>
+            <mfrac>
+                <mrow>
+                    <mi>n</mi>
+                    <mo lspace="0">!</mo>
+                </mrow>
+                <mrow>
+                    <mi>k</mi>
+                    <mo lspace="0">!</mo>
+                    <mo rspace="0.22em">⁢</mo>
+                    <mrow>
+                        <mo>(</mo>
+                        <mrow>
+                            <mi>n</mi>
+                            <mo>-</mo>
+                            <mi>k</mi>
+                        </mrow>
+                        <mo>)</mo>
+                    </mrow>
+                    <mo lspace="0">!</mo>
+                </mrow>
+            </mfrac>
+        </mrow>
+    </math>
+    <p>Moore determinant</p>
+    <math xmlns="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <mrow>
+            <mi>det</mi>
+            <mrow>
+                <mo>|</mo>
+                <mtable>
+                    <mtr>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mn>0</mn>
+                            </msub>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mn>1</mn>
+                            </msub>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mn>2</mn>
+                            </msub>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <mo>…</mo>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mi>n</mi>
+                            </msub>
+                        </mtd>
+                    </mtr>
+                    <mtr>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mn>1</mn>
+                            </msub>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mn>2</mn>
+                            </msub>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mn>3</mn>
+                            </msub>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <mo>…</mo>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mrow>
+                                    <mi>n</mi>
+                                    <mo>+</mo>
+                                    <mn>1</mn>
+                                </mrow>
+                            </msub>
+                        </mtd>
+                    </mtr>
+                    <mtr>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mn>2</mn>
+                            </msub>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mn>3</mn>
+                            </msub>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mn>4</mn>
+                            </msub>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <mo>…</mo>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mrow>
+                                    <mi>n</mi>
+                                    <mo>+</mo>
+                                    <mn>2</mn>
+                                </mrow>
+                            </msub>
+                        </mtd>
+                    </mtr>
+                    <mtr>
+                        <mtd columnalign="center">
+                            <mo>⋮</mo>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <mo>⋮</mo>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <mo>⋮</mo>
+                        </mtd>
+                        <mtd columnalign="center">
+                        </mtd>
+                        <mtd columnalign="center">
+                            <mo>⋮</mo>
+                        </mtd>
+                    </mtr>
+                    <mtr>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mi>n</mi>
+                            </msub>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mrow>
+                                    <mi>n</mi>
+                                    <mo>+</mo>
+                                    <mn>1</mn>
+                                </mrow>
+                            </msub>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mrow>
+                                    <mi>n</mi>
+                                    <mo>+</mo>
+                                    <mn>2</mn>
+                                </mrow>
+                            </msub>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <mo>…</mo>
+                        </mtd>
+                        <mtd columnalign="center">
+                            <msub>
+                                <mi>c</mi>
+                                <mrow>
+                                    <mn>2</mn>
+                                    <mi>n</mi>
+                                </mrow>
+                            </msub>
+                        </mtd>
+                    </mtr>
+                </mtable>
+                <mo>|</mo>
+            </mrow>
+            <mo>&gt;</mo>
+            <mn>0</mn>
+        </mrow>
+        
+    </math>
+</doc>

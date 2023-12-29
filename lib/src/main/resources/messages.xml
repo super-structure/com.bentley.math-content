@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messages>
+  <!-- Ant -->
+  <message id="MJXA001W" type="WARN">
+    <reason>Cannot find Node.js installed.</reason>
+    <response></response>
+  </message>
+  <message id="MJXA002W" type="WARN">
+    <reason>PDF processing cannot use MathJax client-side rendering.</reason>
+    <response/>
+  </message>
+</messages>  
