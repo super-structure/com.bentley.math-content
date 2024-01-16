@@ -17,6 +17,7 @@ Node.js - for pre-rendering of equation content into SVG
 MathJax 3 - included here
     [Hosting your own copy of the MathJax Components](https://www.npmjs.com/package/mathjax#hosting-your-own-copy-of-the-mathjax-components)
 
+[![Powered by MathJax](https://www.mathjax.org/badge/badge.gif)](https://www.mathjax.org)
 
 ## Installation
 
