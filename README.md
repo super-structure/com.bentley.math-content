@@ -13,11 +13,12 @@ While browsers have included some support for MathML in recent years, rendering 
 
 ## Prerequisites
 
-Node.js - for pre-rendering of equation content into SVG
-MathJax 3 - included here
-    [Hosting your own copy of the MathJax Components](https://www.npmjs.com/package/mathjax#hosting-your-own-copy-of-the-mathjax-components)
+- Node.js - for pre-rendering of equation content into SVG
 
-[![Powered by MathJax](https://www.mathjax.org/badge/badge.gif)](https://www.mathjax.org)
+MathJax 3 is included in this plugin (currently limited to 'pre' rendering using Node.js)
+   See also: [Hosting your own copy of the MathJax Components](https://www.npmjs.com/package/mathjax#hosting-your-own-copy-of-the-mathjax-components)
+
+[![Powered by MathJax](https://www.mathjax.org/badge/badge.gif "Powered by MathJax")](https://www.mathjax.org)
 
 ## Installation
 
