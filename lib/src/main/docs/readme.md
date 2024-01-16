@@ -4,7 +4,7 @@ Usage would ideally just be: `mathjax:mml2svg(`*`mml node`*`)`
 
 Prefer to do this _without_ write/read operations; just passing strings in memory. Unfortunately, this presents the following issues:
 
-- Java expects strings as UTF-16, where as most DITA content is going to be in UTF-8
+- Java (7 or earlier, anyway) expects strings as UTF-16, where as most DITA content is going to be in UTF-8 (Java 8 has standardized on UTF-8)
 - Command line arguments using unicode characters are problematic at best and would be unreliable on different platforms. And math content is goign to have _a lot_ of such characters
 - Stripping out whitespace and having to swap out single & double quotes are additional hassles that will trade off at least _some_ of the RW operations.
 
@@ -37,6 +37,8 @@ jar cfm CmdTest.jar MathJaxNode.CmdTest MathJaxNode/CmdTest.class
 java -jar CmdTest.jar simple.mml
 ```
 
+**Note:** The project has since been refactored to make use of a Gradle build file, so the compilation is part of this process simply as part of being structured as a standard gradle project.
+
 ## Node.js
 * [Command line arguments for Node](https://www.digitalocean.com/community/tutorials/nodejs-command-line-arguments-node-scripts)
 
@@ -55,3 +57,8 @@ java -jar CmdTest.jar simple.mml
 * [Saxon: Integrated Extension Functions](https://www.saxonica.com/html/documentation10/extensibility/integratedfunctions/index.html)
 
 * [Microsoft: Java for Beginners](https://learn.microsoft.com/en-us/shows/java-for-beginners/)
+
+## Oxygen
+
+* Getting the trace for external functions when using Oxygen for tansformations: 
+    [How to enable FeatureKeys.TRACE_EXTERNAL_FUNCTIONS in oXygen XML Editor 20.1, build 2018122403](https://www.oxygenxml.com/forum/xslt-and-fop/topic18618.html)

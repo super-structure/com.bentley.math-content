@@ -1,0 +1,2188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE concept PUBLIC "-//BENTLEY//DTD DITA Concept//EN" "bentley_concept.dtd"[]>
+<concept id="BENTLEYCREATETOPICCONCEPT">
+ <title>MathML Symbol Rendering</title>
+ <shortdesc></shortdesc>
+ <prolog>
+  <metadata>
+   <keywords>
+    <indexterm></indexterm>    
+   </keywords>
+  </metadata>
+ </prolog>
+ <conbody>
+  <p>Source: <xref href="https://elsenaju.eu/mathml/MathML-Examples.htm" format="html"
+    scope="external"/></p>
+  <note type="caution" id="NOTE_CAUTION-MATHJAX-OPERATOR-VS-IDENTIFIER">MathJax seems to process
+   letters differently when they are placed within an <xref
+    href="https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mo" format="html"
+    scope="external"><xmlelement>m:mo</xmlelement></xref> (operator) versus an <xref
+    href="https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mi" format="html"
+    scope="external"><xmlelement>m:mi</xmlelement></xref> (identifier) element. For example, the
+   <xref href="https://codepoints.net/U+03B8" format="html" scope="external"
+    >Greek small theta</xref> renders as <equation-inline><mathml>
+     <m:math>
+      <m:mo>θ</m:mo>
+     </m:math>
+    </mathml></equation-inline> (mojibake) when placed in an <xmlelement>m:mo</xmlelement>, but
+   renders correctly when in an <xmlelement>m:mi</xmlelement>
+   <equation-inline><mathml>
+     <m:math>
+      <m:mi>θ</m:mi>
+     </m:math>
+    </mathml></equation-inline>.</note>
+  <section id="section_uth_qyf_b1c">
+   <title>Operators</title>
+   <table frame="all" rowsep="1" colsep="1" id="table_uzl_qyf_b1c">
+    <tgroup cols="5">
+     <colspec colnum="1" colname="col1"/>
+     <colspec colnum="2" colname="col2"/>
+     <colspec colnum="3" colname="col3"/>
+     <colspec colnum="4" colname="col4"/>
+     <colspec colnum="5" colname="col5"/>
+     <thead>
+      <row>
+       <entry>Symbol</entry>
+       <entry>Entity</entry>
+       <entry>Hex</entry>
+       <entry>Description</entry>
+       <entry>MathML
+        <p><xmlelement>m:mo</xmlelement></p>
+       </entry>
+      </row>
+     </thead>
+     <tbody>
+      <row>
+       <entry>−</entry>
+       
+       <entry><codeph>&amp;minus;</codeph></entry>
+       <entry><codeph>&amp;#x2212;</codeph></entry>
+       <entry>Subtraction</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mo>−</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>×</entry>
+       
+       <entry><codeph>&amp;times;</codeph></entry>
+       <entry><codeph>&amp;#x00D7;</codeph></entry>
+       <entry>Multiplication</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mo>×</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>÷</entry>
+       
+       <entry><codeph>&amp;divide;</codeph></entry>
+       <entry><codeph>&amp;#x00F7;</codeph></entry>
+       <entry>Division</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mo>÷</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∕</entry>
+       <entry>(n/a)</entry>
+       <entry><codeph>&amp;#x2215;</codeph></entry>
+       <entry>Division slash</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mo>∕</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>≠</entry>
+       
+       <entry><codeph>&amp;ne;</codeph></entry>
+       <entry><codeph>&amp;#x2260;</codeph></entry>
+       <entry>Unequal</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mo>≠</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>≈</entry>
+       
+       <entry><codeph>&amp;asymp;</codeph><p><codeph>&amp;approx;</codeph></p></entry>
+       <entry><codeph>&amp;#x2248;</codeph></entry>
+       <entry>Almost equal to (similar)</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mo>≈</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>≅</entry>
+       <entry><codeph>&amp;cong;</codeph></entry>
+       <entry><codeph>&amp;#x2245;</codeph></entry>
+       <entry><xref href="https://codepoints.net/U+2245" format="html" scope="external"
+         >Approximately equal to</xref></entry>
+       <entry>
+        <equation-inline>
+         <mathml><m:math><m:mo>≅</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>≃</entry>
+       <entry><codeph>&amp;sime;</codeph><p><codeph>&amp;simeq;</codeph></p></entry>
+       <entry><codeph>&amp;#x2243;</codeph></entry>
+       <entry><xref href="https://codepoints.net/U+2243" format="html" scope="external"
+         >Asymptotically equal to</xref></entry>
+       <entry>
+        <equation-inline>
+         <mathml><m:math><m:mo>≃</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>≡</entry>
+       <entry><codeph>&amp;Congruent;</codeph><p><codeph>&amp;equiv;</codeph></p></entry>
+       <entry><codeph>&amp;#x2261;</codeph></entry>
+       <entry><xref href="https://codepoints.net/U+2261" format="html" scope="external">Identical
+         to</xref></entry>
+       <entry>
+        <equation-inline>
+         <mathml><m:math><m:mo>≡</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>&lt;</entry>
+       <entry><codeph>&amp;lt;</codeph></entry>
+       <entry><codeph>&amp;#x003C;</codeph></entry>
+       <entry>Less</entry>
+       <entry>
+        <equation-inline>
+         <mathml><m:math><m:mo>&lt;</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>≤</entry>
+       
+       <entry><codeph>&amp;le;</codeph></entry>
+       <entry><codeph>&amp;#x2264;</codeph></entry>
+       <entry>Less or equal</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mo>≤</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>></entry>
+       
+       <entry><codeph>&amp;gt;</codeph></entry>
+       <entry><codeph>&amp;#x003E;</codeph></entry>
+       <entry>Greater</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mo>></m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>≥</entry>
+       
+       <entry><codeph>&amp;ge;</codeph></entry>
+       <entry><codeph>&amp;#x2265;</codeph></entry>
+       <entry>Greater or equal</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mo>≥</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>±</entry>
+       
+       <entry><codeph>&amp;plusmn;</codeph></entry>
+       <entry><codeph>&amp;#x00B1;</codeph></entry>
+       <entry>Plus or minus</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mo>±</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∝</entry>
+       
+       <entry><codeph>&amp;prop;</codeph></entry>
+       <entry><codeph>&amp;#x221D;</codeph></entry>
+       <entry>Proportional</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mo>∝</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∑</entry>
+       
+       <entry><codeph>&amp;sum;</codeph></entry>
+       <entry><codeph>&amp;#x2211;</codeph></entry>
+       <entry>Sum</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mo>∑</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∏</entry>
+       
+       <entry><codeph>&amp;prod;</codeph></entry>
+       <entry><codeph>&amp;#x220F;</codeph></entry>
+       <entry>Product</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mo>∏</m:mo></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⏜</entry>
+       <entry><codeph>&amp;OverParenthesis;</codeph></entry>
+       <entry><codeph>&amp;#x23DC;</codeph></entry>
+       <entry>Top parenthesis</entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>⏝</entry>
+       <entry><codeph>&amp;UnderParenthesis;</codeph></entry>
+       <entry><codeph>&amp;#x23DD;</codeph></entry>
+       <entry>Bottom parenthesis</entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>⏞</entry>
+       <entry><codeph>&amp;OverBrace;</codeph></entry>
+       <entry><codeph>&amp;#x23DE;</codeph></entry>
+       <entry>Top curly bracket</entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>⏟</entry>
+       <entry><codeph>&amp;UnderBrace;</codeph></entry>
+       <entry><codeph>&amp;#x23DF;</codeph></entry>
+       <entry>Bottom curly bracket</entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>⏠</entry>
+       <entry>(n/a)</entry>
+       <entry><codeph>&amp;#x23E0;</codeph></entry>
+       <entry>Top tortoise shell bracket</entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>⏡</entry>
+       <entry>(n/a)</entry>
+       <entry><codeph>&amp;#x23E1;</codeph></entry>
+       <entry>Bottom tortoise shell bracket</entry>
+       <entry/>
+      </row>
+     </tbody>
+    </tgroup>
+   </table>
+  </section>
+  <section id="section_oq1_tyf_b1c">
+   <title>Differential / Integral</title>
+   <p/>
+   <table frame="all" rowsep="1" colsep="1" id="table_dfv_tyf_b1c">
+    <tgroup cols="6">
+     <colspec colnum="1" colname="col1"/>
+     <colspec colnum="2" colname="col2"/>
+     <colspec colnum="3" colname="col3"/>
+     <colspec colnum="4" colname="col4"/>
+     <colspec colnum="5" colname="col5"/>
+     <colspec colname="newCol6" colnum="6"/>
+     <thead>
+      <row>
+       <entry>Symbol</entry>
+       <entry>Entity</entry>
+       <entry>Hex</entry>
+       <entry>Description</entry>
+       <entry>MathML<p><xmlelement>m:mo</xmlelement></p></entry>
+       <entry>MathML<p><xmlelement>m:mtext</xmlelement></p></entry>
+      </row>
+     </thead>
+     <tbody>
+      <row>
+       <entry>′</entry>
+       <entry><codeph>&amp;prime;</codeph></entry>
+       <entry><codeph>&amp;#x2032;</codeph></entry>
+       <entry>First derivative</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>′</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>″</entry>
+       <entry><codeph>&amp;Prime;</codeph></entry>
+       <entry><codeph>&amp;#x2033;</codeph></entry>
+       <entry>Second derivative</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>″</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>‴</entry>
+       <entry><codeph>&amp;tprime;</codeph></entry>
+       <entry><codeph>&amp;#x2034;</codeph></entry>
+       <entry>Third derivative</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>‴</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>⁗</entry>
+       <entry><codeph>&amp;qprime;</codeph></entry>
+       <entry><codeph>&amp;#x2057;</codeph></entry>
+       <entry>Fourth derivative</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>⁗</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>∂</entry>
+       <entry><codeph>&amp;part;</codeph></entry>
+       <entry><codeph>&amp;#x2202;</codeph></entry>
+       <entry>Partial derivative</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>∂</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>Δ</entry>
+       <entry><codeph>&amp;Delta;</codeph></entry>
+       <entry><codeph>&amp;#x0394;</codeph></entry>
+       <entry>Increment</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>Δ</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>∇</entry>
+       <entry><codeph>&amp;Del;</codeph></entry>
+       <entry><codeph>&amp;#x2207;</codeph></entry>
+       <entry>Gradient</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>∇</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>∫</entry>
+       <entry><codeph>&amp;int;</codeph></entry>
+       <entry><codeph>&amp;#x222B;</codeph></entry>
+       <entry>Integral</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>∫</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>∬</entry>
+       <entry><codeph>&amp;Int;</codeph></entry>
+       <entry><codeph>&amp;#x222C;</codeph></entry>
+       <entry>Double Integral</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>∬</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>∭</entry>
+       <entry><codeph>&amp;tint;</codeph></entry>
+       <entry><codeph>&amp;#x222D;</codeph></entry>
+       <entry>Triple Integral</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>∭</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>⨌</entry>
+       <entry><codeph>&amp;qint;</codeph></entry>
+       <entry><codeph>&amp;#x2A0C;</codeph></entry>
+       <entry>Quadruple Integral</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>⨌</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>∮</entry>
+       <entry><codeph>&amp;conint;</codeph></entry>
+       <entry><codeph>&amp;#x222E;</codeph></entry>
+       <entry>Line integral</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>∮</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>∲</entry>
+       <entry><codeph>&amp;cwconint;</codeph></entry>
+       <entry><codeph>&amp;#x2232;</codeph></entry>
+       <entry>Line integral clockwise</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>∲</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry><equation-inline><mathml>
+          <m:math>
+           <m:mtext>∲</m:mtext>
+          </m:math>
+         </mathml>
+        </equation-inline></entry>
+      </row>
+      <row>
+       <entry>∳</entry>
+       <entry><codeph>&amp;awconint;</codeph></entry>
+       <entry><codeph>&amp;#x2233;</codeph></entry>
+       <entry>Line integral counter clockwise</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>∳</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry><equation-inline><mathml>
+          <m:math>
+           <m:mtext>∳</m:mtext>
+          </m:math>
+         </mathml>
+        </equation-inline></entry>
+      </row>
+      <row>
+       <entry>∯</entry>
+       <entry><codeph>&amp;Conint;</codeph></entry>
+       <entry><codeph>&amp;#x222F;</codeph></entry>
+       <entry>Surface integral</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>∯</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry><equation-inline><mathml>
+          <m:math>
+           <m:mtext>∯</m:mtext>
+          </m:math>
+         </mathml>
+        </equation-inline></entry>
+      </row>
+      <row>
+       <entry>∰</entry>
+       <entry><codeph>&amp;Cconint;</codeph></entry>
+       <entry><codeph>&amp;#x2230;</codeph></entry>
+       <entry>Volume integral</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>∰</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry><equation-inline><mathml>
+          <m:math>
+           <m:mtext>∰</m:mtext>
+          </m:math>
+         </mathml>
+        </equation-inline></entry>
+      </row>
+      <row>
+       <entry>∞</entry>
+       <entry><codeph>&amp;infin;</codeph></entry>
+       <entry><codeph>&amp;#x221E;</codeph></entry>
+       <entry>Infinite</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>∞</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+     </tbody>
+    </tgroup>
+   </table>
+  </section>
+  <section id="section_ycw_vyf_b1c">
+   <title>Points</title>
+   <table frame="all" rowsep="1" colsep="1" id="table_dlm_wyf_b1c">
+    <tgroup cols="6">
+     <colspec colnum="1" colname="col1"/>
+     <colspec colnum="2" colname="col2"/>
+     <colspec colnum="3" colname="col3"/>
+     <colspec colnum="4" colname="col4"/>
+     <colspec colnum="5" colname="col5"/>
+     <colspec colname="newCol6" colnum="6"/>
+     <thead>
+      <row>
+       <entry>Symbol</entry>
+       <entry>Entity</entry>
+       <entry>Hex</entry>
+       <entry>Description</entry>
+       <entry>MathML<p><xmlelement>m:mo</xmlelement></p></entry>
+       <entry>MathML<p><xmlelement>m:mtext</xmlelement></p></entry>
+      </row>
+     </thead>
+     <tbody>
+      <row>
+       <entry>…</entry>
+       <entry><codeph>&amp;hellip;</codeph></entry>
+       <entry><codeph>&amp;#x2026;</codeph></entry>
+       <entry>Horizontal Points</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>…</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>⋮</entry>
+       <entry><codeph>&amp;vellip;</codeph></entry>
+       <entry><codeph>&amp;#x22EE;</codeph></entry>
+       <entry>Vertical Points</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>⋮</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>⋯</entry>
+       <entry><codeph>&amp;ctdot;</codeph></entry>
+       <entry><codeph>&amp;#x22EF;</codeph></entry>
+       <entry>Horizontal Points center</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>⋯</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>⋰</entry>
+       <entry><codeph>&amp;utdot;</codeph></entry>
+       <entry><codeph>&amp;#x22F0;</codeph></entry>
+       <entry>Diagonal point to the upper right</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>⋰</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry><equation-inline><mathml>
+          <m:math>
+           <m:mtext>⋰</m:mtext>
+          </m:math>
+         </mathml>
+        </equation-inline></entry>
+      </row>
+      <row>
+       <entry>⋱</entry>
+       <entry><codeph>&amp;dtdot;</codeph></entry>
+       <entry><codeph>&amp;#x22F1;</codeph></entry>
+       <entry>Diagonal points to bottom right</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mo>⋱</m:mo>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+     </tbody>
+    </tgroup>
+   </table>
+  </section>
+  <section id="section_n4s_wyf_b1c">
+   <title>Geometric</title>
+   <p/>
+   <table frame="all" rowsep="1" colsep="1" id="table_lw2_xyf_b1c">
+    <tgroup cols="6">
+     <colspec colnum="1" colname="col1"/>
+     <colspec colnum="2" colname="col2"/>
+     <colspec colnum="3" colname="col3"/>
+     <colspec colnum="4" colname="col4"/>
+     <colspec colnum="5" colname="col5"/>
+     <colspec colname="newCol6" colnum="6"/>
+     <thead>
+      <row>
+       <entry>Symbol</entry>
+       <entry>Entity</entry>
+       <entry>Hex</entry>
+       <entry>Description</entry>
+       <entry>MathML<p><xmlelement>m:mo</xmlelement></p></entry>
+       <entry>MathML<p><xmlelement>m:mtext</xmlelement></p></entry>
+      </row>
+     </thead>
+     <tbody>
+      <row>
+       <entry>°</entry>
+       <entry><codeph>&amp;deg;</codeph></entry>
+       <entry><codeph>&amp;#x00B0;</codeph></entry>
+       <entry>Degree</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>°</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>∠</entry>
+       <entry><codeph>&amp;ang;</codeph></entry>
+       <entry><codeph>&amp;#x2220;</codeph></entry>
+       <entry>Angle</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>∠</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>∡</entry>
+       <entry><codeph>&amp;angmsd;</codeph></entry>
+       <entry><codeph>&amp;#x2221;</codeph></entry>
+       <entry>Measured angle</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>∡</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>∢</entry>
+       <entry><codeph>&amp;angsph;</codeph></entry>
+       <entry><codeph>&amp;#x2222;</codeph></entry>
+       <entry>Spherical angle</entry>
+       <entry>
+        <equation-inline><mathml>
+         <m:math>
+          <m:mi>∢</m:mi>
+         </m:math>
+        </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>∟</entry>
+       <entry><codeph>&amp;angrt;</codeph></entry>
+       <entry><codeph>&amp;#x221F;</codeph></entry>
+       <entry>Right angle</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>∟</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry><equation-inline><mathml>
+          <m:math>
+           <m:mi>∟</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline></entry>
+      </row>
+      <row>
+       <entry>⦜</entry>
+       <entry><codeph>&amp;vangrt;</codeph></entry>
+       <entry><codeph>&amp;#x299C;</codeph></entry>
+       <entry>Right angle with square</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>⦜</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry><equation-inline><mathml>
+          <m:math>
+           <m:mtext>⦜</m:mtext>
+          </m:math>
+         </mathml>
+        </equation-inline></entry>
+      </row>
+      <row>
+       <entry>⊿</entry>
+       <entry><codeph>&amp;lrtri;</codeph></entry>
+       <entry><codeph>&amp;#x22BF;</codeph></entry>
+       <entry>Right triangle</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>⊿</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry><equation-inline><mathml>
+          <m:math>
+           <m:mtext>⊿</m:mtext>
+          </m:math>
+         </mathml>
+        </equation-inline></entry>
+      </row>
+      <row>
+       <entry>○</entry>
+       <entry><codeph>&amp;cir;</codeph></entry>
+       <entry><codeph>&amp;#x25CB;</codeph></entry>
+       <entry>Circle</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>○</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry><equation-inline><mathml>
+          <m:math>
+           <m:mtext>○</m:mtext>
+          </m:math>
+         </mathml>
+        </equation-inline></entry>
+      </row>
+      <row>
+       <entry>△</entry>
+       <entry><codeph>&amp;xutri;</codeph></entry>
+       <entry><codeph>&amp;#x25B3;</codeph></entry>
+       <entry>Equilateral triangle</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>△</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>□</entry>
+       <entry><codeph>&amp;squ;</codeph></entry>
+       <entry><codeph>&amp;#x25A1;</codeph></entry>
+       <entry>Square</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>□</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>▱</entry>
+       <entry><codeph>&amp;fltns;</codeph></entry>
+       <entry><codeph>&amp;#x25B1;</codeph></entry>
+       <entry>Parallelogram</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>▱</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry><equation-inline><mathml>
+          <m:math>
+           <m:mtext>▱</m:mtext>
+          </m:math>
+         </mathml>
+        </equation-inline></entry>
+      </row>
+      <row>
+       <entry>∥</entry>
+       <entry><codeph>&amp;spar;</codeph></entry>
+       <entry><codeph>&amp;#x2225;</codeph></entry>
+       <entry>Parallel</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>∥</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>∦</entry>
+       <entry><codeph>&amp;npar;</codeph></entry>
+       <entry><codeph>&amp;#x2226;</codeph></entry>
+       <entry>Not parallel</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>∦</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>⊥</entry>
+       <entry><codeph>&amp;perp;</codeph></entry>
+       <entry><codeph>&amp;#x22A5;</codeph></entry>
+       <entry>Orthogonal</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>⊥</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>≅</entry>
+       <entry><codeph>&amp;cong;</codeph></entry>
+       <entry><codeph>&amp;#x2245;</codeph></entry>
+       <entry>Congruent</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>≅</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>→</entry>
+       <entry><codeph>&amp;rarr;</codeph></entry>
+       <entry><codeph>&amp;#x2192;</codeph></entry>
+       <entry>Ray</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>→</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>↔</entry>
+       <entry><codeph>&amp;harr;</codeph></entry>
+       <entry><codeph>&amp;#x2194;</codeph></entry>
+       <entry>Beam</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>↔</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>-</entry>
+       <entry>(n/a)</entry>
+       <entry><codeph>&amp;#x002D;</codeph></entry>
+       <entry>Line segment</entry>
+       <entry>
+        <equation-inline><mathml>
+          <m:math>
+           <m:mi>-</m:mi>
+          </m:math>
+         </mathml>
+        </equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>⌀</entry>
+       <entry>(n/a)</entry>
+       <entry><codeph>&amp;#x2300;</codeph></entry>
+       <entry><xref href="https://codepoints.net/U+2300" format="html" scope="external">Diameter
+         sign</xref></entry>
+       <entry><equation-inline><mathml>
+          <m:math>
+           <m:mi>⌀</m:mi>
+          </m:math>
+         </mathml></equation-inline></entry>
+       <entry><equation-inline><mathml>
+          <m:math>
+           <m:mtext>⌀</m:mtext>
+          </m:math>
+         </mathml></equation-inline></entry>
+      </row>
+      <row>
+       <entry>℄</entry>
+       <entry>(n/a)</entry>
+       <entry><codeph>&amp;#x2104;</codeph></entry>
+       <entry><xref href="https://codepoints.net/U+2104" format="html" scope="external"><ph
+          xml:lang="en-GB">Centre line symbol</ph></xref></entry>
+       <entry>
+        <equation-inline><mathml>
+         <m:math><m:mi>℄</m:mi></m:math>
+        </mathml></equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>⅊</entry>
+       <entry>(n/a)</entry>
+       <entry><codeph>&amp;#x214A;</codeph></entry>
+       <entry><xref href="https://codepoints.net/U+214A" format="html" scope="external">Property
+         line</xref></entry>
+       <entry>
+        <equation-inline><mathml>
+         <m:math><m:mi>⅊</m:mi></m:math>
+        </mathml></equation-inline>
+       </entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>ℓ</entry>
+       <entry><codeph>&amp;ell;</codeph></entry>
+       <entry><codeph>&amp;#x2113;</codeph></entry>
+       <entry>Script small L</entry>
+       <entry><equation-inline><mathml>
+        <m:math><m:mi>ℓ</m:mi></m:math>
+         </mathml></equation-inline></entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>⯐</entry>
+       <entry>(n/a)</entry>
+       <entry><codeph>&amp;#x2BD0;</codeph></entry>
+       <entry><xref href="https://codepoints.net/U+2BD0" format="html" scope="external">Square
+         position indicator</xref></entry>
+       <entry/>
+       <entry/>
+      </row>
+     </tbody>
+    </tgroup>
+   </table>
+  </section>
+  <section id="section_o1l_xyf_b1c">
+   <title>Logic</title>
+   <p/>
+   <table frame="all" rowsep="1" colsep="1" id="table_gf2_yyf_b1c">
+    <tgroup cols="5">
+     <colspec colnum="1" colname="col1"/>
+     <colspec colnum="2" colname="col2"/>
+     <colspec colnum="3" colname="col3"/>
+     <colspec colnum="4" colname="col4"/>
+     <colspec colnum="5" colname="col5"/>
+     <thead>
+      <row>
+       <entry>Symbol</entry>
+       <entry>Entity</entry>
+       <entry>Hex</entry>
+       <entry>Description</entry>
+       <entry>MathML<p><xmlelement>m:mo</xmlelement></p></entry>
+      </row>
+     </thead>
+     <tbody>
+      <row>
+       <entry>¬</entry>
+       
+       <entry><codeph>&amp;not;</codeph></entry>
+       <entry><codeph>&amp;#x00AC;</codeph></entry>
+       <entry>Negation</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>¬</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∧</entry>
+       
+       <entry><codeph>&amp;and;</codeph></entry>
+       <entry><codeph>&amp;#x2227;</codeph></entry>
+       <entry>AND</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>∧</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∨</entry>
+       
+       <entry><codeph>&amp;or;</codeph></entry>
+       <entry><codeph>&amp;#x2228;</codeph></entry>
+       <entry>OR</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>∨</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⊻</entry>
+       
+       <entry><codeph>&amp;veebar;</codeph></entry>
+       <entry><codeph>&amp;#x22BB;</codeph></entry>
+       <entry>Exclusive OR</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⊻</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∀</entry>
+       
+       <entry><codeph>&amp;forall;</codeph></entry>
+       <entry><codeph>&amp;#x2200;</codeph></entry>
+       <entry>For all</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>∀</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∃</entry>
+       
+       <entry><codeph>&amp;exist;</codeph></entry>
+       <entry><codeph>&amp;#x2203;</codeph></entry>
+       <entry>Exists</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>∃</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⇒</entry>
+       
+       <entry><codeph>&amp;rArr;</codeph></entry>
+       <entry><codeph>&amp;#x21D2;</codeph></entry>
+       <entry>Implication</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⇒</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⇔</entry>
+       
+       <entry><codeph>&amp;hArr;</codeph></entry>
+       <entry><codeph>&amp;#x21D4;</codeph></entry>
+       <entry>Equivalent to</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⇔</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>◻</entry>
+       
+       <entry><codeph>&amp;EmptySmallSquare;</codeph></entry>
+       <entry><codeph>&amp;#x25FB;</codeph></entry>
+       <entry>Necessary</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>◻</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>◊</entry>
+       
+       <entry><codeph>&amp;loz;</codeph></entry>
+       <entry><codeph>&amp;#x25CA;</codeph></entry>
+       <entry>Possible</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>◊</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⊢</entry>
+       
+       <entry><codeph>&amp;vdash;</codeph></entry>
+       <entry><codeph>&amp;#x22A2;</codeph></entry>
+       <entry>Testable</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⊢</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⊨</entry>
+       
+       <entry><codeph>&amp;vDash;</codeph></entry>
+       <entry><codeph>&amp;#x22A8;</codeph></entry>
+       <entry>Follows</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⊨</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∴</entry>
+       
+       <entry><codeph>&amp;there4;</codeph></entry>
+       <entry><codeph>&amp;#x2234;</codeph></entry>
+       <entry>From that</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>∴</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+     </tbody>
+    </tgroup>
+   </table>
+  </section>
+  <section id="section_j1z_xyf_b1c">
+   <title>Set</title>
+   <p/>
+   <table frame="all" rowsep="1" colsep="1" id="table_mxr_zyf_b1c">
+    <tgroup cols="5">
+     <colspec colnum="1" colname="col1"/>
+     <colspec colnum="2" colname="col2"/>
+     <colspec colnum="3" colname="col3"/>
+     <colspec colnum="4" colname="col4"/>
+     <colspec colnum="5" colname="col5"/>
+     <thead>
+      <row>
+       <entry>Symbol</entry>
+       <entry>Entity</entry>
+       <entry>Hex</entry>
+       <entry>Description</entry>
+       <entry>MathML<p><xmlelement>m:mi</xmlelement></p></entry>
+      </row>
+     </thead>
+     <tbody>
+      <row>
+       <entry>∅</entry>
+       
+       <entry><codeph>&amp;empty;</codeph></entry>
+       <entry><codeph>&amp;#x2205;</codeph></entry>
+       <entry>Empty set</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>∅</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∈</entry>
+       
+       <entry><codeph>&amp;isin;</codeph></entry>
+       <entry><codeph>&amp;#x2208;</codeph></entry>
+       <entry>Element of</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>∈</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∉</entry>
+       
+       <entry><codeph>&amp;notin;</codeph></entry>
+       <entry><codeph>&amp;#x2209;</codeph></entry>
+       <entry>Not Element of</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>∉</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⊆</entry>
+       
+       <entry><codeph>&amp;sube;</codeph></entry>
+       <entry><codeph>&amp;#x2286;</codeph></entry>
+       <entry>Subset</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⊆</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⊈</entry>
+       
+       <entry><codeph>&amp;nsube;</codeph></entry>
+       <entry><codeph>&amp;#x2288;</codeph></entry>
+       <entry>Not Subset</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⊈</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⊂</entry>
+       
+       <entry><codeph>&amp;sub;</codeph></entry>
+       <entry><codeph>&amp;#x2282;</codeph></entry>
+       <entry>Strict subset</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⊂</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⊄</entry>
+       
+       <entry><codeph>&amp;nsub;</codeph></entry>
+       <entry><codeph>&amp;#x2284;</codeph></entry>
+       <entry>Not strict subset</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⊄</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⊇</entry>
+       
+       <entry><codeph>&amp;supe;</codeph></entry>
+       <entry><codeph>&amp;#x2287;</codeph></entry>
+       <entry>superset</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⊇</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⊉</entry>
+       
+       <entry><codeph>&amp;nsupe;</codeph></entry>
+       <entry><codeph>&amp;#x2289;</codeph></entry>
+       <entry>Not superset</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⊉</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⊃</entry>
+       
+       <entry><codeph>&amp;sup;</codeph></entry>
+       <entry><codeph>&amp;#x2283;</codeph></entry>
+       <entry>Strict superset</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⊃</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⊅</entry>
+       
+       <entry><codeph>&amp;nsup;</codeph></entry>
+       <entry><codeph>&amp;#x2285;</codeph></entry>
+       <entry>Not strict superset</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⊅</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∩</entry>
+       
+       <entry><codeph>&amp;cap;</codeph></entry>
+       <entry><codeph>&amp;#x2229;</codeph></entry>
+       <entry>Intersection</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>∩</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∪</entry>
+       
+       <entry><codeph>&amp;cup;</codeph></entry>
+       <entry><codeph>&amp;#x222A;</codeph></entry>
+       <entry>Union</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>∪</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∖</entry>
+       
+       <entry><codeph>&amp;ssetmn;</codeph></entry>
+       <entry><codeph>&amp;#x2216;</codeph></entry>
+       <entry>Complementary</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>∖</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+     </tbody>
+    </tgroup>
+   </table>
+  </section>
+  <section id="section_h5q_1zf_b1c">
+   <title>Vectors</title>
+   <p/>
+   <table frame="all" rowsep="1" colsep="1" id="table_f2l_bzf_b1c">
+    <tgroup cols="5">
+     <colspec colnum="1" colname="col1"/>
+     <colspec colnum="2" colname="col2"/>
+     <colspec colnum="3" colname="col3"/>
+     <colspec colnum="4" colname="col4"/>
+     <colspec colnum="5" colname="col5"/>
+     <thead>
+      <row>
+       <entry>Symbol</entry>
+       <entry>Entity</entry>
+       <entry>Hex</entry>
+       <entry>Description</entry>
+       <entry>MathML<p><xmlelement>m:mi</xmlelement></p></entry>
+      </row>
+     </thead>
+     <tbody>
+      <row>
+       <entry>⋅</entry>
+       
+       <entry><codeph>&amp;sdot;</codeph></entry>
+       <entry><codeph>&amp;#x22C5;</codeph></entry>
+       <entry>Scalar Product</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⋅</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⨯</entry>
+       
+       <entry><codeph>&amp;Cross;</codeph></entry>
+       <entry><codeph>&amp;#x2A2F;</codeph></entry>
+       <entry>Cross Product</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⨯</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>‖</entry>
+       
+       <entry><codeph>&amp;Vert;</codeph></entry>
+       <entry><codeph>&amp;#x2016;</codeph></entry>
+       <entry>Norm</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>‖</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⟨</entry>
+       
+       <entry><codeph>&amp;lang;</codeph></entry>
+       <entry><codeph>&amp;#x27E8;</codeph></entry>
+       <entry>Left parenthesis</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⟨</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>⟩</entry>
+       
+       <entry><codeph>&amp;rang;</codeph></entry>
+       <entry><codeph>&amp;#x27E9;</codeph></entry>
+       <entry>Right parenthesis</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>⟩</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>∘</entry>
+       
+       <entry><codeph>&amp;compfn;</codeph></entry>
+       <entry><codeph>&amp;#x2218;</codeph></entry>
+       <entry>Inner product</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>∘</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>→</entry>
+       
+       <entry><codeph>&amp;rarr;</codeph></entry>
+       <entry><codeph>&amp;#x2192;</codeph></entry>
+       <entry>General mapping</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>→</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>↦</entry>
+       
+       <entry><codeph>&amp;mapsto;</codeph></entry>
+       <entry><codeph>&amp;#x21A6;</codeph></entry>
+       <entry>Mapping</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>↦</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>ı</entry>
+       
+       <entry><codeph>&amp;imath;</codeph></entry>
+       <entry><codeph>&amp;#x0131;</codeph></entry>
+       <entry>i without dot</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>ı</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>ȷ</entry>
+       
+       <entry><codeph>&amp;jmath;</codeph></entry>
+       <entry><codeph>&amp;#x0237;</codeph></entry>
+       <entry>j witout dot</entry>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>ȷ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+     </tbody>
+    </tgroup>
+   </table>
+  </section>
+  <section id="section_khd_czf_b1c">
+   <title>Greek Letters</title>
+   <p/>
+   <table frame="all" rowsep="1" colsep="1" id="table_gzt_czf_b1c">
+    <title>Upper Case</title>
+    <tgroup cols="5">
+     <colspec colnum="1" colname="col1"/>
+     <colspec colnum="2" colname="col2"/>
+     <colspec colnum="3" colname="col3"/>
+     <colspec colname="col4" colnum="4"/>
+     <colspec colnum="5" colname="col5"/>
+     <thead>
+      <row>
+       <entry>Letter</entry>
+       <entry>Entity</entry>
+       <entry>Hex Code</entry>
+       <entry>Description</entry>
+       <entry>MathML<p><xmlelement>m:mi</xmlelement></p></entry>
+      </row>
+     </thead>
+     <tbody>
+      <row>
+       <entry>Α</entry>
+       
+       <entry><codeph>&amp;Alpha;</codeph></entry>
+       <entry><codeph>&amp;#x0391;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Α</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Β</entry>
+       
+       <entry><codeph>&amp;Beta;</codeph></entry>
+       <entry><codeph>&amp;#x0392;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Β</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Γ</entry>
+       
+       <entry><codeph>&amp;Gamma;</codeph></entry>
+       <entry><codeph>&amp;#x0393;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Γ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Δ</entry>
+       
+       <entry><codeph>&amp;Delta;</codeph></entry>
+       <entry><codeph>&amp;#x0394;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Δ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Ε</entry>
+       
+       <entry><codeph>&amp;Epsilon;</codeph></entry>
+       <entry><codeph>&amp;#x0395;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Ε</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Ζ</entry>
+       
+       <entry><codeph>&amp;Zeta;</codeph></entry>
+       <entry><codeph>&amp;#x0396;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Ζ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Η</entry>
+       
+       <entry><codeph>&amp;Eta;</codeph></entry>
+       <entry><codeph>&amp;#x0397;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Η</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Θ</entry>
+       
+       <entry><codeph>&amp;Theta;</codeph></entry>
+       <entry><codeph>&amp;#x0398;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Θ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Ι</entry>
+       
+       <entry><codeph>&amp;Iota;</codeph></entry>
+       <entry><codeph>&amp;#x0399;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Ι</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Κ</entry>
+       
+       <entry><codeph>&amp;Kappa;</codeph></entry>
+       <entry><codeph>&amp;#x039A;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Κ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Λ</entry>
+       
+       <entry><codeph>&amp;Lambda;</codeph></entry>
+       <entry><codeph>&amp;#x039B;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Λ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Μ</entry>
+       
+       <entry><codeph>&amp;Mu;</codeph></entry>
+       <entry><codeph>&amp;#x039C;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Μ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Ν</entry>
+       
+       <entry><codeph>&amp;Nu;</codeph></entry>
+       <entry><codeph>&amp;#x039D;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Ν</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Ξ</entry>
+       
+       <entry><codeph>&amp;Xi;</codeph></entry>
+       <entry><codeph>&amp;#x039E;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Ξ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Ο</entry>
+       
+       <entry><codeph>&amp;Omicron;</codeph></entry>
+       <entry><codeph>&amp;#x039F;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Ο</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Π</entry>
+       
+       <entry><codeph>&amp;Pi;</codeph></entry>
+       <entry><codeph>&amp;#x03A0;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Π</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Ρ</entry>
+       
+       <entry><codeph>&amp;Rho;</codeph></entry>
+       <entry><codeph>&amp;#x03A1;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Ρ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Σ</entry>
+       
+       <entry><codeph>&amp;Sigma;</codeph></entry>
+       <entry><codeph>&amp;#x03A3;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Σ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Τ</entry>
+       
+       <entry><codeph>&amp;Tau;</codeph></entry>
+       <entry><codeph>&amp;#x03A4;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Τ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Υ</entry>
+       
+       <entry><codeph>&amp;Upsilon;</codeph></entry>
+       <entry><codeph>&amp;#x03A5;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Υ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Φ</entry>
+       
+       <entry><codeph>&amp;Phi;</codeph></entry>
+       <entry><codeph>&amp;#x03A6;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Φ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Χ</entry>
+       
+       <entry><codeph>&amp;Chi;</codeph></entry>
+       <entry><codeph>&amp;#x03A7;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Χ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Ψ</entry>
+       
+       <entry><codeph>&amp;Psi;</codeph></entry>
+       <entry><codeph>&amp;#x03A8;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Ψ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>Ω</entry>
+       
+       <entry><codeph>&amp;Omega;</codeph></entry>
+       <entry><codeph>&amp;#x03A9;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>Ω</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+     </tbody>
+    </tgroup>
+   </table>
+   <table frame="all" rowsep="1" colsep="1" id="table_csq_l2g_b1c">
+    <title>Lower Case</title>
+    <tgroup cols="5">
+     <colspec colnum="1" colname="col1"/>
+     <colspec colnum="2" colname="col2"/>
+     <colspec colnum="3" colname="col3"/>
+     <colspec colname="col4" colnum="4"/>
+     <colspec colnum="5" colname="col5"/>
+     <thead>
+      <row>
+       <entry>Letter</entry>
+       <entry>Entity</entry>
+       <entry>Hex Code</entry>
+       <entry>Description</entry>
+       <entry>MathML<p><xmlelement>m:mi</xmlelement></p></entry>
+      </row>
+     </thead>
+     <tbody>
+      <row>
+       <entry>α</entry>
+       
+       <entry><codeph>&amp;alpha;</codeph></entry>
+       <entry><codeph>&amp;#x03B1;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>α</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>β</entry>
+       
+       <entry><codeph>&amp;beta;</codeph></entry>
+       <entry><codeph>&amp;#x03B2;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>β</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>γ</entry>
+       
+       <entry><codeph>&amp;gamma;</codeph></entry>
+       <entry><codeph>&amp;#x03B3;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>γ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>δ</entry>
+       
+       <entry><codeph>&amp;delta;</codeph></entry>
+       <entry><codeph>&amp;#x03B4;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>δ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>ε</entry>
+       
+       <entry><codeph>&amp;epsilon;</codeph></entry>
+       <entry><codeph>&amp;#x03B5;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>ε</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>ζ</entry>
+       
+       <entry><codeph>&amp;zeta;</codeph></entry>
+       <entry><codeph>&amp;#x03B6;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>ζ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>η</entry>
+       
+       <entry><codeph>&amp;eta;</codeph></entry>
+       <entry><codeph>&amp;#x03B7;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>η</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>θ</entry>
+       
+       <entry><codeph>&amp;theta;</codeph></entry>
+       <entry><codeph>&amp;#x03B8;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>θ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>ι</entry>
+       
+       <entry><codeph>&amp;iota;</codeph></entry>
+       <entry><codeph>&amp;#x03B9;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>ι</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>κ</entry>
+       
+       <entry><codeph>&amp;kappa;</codeph></entry>
+       <entry><codeph>&amp;#x03BA;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>κ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>λ</entry>
+       
+       <entry><codeph>&amp;lambda;</codeph></entry>
+       <entry><codeph>&amp;#x03BB;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>λ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>μ</entry>
+       
+       <entry><codeph>&amp;mu;</codeph></entry>
+       <entry><codeph>&amp;#x03BC;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>μ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>ν</entry>
+       
+       <entry><codeph>&amp;nu;</codeph></entry>
+       <entry><codeph>&amp;#x03BD;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>ν</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>ξ</entry>
+       
+       <entry><codeph>&amp;xi;</codeph></entry>
+       <entry><codeph>&amp;#x03BE;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>ξ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>ο</entry>
+       
+       <entry><codeph>&amp;omicron;</codeph></entry>
+       <entry><codeph>&amp;#x03BF;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>ο</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>π</entry>
+       
+       <entry><codeph>&amp;pi;</codeph></entry>
+       <entry><codeph>&amp;#x03C0;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>π</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>ρ</entry>
+       
+       <entry><codeph>&amp;rho;</codeph></entry>
+       <entry><codeph>&amp;#x03C1;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>ρ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>σ</entry>
+       
+       <entry><codeph>&amp;sigma;</codeph></entry>
+       <entry><codeph>&amp;#x03C3;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>σ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>τ</entry>
+       
+       <entry><codeph>&amp;tau;</codeph></entry>
+       <entry><codeph>&amp;#x03C4;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>τ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>υ</entry>
+       
+       <entry><codeph>&amp;upsilon;</codeph></entry>
+       <entry><codeph>&amp;#x03C5;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>υ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>φ</entry>
+       
+       <entry><codeph>&amp;phi;</codeph></entry>
+       <entry><codeph>&amp;#x03C6;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>φ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>χ</entry>
+       
+       <entry><codeph>&amp;chi;</codeph></entry>
+       <entry><codeph>&amp;#x03C7;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>χ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>ψ</entry>
+       
+       <entry><codeph>&amp;psi;</codeph></entry>
+       <entry><codeph>&amp;#x03C8;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>ψ</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+      <row>
+       <entry>ω</entry>
+       
+       <entry><codeph>&amp;omega;</codeph></entry>
+       <entry><codeph>&amp;#x03C9;</codeph></entry>
+       <entry/>
+       <entry>
+        <equation-inline><mathml><m:math><m:mi>ω</m:mi></m:math></mathml>
+        </equation-inline>
+       </entry>
+      </row>
+     </tbody>
+    </tgroup>
+   </table>
+   <table frame="all" rowsep="1" colsep="1" id="table_yhr_p2g_b1c">
+    <title>Variants</title>
+    <tgroup cols="5">
+     <colspec colname="c1" colnum="1" colwidth="1*"/>
+     <colspec colname="c2" colnum="2" colwidth="1*"/>
+     <colspec colname="c3" colnum="3" colwidth="1*"/>
+     <colspec colname="c4" colnum="4" colwidth="1*"/>
+     <colspec colname="newCol5" colnum="5" colwidth="1*"/>
+     <thead>
+      <row>
+       <entry>Symbol</entry>
+       <entry>Entity</entry>
+       <entry>Hex</entry>
+       <entry>Description</entry>
+       <entry>MathML<p><xmlelement>m:mi</xmlelement></p></entry>
+      </row>
+     </thead>
+     <tbody>
+      <row>
+       <entry>ϕ</entry>
+       <entry><codeph>&amp;varphi</codeph><p><codeph>&amp;phiv</codeph></p><p><codeph>&amp;straightphi</codeph></p></entry>
+       <entry><codeph>&amp;#x03D5;</codeph></entry>
+       <entry><xref href="https://codepoints.net/U+03D5" format="html" scope="external"
+        >Greek phi symbol</xref></entry>
+       <entry><equation-inline><mathml>
+        <m:math><m:mi>ϕ</m:mi></m:math>
+         </mathml></equation-inline></entry>
+      </row>
+      <row>
+       <entry>ℇ</entry>
+       <entry>(n/a)</entry>
+       <entry><codeph>&amp;#x2107;</codeph></entry>
+       <entry><xref href="https://codepoints.net/U+2107" format="html" scope="external">Euler
+         constant</xref></entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>Ω</entry>
+       <entry>(n/a)</entry>
+       <entry><codeph>&amp;#x2126;</codeph></entry>
+       <entry><xref href="https://codepoints.net/U+2126" format="html" scope="external">Ohm
+         sign</xref></entry>
+       <entry/>
+      </row>
+      <row>
+       <entry>℧</entry>
+       <entry><codeph>&amp;mho;</codeph></entry>
+       <entry><codeph>&amp;#x2127;</codeph></entry>
+       <entry><xref href="https://codepoints.net/U+2127" format="html" scope="external">Inverted ohm
+         sign (mho)</xref></entry>
+       <entry/>
+      </row>
+     </tbody>
+    </tgroup>
+   </table>
+  </section>
+ </conbody>
+</concept>

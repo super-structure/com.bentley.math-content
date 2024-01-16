@@ -5,15 +5,11 @@ Copyright © Bentley Systems, Incorporated. All rights reserved
 <project xmlns:dita="http://dita-ot.sourceforge.net"
    name="equation-and-math-handling">
    
-   <target name="bentley:math-content-init" depends="bentley:node.check">
-      <!-- depends on a node-check target (ref: fox.jason.prismjs ) -->
+   <target name="bentley:math-content-init" depends="bentley:node.check">      
+      <!-- set default parameter values: -->
+      <property name="args.eqnlink.style" value="abbr"/>
+      <property name="args.mathml.processing" value="none"/>
       
-      <!-- set default parameter values; not sure this direct method works: -->
-      <property name="args.eqnlink.style" value="full"/>
-      <!--<property name="args.mathml.processing" value="none"/>-->
-      <property name="args.mathml.processing" value="mathjax-pre"/>
-      
-      <!-- TODO: create error codes and messages -->
       <dita-ot-fail id="MJXA001W">
          <condition>
             <and>
@@ -85,8 +81,7 @@ Copyright © Bentley Systems, Incorporated. All rights reserved
    <target name="bentley:node.check">
       <!-- copied from fox.jason.prismjs -->
       
-      <!-- For Unix run node as an executable -->
-      
+      <!-- Run node as an executable -->
       <exec
          executable="node"
          dir="${dita.dir}"
@@ -98,24 +93,18 @@ Copyright © Bentley Systems, Incorporated. All rights reserved
          >
          <arg line="-v"/>
       </exec>  <!--  osfamily="unix" -->
-      <!-- For Windows run from a DOS command -->
-      <!--<exec
-         executable="cmd"
-         dir="${dita.dir}"
-         osfamily="windows"
-         taskname="node"
-         resultproperty="node.result"
-         outputproperty="node.out"
-         failonerror="false"
-         failifexecutionfails="false"
-         >
-         <arg value="/C"/>
-         <arg value="node -v"/>
-      </exec>-->
       
       <condition property="node.installed">
          <equals arg1="${node.result}" arg2="0"/>
       </condition>
+   </target>
+   
+   
+   <target name="bentley:math.css">
+      <property name="math-content.css.file" value="${dita.plugin.com.bentley.math-content.dir}/css/math-content.css"/>
+      <loadfile property="math-content.css.contents" srcFile="${math-content.css.file}" />
+      <echo level="info">inserting file: ${math-content.css.file}</echo>
+      <echo append="true" message="${line.separator}${math-content.css.contents}" file="${extend.css.file}"/>
    </target>
 
 </project>

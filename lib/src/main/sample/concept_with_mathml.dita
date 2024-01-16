@@ -2,8 +2,7 @@
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept id="concept_with_mathml">
     <title>Concept with MathML</title>
-    <shortdesc>A DITA Concept topic containing MathML
-        content<!-- provided in the W3C MathML 2 test suite-->.</shortdesc>
+    <shortdesc>A DITA Concept topic containing MathML content.</shortdesc>
     <conbody>
         <p>This paragraph contains an <xmlelement>equation-inline</xmlelement> element: <equation-inline>
                 <mathml>
@@ -176,7 +175,7 @@
                             </m:mrow>
                         </m:math>
                     </mathml>
-                    <equation-number>Eqn 1</equation-number>
+                    <equation-number>1</equation-number>
                 </equation-block>
                 <dl>
                     <dlentry>
@@ -304,15 +303,15 @@
                 </dl>
             </equation-figure>
         </section>
-        <section>
+        <!--<section>
             <title>Math References</title>
             <p>An <xmlelement>mathref</xmlelement> element to an external <filepath>.mml</filepath> file:</p>
             <equation-block>
                 <mathml>
-                    <mathmlref href="./MathML/ex1_binomial_coeff.mml"/>
+                    <mathmlref href="./matrix_small.mml"/>
                 </mathml>
             </equation-block>
                 
-        </section>
+        </section>-->
     </conbody>
 </concept>

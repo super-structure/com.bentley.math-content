@@ -68,7 +68,7 @@ task dist(type: Zip) {
     println("Making distributable...")
     from("src/main") {
         include "*.xml"
-        include "xsl/**", "cfg/**", "docs/**", "sample/**"
+        include "xsl/**", "cfg/**", "docs/**", "sample/**", "css/**"
     }
     
     from("${rootProject.projectDir}.") {

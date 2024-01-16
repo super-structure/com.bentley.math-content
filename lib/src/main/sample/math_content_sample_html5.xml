@@ -5,9 +5,10 @@
   </context>
   <deliverable name="Math Content Sample HTML5" id="ug_html5">
     <context idref="math_content_sample_html"/>
-    <output href="./html5-output"/>
-    <publication transtype="html5">
-      
+    <output href="./html5-bootstrap"/>
+    <publication transtype="html5-bootstrap">
+      <param name="args.mathml.processing" value="mathjax-pre"/>
+      <param name="args.eqnlink.style" value="abbr"/>
     </publication>
   </deliverable>
 </project>
