@@ -14,9 +14,12 @@ This plugin includes stylesheets for HTML5/XHTML and PDF/FO transformations by m
 
 ## Prerequisites
 
-Node.js - for pre-rendering of equation content into SVG
-MathJax 3 - included here
-    [Hosting your own copy of the MathJax Components](https://www.npmjs.com/package/mathjax#hosting-your-own-copy-of-the-mathjax-components)
+- Node.js - for pre-rendering of equation content into SVG
+
+MathJax 3 is included in this plugin (currently limited to 'pre' rendering using Node.js)
+   See also: [Hosting your own copy of the MathJax Components](https://www.npmjs.com/package/mathjax#hosting-your-own-copy-of-the-mathjax-components)
+
+[![Powered by MathJax](https://www.mathjax.org/badge/badge.gif "Powered by MathJax")](https://www.mathjax.org)
 
 
 ## Install
@@ -53,4 +56,3 @@ Copyright © Bentley Systems, Incorporated. All rights reserved.
 ## License
 
 **MathJax 3.x** distribution is licensed under an Apache v2.0 license. See the included license file for details.
-**jeuclid-fop-3.1.9** distribution is licensed under an Apache v2.0 license. See the included license file for details.
