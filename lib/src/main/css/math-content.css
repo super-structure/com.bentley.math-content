@@ -2,7 +2,7 @@
   --math-font: 'Noto Serif', serif;
 }
 
-math, .mathml {
+mathml, .mathml {
     font-family: var(--math-font);
     /*font-style: italic;*/
     color: inherit;
@@ -54,10 +54,25 @@ math, .mathml {
 }
 
 .equation-block {
+    font-family: var(--math-font);
     vertical-align: middle;
     clear: both;
     width: 100%;
     display: flex;
+}
+
+.equation-inline {
+    font-family: var(--math-font);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.1em;
+}
+
+.equation-block .equation-text {
+    font-style: italic;
+    font-weight: 500;
+    padding-bottom: 12px;
+    font-size: 1.1em;
 }
 
 div.mathmls > div.mathml {
@@ -72,7 +87,7 @@ div.equation-block > div.mathml {
     padding-bottom: 8px;
 }
 .equation-block > .equation-number {
-    /*float: right;*/
+    font-style: normal;
     text-align: right;
     align-self: center;
     padding-right: 40px;

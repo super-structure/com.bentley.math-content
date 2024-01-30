@@ -52,8 +52,12 @@
     <!-- strip out the namespace for HTML5 -->
     <xsl:template match="m:*" mode="dita-ot:mathml" priority="10">
         <xsl:element name="{local-name()}" namespace="http://www.w3.org/1998/Math/MathML">
-            <xsl:apply-templates select="@* | node()" mode="#current"/>
+            <xsl:apply-templates select="* | @* | text()" mode="#current"/>
         </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="m:*/@*" mode="dita-ot:mathml" priority="10">
+        <xsl:copy-of select="."/>
     </xsl:template>
     
     <xsl:template match="m:math" mode="mathjax:mathml">

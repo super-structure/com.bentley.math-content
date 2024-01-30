@@ -78,6 +78,7 @@
         </param>
     </transtype>
     <feature extension="dita.conductor.html5.toc.param" file="InsertParams.xml"/>
+    <feature extension="dita.conductor.pdf2.param" file="InsertParams.xml"/>
     
     <!-- Use Extend CSS to add math theme stylesheet -->
     <feature extension="extend.css.process.post" value="bentley:math.css"/>

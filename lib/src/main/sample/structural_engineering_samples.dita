@@ -5,7 +5,9 @@
     <shortdesc></shortdesc>
     <conbody>
         <p>The following matrix uses the default <xmlatt>displaystyle</xmlatt> of <q>false</q> (i.e., compact).</p>
-        <equation-figure id="equation-figure_dpt_svn_b1d">
+        <p>The <xmlelement>equation-figure</xmlelement> attribute <xmlatt>scale</xmlatt> is set to
+                <q>70</q>, which is used for scaling print output.</p>
+        <equation-figure id="equation-figure_dpt_svn_b1d" scale="70">
             <title>Stiffness matrix derivation for a frame element</title>
             <equation-block id="equation-block_vbx_svn_b1d"><mathml>
                     <m:math xmlns:m="http://www.w3.org/1998/Math/MathML" displaystyle="false">
@@ -14,7 +16,7 @@
                             <m:mo>=</m:mo>
                             <m:mrow>
                                 <m:mo>[</m:mo>
-                                <m:mtable displaystyle="false">
+                                <m:mtable>
                                     <m:mtr>
                                         <m:mtd>
                                             <m:mfrac>
@@ -1160,5 +1162,6 @@
                 <equation-number/>
             </equation-block>
         </equation-figure>
+        <p>Some additional content after the matrix.</p>
     </conbody>
 </concept>

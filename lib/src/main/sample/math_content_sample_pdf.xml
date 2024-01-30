@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="https://www.dita-ot.org/project">
+  <context name="Math Content Sample PDF" id="math_content_sample_pdf">
+    <input href="math_content_sample_bookmap.ditamap"/>
+  </context>
+  <deliverable name="Math Content Sample PDF" id="math_pdf">
+    <context idref="math_content_sample_pdf"/>
+    <output href="./"/>
+    <publication transtype="pdf">
+      <param name="args.draft" value="no"/>
+      <param name="args.figurelink.style" value="NUMBER"/>
+      <param name="args.tablelink.style" value="NUMBER"/>
+      <param name="args.output.base" value="Math Content Sample"/>
+      <param name="args.bookmark.style" value="COLLAPSE"/>
+      <param name="args.chapter.layout" value="BASIC"/>
+      <param name="org.dita.pdf2.i18n.enabled" value="false"/>
+      <param name="args.mathml.processing" value="mathjax-pre"/>
+      <param name="args.eqnlink.style" value="abbr"/>
+      <param name="clean.temp" value="no"/>
+    </publication>
+  </deliverable>
+</project>

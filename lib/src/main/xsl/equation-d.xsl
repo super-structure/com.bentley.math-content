@@ -25,9 +25,15 @@
         <div>
             <xsl:call-template name="commonattributes"/>
             <xsl:call-template name="setid"/>
+            <!-- process 'text' math content -->
+            <div class="equation-text">
+               <xsl:apply-templates select="*[not(self::*[contains(@class,' mathml-d/mathml ')] or
+                self::*[contains(@class,' equation-d/equation-number ')])] | text()"/>
+            </div>
+            <!-- process mathml content -->
             <xsl:choose>
                 <xsl:when test="count(child::*[contains(@class,' mathml-d/mathml ')]) &gt; 1">
-                    <!-- nest multipel <mathml> elements in a div; need to put this in a for-each loop -->
+                    <!-- nest multiple <mathml> elements in a div; need to put this in a for-each loop -->
                     <div class="mathmls">
                         <xsl:for-each select="*[contains(@class,' mathml-d/mathml ')]">
                             <xsl:apply-templates select="current()"/>
@@ -38,6 +44,7 @@
                     <xsl:apply-templates select="*[contains(@class,' mathml-d/mathml ')]"/>
                 </xsl:otherwise>
             </xsl:choose>
+            <!-- process equation number -->
             <xsl:apply-templates select="*[contains(@class,' equation-d/equation-number ')]"/>
         </div>
     </xsl:template>
@@ -60,6 +67,7 @@
 
     <!-- also refer to mode="label" in \org.dita.html5\xsl\tables.xsl -->
     <!-- TODO: generate target ID value for linking -->
+    <!-- TODO: allow for 'formatting' of the equation number, such as for PLAXIS: Eq [#] -->
     <xsl:template match="*[contains(@class,' equation-d/equation-number ')]" name="topic.equation-d.equation-number">
         <xsl:variable name="prev-eqn-num-count" select="count(preceding::*[contains(@class, ' equation-d/equation-number ')])"/>
         <xsl:variable name="eqn-count-actual" select="$prev-eqn-num-count + 1"/>
