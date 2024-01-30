@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bookmap PUBLIC "-//OASIS//DTD DITA BookMap//EN" "bookmap.dtd">
+<bookmap>
+    <booktitle>
+        <mainbooktitle>Math Content</mainbooktitle>
+        <booktitlealt>Print Sample</booktitlealt>
+    </booktitle>
+    <frontmatter>
+        <booklists>
+            <toc/>
+        </booklists>
+    </frontmatter>
+    <chapter href="dita_math_content_sample.dita">
+        <topicref href="concept_with_mathml.dita"/>
+        <topicref href="structural_engineering_samples.dita"/>
+    </chapter>
+</bookmap>

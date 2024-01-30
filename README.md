@@ -7,7 +7,8 @@ DITA Open Toolkit plugin for math content (MathML ~~and LaTeX~~) integration wit
 
 This plugin includes stylesheets for HTML5/XHTML and PDF/FO transformations by means of DITA Open Toolkit extensions.
 
-While browsers have included some support for MathML in recent years, rendering of anything but very basic math content is severaly limited even as of late 2023. However, SVG support is well established in all modern browsers. Therefore, in addition to general stylesheets to support MathML content, this plugin also "pre-renders" the `<mathml>` elements into SVG using MathJax 3.x.
+- XSL transformations for equation and math domain elements; not included in DITA Open Toolkit standard plugins
+- While browsers have included some support for MathML in recent years, rendering of anything but very basic math content is severely limited even as of late 2023. However, SVG support is well established in all modern browsers. Therefore, in addition to general stylesheets to support MathML content, this plugin also "pre-renders" the `<mathml>` elements into SVG using MathJax 3.x.
 
 **In Development**: Refer to [docs](docs/index.md) for roadmap and To Do list.
 
@@ -20,10 +21,21 @@ MathJax 3 is included in this plugin (currently limited to 'pre' rendering using
 
 [![Powered by MathJax](https://www.mathjax.org/badge/badge.gif "Powered by MathJax")](https://www.mathjax.org)
 
-## Installation
+
+## Install
 
 1. Download or clone this repository to your DITA OT `plugins` directory.
 2. Run the `dita --install` command.
+
+## Build
+
+To build the com.bentley.math-content plugin from the source:
+
+1. Run the Gradle build task to generate the compiled Jar file:
+   ```gradle clean build```
+2. Run the Gradle distribution task to generate the plugin package:
+   ```gradle dist build```
+   The distribution package is located in `lib/build/distributions/`.
 
 ## Usage
 
@@ -43,5 +55,5 @@ Copyright © Bentley Systems, Incorporated. All rights reserved.
 
 ## License
 
+
 **MathJax 3.x** distribution is licensed under an Apache v2.0 license. See the included license file for details.
-**jeuclid-fop-3.1.9** distribution is licensed under an Apache v2.0 license. See the included license file for details.

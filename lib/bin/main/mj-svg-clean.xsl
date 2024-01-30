@@ -21,7 +21,7 @@
                             <xsl:value-of select="substring-after(current(),'vertical-align:')"/>
                         </xsl:variable>
                         <xsl:text>vertical-align: </xsl:text>
-                        <xsl:value-of select="bentley:ex-2-em($align-val-ex)"/>
+                        <xsl:value-of select="bentley:ex-2-px($align-val-ex)"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="current()"/>
@@ -37,7 +37,7 @@
         <xsl:attribute name="{name(.)}">
             <xsl:choose>
                 <xsl:when test="contains(.,'ex')">
-                    <xsl:value-of select="bentley:ex-2-em(.)"/>
+                    <xsl:value-of select="bentley:ex-2-px(.)"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="."/>
@@ -55,7 +55,30 @@
     <xsl:function name="bentley:ex-2-em">
         <xsl:param name="string"/>
         <xsl:variable name="value" select="substring-before($string,'ex')"/>
-        <xsl:value-of select="0.5 * number($value)"/>
+        <xsl:variable name="ratio" as="xs:double">0.5</xsl:variable> <!-- 1em / 2ex -->
+        <xsl:value-of select="bentley:convert-size($ratio, $value)"/>
         <xsl:text>em</xsl:text>
+    </xsl:function>
+
+    <xsl:function name="bentley:ex-2-pt">
+        <xsl:param name="string"/>
+        <xsl:variable name="value" select="substring-before($string,'ex')"/>
+        <xsl:variable name="ratio" as="xs:double">6</xsl:variable> <!-- 12pt / 2ex -->
+        <xsl:value-of select="bentley:convert-size($ratio, $value)"/>
+        <xsl:text>pt</xsl:text>
+    </xsl:function>
+    
+    <xsl:function name="bentley:ex-2-px">
+        <xsl:param name="string"/>
+        <xsl:variable name="value" select="substring-before($string,'ex')"/>
+        <xsl:variable name="ratio" as="xs:double">8</xsl:variable> <!-- 16px / 2ex -->
+        <xsl:value-of select="bentley:convert-size($ratio, $value)"/> 
+        <xsl:text>px</xsl:text>
+    </xsl:function>
+    
+    <xsl:function name="bentley:convert-size">
+        <xsl:param name="ratio"/>
+        <xsl:param name="value"/>
+        <xsl:value-of select="number($ratio) * number($value)"/>
     </xsl:function>
 </xsl:stylesheet>

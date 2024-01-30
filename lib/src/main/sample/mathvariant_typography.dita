@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="mathvariant_typography">
+    <title>MathVariant Typography</title>
+    <shortdesc>The <xmlatt>mathvariant</xmlatt> attribute on the <xmlelement>m:mi</xmlelement>
+        element can be used to render many alphanumeric symbols in different ways.</shortdesc>
+    <conbody>
+        <note>Though the <xref href="https://w3c.github.io/mathml-core/#dfn-mi" format="html"
+                scope="external">MathML Core spec</xref> and <xref
+                href="https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mi" format="html"
+                scope="external">MDN Web Docs</xref> indicate that the <xmlatt>mathvariant</xmlatt>
+            attribute is deprecated (other than <q>normal</q>) and instead that the actual <xref
+                href="https://en.wikipedia.org/wiki/Mathematical_Alphanumeric_Symbols" format="html"
+                scope="external">Mathematical Alphanumeric Operators</xref> should be used, MathJax
+            does support the use of the many of the accepted values for this attribute.</note>
+        <p>The following table shows the options, all of which apply to Latin capital and small
+            letters. For Greek capital and small letters, only the values of: normal, bold, italic,
+            bold-italic, bold-sans-serif, and sans-serif-bold-italic have effect. For numerals 0-9,
+            only the values of: normal, bold, double-struck, sans-serif, bold-sans-serif, and
+            monospace have effect.</p>
+        <example id="example_sxy_4sn_b1c">
+            <title>Examples</title>
+            <table colsep="1" rowsep="1" frame="all" id="table_j1z_qrn_b1c">
+                <tgroup cols="14">
+                    <colspec colname="c1" colnum="1" colwidth="1*"/>
+                    <colspec colname="c2" colnum="2" colwidth="1*"/>
+                    <colspec colname="c3" colnum="3" colwidth="1*"/>
+                    <colspec colname="c4" colnum="4" colwidth="1*"/>
+                    <colspec colname="c5" colnum="5" colwidth="1*"/>
+                    <colspec colname="c6" colnum="6" colwidth="1*"/>
+                    <colspec colname="c7" colnum="7" colwidth="1*"/>
+                    <colspec colname="c8" colnum="8" colwidth="1*"/>
+                    <colspec colname="newCol9" colnum="9" colwidth="1*"/>
+                    <colspec colname="newCol11" colnum="10" colwidth="1*"/>
+                    <colspec colname="newCol12" colnum="11" colwidth="1*"/>
+                    <colspec colname="newCol13" colnum="12" colwidth="1*"/>
+                    <colspec colname="newCol10" colnum="13" colwidth="1*"/>
+                    <colspec colname="newCol14" colnum="14" colwidth="1*"/>
+                    <thead>
+                        <row>
+                            <entry namest="c1" nameend="c4" align="center">serif</entry>
+                            <entry namest="c5" nameend="c8" align="center">sans-serif</entry>
+                            <entry namest="newCol9" nameend="newCol11" align="center">script</entry>
+                            <entry namest="newCol12" nameend="newCol13" align="center"
+                                >Fraktur</entry>
+                            <entry morerows="1" align="center"><codeph>monospace</codeph></entry>
+                            <entry morerows="1" align="center"
+                                ><codeph>double-struck</codeph></entry>
+                        </row>
+                        <row>
+                            <entry><codeph>normal</codeph></entry>
+                            <entry><codeph>bold</codeph></entry>
+                            <entry><codeph>italic</codeph></entry>
+                            <entry><codeph>bold-italic</codeph></entry>
+                            <entry><codeph>sans-serif</codeph>
+                                <p>(normal)</p></entry>
+                            <entry><codeph>bold-sans-serif</codeph>
+                                <p>(bold)</p></entry>
+                            <entry><codeph>sans-serif-italic</codeph>
+                            <p>(italic)</p>
+                            </entry>
+                            <entry>
+                                <line-through><codeph>sans-serif-bold-italic</codeph></line-through><p><line-through>(bold-italic)</line-through></p></entry>
+                            <entry><codeph>script</codeph>
+                                <p>(normal)</p></entry>
+                            <entry>
+                                <line-through><codeph>bold-script</codeph></line-through>
+                                <p><line-through>bold</line-through></p></entry>
+                            <entry><codeph>fraktur</codeph>
+                                <p>(normal)</p></entry>
+                            <entry><codeph>bold-fraktur</codeph>
+                            <p>(bold)</p></entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi>A</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="bold">A</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="italic">A</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="bold-italic">A</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="sans-serif">A</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="bold-sans-serif">A</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="sans-serif-italic">A</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="sans-serif-bold-italic">A</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="script">A</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="bold-script">A</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="fraktur">A</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="bold-fraktur">A</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="monospace">A</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="double-struck">A</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi>R</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="bold">R</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="italic">R</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="bold-italic">R</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="sans-serif">R</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="bold-sans-serif">R</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="sans-serif-italic">R</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="sans-serif-bold-italic">R</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="script">R</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="bold-script">R</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="fraktur">R</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="bold-fraktur">R</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="monospace">R</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                            <entry>
+                                <equation-inline>
+                                    <mathml>
+                                        <m:math>
+                                            <m:mi mathvariant="double-struck">R</m:mi>
+                                        </m:math>
+                                    </mathml>
+                                </equation-inline>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </example>
+    </conbody>
+</concept>

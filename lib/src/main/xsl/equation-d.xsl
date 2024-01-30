@@ -25,7 +25,27 @@
         <div>
             <xsl:call-template name="commonattributes"/>
             <xsl:call-template name="setid"/>
-            <xsl:apply-templates/>
+            <!-- process 'text' math content -->
+            <div class="equation-text">
+               <xsl:apply-templates select="*[not(self::*[contains(@class,' mathml-d/mathml ')] or
+                self::*[contains(@class,' equation-d/equation-number ')])] | text()"/>
+            </div>
+            <!-- process mathml content -->
+            <xsl:choose>
+                <xsl:when test="count(child::*[contains(@class,' mathml-d/mathml ')]) &gt; 1">
+                    <!-- nest multiple <mathml> elements in a div; need to put this in a for-each loop -->
+                    <div class="mathmls">
+                        <xsl:for-each select="*[contains(@class,' mathml-d/mathml ')]">
+                            <xsl:apply-templates select="current()"/>
+                        </xsl:for-each>
+                    </div>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="*[contains(@class,' mathml-d/mathml ')]"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <!-- process equation number -->
+            <xsl:apply-templates select="*[contains(@class,' equation-d/equation-number ')]"/>
         </div>
     </xsl:template>
     
@@ -46,27 +66,29 @@
     </xsl:template>
 
     <!-- also refer to mode="label" in \org.dita.html5\xsl\tables.xsl -->
+    <!-- TODO: generate target ID value for linking -->
+    <!-- TODO: allow for 'formatting' of the equation number, such as for PLAXIS: Eq [#] -->
     <xsl:template match="*[contains(@class,' equation-d/equation-number ')]" name="topic.equation-d.equation-number">
         <xsl:variable name="prev-eqn-num-count" select="count(preceding::*[contains(@class, ' equation-d/equation-number ')])"/>
         <xsl:variable name="eqn-count-actual" select="$prev-eqn-num-count + 1"/>
         <span>
             <xsl:call-template name="commonattributes"/>
+            <xsl:call-template name="setid"/>
             <xsl:text>(</xsl:text>
             <xsl:choose>
                 <xsl:when test="child::* or child::text()">
                     <xsl:apply-templates/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:call-template name="getVariable">
-                        <xsl:with-param name="id" select="'Eqn'">
+                    <!--<xsl:call-template name="getVariable">
+                        <xsl:with-param name="id">
                             <xsl:choose>
                                 <xsl:when test="$EQN-PREFIX = 'abbr'">EqnAbbr</xsl:when>
                                 <xsl:otherwise>Equation</xsl:otherwise>
                             </xsl:choose>
                         </xsl:with-param>
-                        
                     </xsl:call-template>
-                    <xsl:text> </xsl:text>
+                    <xsl:text> </xsl:text>-->
                     <xsl:value-of select="$eqn-count-actual"/>
                 </xsl:otherwise>
             </xsl:choose>
@@ -75,8 +97,9 @@
     </xsl:template>
     
     <xsl:template match="*[contains(@class,' equation-d/equation-figure ')]//*[contains(@class,'- topic/dl ')]"  name="topic.equation-d.fig.dl">
+        <!-- generate leader text when <dt> follows an equation -->
         <xsl:if test="preceding-sibling::*[contains(@class,' equation-d/equation-block ')]">
-            <p>
+            <p class="eqn-leader">
                 <xsl:call-template name="getVariable">
                     <xsl:with-param name="id" select="'Where'"/>
                 </xsl:call-template>
@@ -84,11 +107,21 @@
         </xsl:if>
         <dl>
             <xsl:call-template name="commonattributes">
-                <xsl:with-param name="default-output-class">eqn-dl</xsl:with-param>
+                <xsl:with-param name="default-output-class">dl eqn-dl</xsl:with-param>
             </xsl:call-template>
             <xsl:call-template name="setid"/>
             <xsl:apply-templates mode="eqn-fig-dl"/>
         </dl>
+    </xsl:template>
+    
+    <xsl:template match="*[contains(@class, ' topic/dlentry ')]" name="topic.equation-d.fig.dlentry" mode="eqn-fig-dl">
+        <div>
+            <xsl:call-template name="commonattributes">
+                <xsl:with-param name="default-output-class">eqn-dlentry</xsl:with-param>
+            </xsl:call-template>
+            <xsl:call-template name="setid"/>
+            <xsl:apply-templates mode="eqn-fig-dl"/>
+        </div>    
     </xsl:template>
     
     <xsl:template match="*[contains(@class, ' topic/dt ')]" name="topic.equation-d.fig.dt" mode="eqn-fig-dl">
@@ -99,6 +132,7 @@
             <xsl:call-template name="setid"/>
             <xsl:apply-templates/>
         </dt>
+        <div class="eqn-equal">=</div>
     </xsl:template>
     
     <xsl:template match="*[contains(@class, ' topic/dd ')]" name="topic.equation-d.fig.dd" mode="eqn-fig-dl">

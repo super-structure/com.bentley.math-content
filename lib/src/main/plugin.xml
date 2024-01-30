@@ -12,6 +12,7 @@
     
     <require plugin="org.dita.pdf2"/>
     <require plugin="org.dita.html5"/>
+    <require plugin="fox.jason.extend.css"/>    <!-- necessary to add custom CSS without a new transtype? -->
 
     <extension-point id="dita.mathml.extensions" name="MathML file extension"/>
     
@@ -38,6 +39,7 @@
 
     <feature extension="dita.xsl.xhtml" value="xsl/equation-d.xsl" type="file"/>
     <feature extension="dita.xsl.html5" value="xsl/equation-d.xsl" type="file"/>
+    <feature extension="dita.xsl.html5" value="xsl/topic.xsl" type="file"/>
     
     <feature extension="dita.xsl.xslfo" value="xsl/fo/equation-domain.xsl" type="file"/>
 
@@ -48,8 +50,8 @@
         desc="Math content parameters for HTML output">
         <param name="args.eqnlink.style"
             desc="Specifies how cross references to equations are styled." type="enum">
-            <val default="true">full</val>
-            <val>abbr</val>
+            <val default="true">abbr</val>
+            <val>full</val>
         </param>
         <param name="args.mathml.processing" desc="Specifies method for processing MathML"
             type="enum">
@@ -75,5 +77,9 @@
             <!--<val desc="Use JEuclid Java library to pre-render the MathML into SVG">jeuclid</val>-->
         </param>
     </transtype>
-    <feature extension="dita.conductor.html5.toc.param" file="params.xml"/>
+    <feature extension="dita.conductor.html5.toc.param" file="InsertParams.xml"/>
+    <feature extension="dita.conductor.pdf2.param" file="InsertParams.xml"/>
+    
+    <!-- Use Extend CSS to add math theme stylesheet -->
+    <feature extension="extend.css.process.post" value="bentley:math.css"/>
 </plugin>

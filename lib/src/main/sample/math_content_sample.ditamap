@@ -4,5 +4,10 @@
     <title>Math Content Sample</title>
     <topicref href="dita_math_content_sample.dita">
         <topicref href="concept_with_mathml.dita"/>
+        <topicref href="mathjax_mml_samples.dita"/>
+        <topicref href="structural_engineering_samples.dita"/>
+        <topicref href="maxsurf_equations.dita"/>
+        <topicref href="mathml-rendering.dita"/>
+        <topicref href="mathvariant_typography.dita"/>
     </topicref>
 </map>
