@@ -55,4 +55,5 @@ Copyright © Bentley Systems, Incorporated. All rights reserved.
 
 ## License
 
+
 **MathJax 3.x** distribution is licensed under an Apache v2.0 license. See the included license file for details.
