@@ -91,11 +91,10 @@
     </xsl:template>
     
     <xsl:template match="*[contains(@class, ' mathml-d/mathmlref ')]" mode="mathjax:mathml" priority="10">
-        <!-- apply either mathjax-pre or jeuclid function on this filename -->
         <xsl:variable name="mathml">
             <xsl:copy-of select="document(@href)/*"/>
         </xsl:variable>
-        <xsl:message>Root element of file: <xsl:value-of select="name($mathml/*)"/></xsl:message>
+        <!--<xsl:message>Root element of file: <xsl:value-of select="name($mathml/*)"/></xsl:message>-->
         
         <xsl:call-template name="convert-mathml2svg-mathjax">
             <xsl:with-param name="mathml" select="document(@href)/*"/>
@@ -116,6 +115,7 @@
     
     <xsl:template name="convert-mathml2svg-mathjax">
         <xsl:param name="mathml"/>
+        <!-- apply either mathjax-pre or jeuclid function on this filename -->
         <xsl:choose>
             <xsl:when test="$MATH-PROC = 'mathjax-pre'">
                 <!-- use custom java function 'mathjax:mml2svg'-->
