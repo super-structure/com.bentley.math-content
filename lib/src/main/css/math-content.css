@@ -17,7 +17,7 @@ mathml, .mathml {
 }
 
 .equation-figure .eqn-dl {
-    margin-left: 40px;
+    margin-left: 16px;
     margin-right: 40px;
     display: table;
 }
@@ -32,7 +32,6 @@ mathml, .mathml {
 .equation-figure .eqn-dlentry .eqn-dd {
     display: table-cell;
     padding-bottom: 16px;
-   /* border: 1px solid #eee;*/
     min-height: 2em;
     vertical-align: top;
     width: revert;
