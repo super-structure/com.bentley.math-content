@@ -39,7 +39,33 @@ To build the com.bentley.math-content plugin from the source:
 
 ## Usage
 
-(Coming soon…)
+The following parameters are available in this plugin:
+
+### PDF
+
+**args.eqnlink.style**
+Specifies how cross references to equations are styled.
+- abbr (default)
+- full
+
+**args.mathml.processing**
+Specifies method for processing MathML.
+- none (default) - Use MathML mark up in the resulting FO (i.e., relies of FO processor to render the MathML).
+- mathjax-pre - Use MathJax-Node to pre-render the MathML into SVG.
+
+### HTML
+
+**args.eqnlink.style**
+Specifies how cross references to equations are styled.
+- abbr (default)
+- full
+
+**args.mathml.processing**
+Specifies method for processing MathML.
+- none (default) - Use MathML mark up in the resulting HTML (i.e., relies on browser rendering of MathML).
+- mathjax-pre - Use MathJax-Node to pre-render the MathML into SVG.
+- mathjax-local - Use MathML markup in resulting HTML and add link to local copy of MathJax in footer.
+- mathjax-cdn - Use MathML markup in resulting HTML and add MathJax CDN in footer.
 
 ## Roadmap
 
