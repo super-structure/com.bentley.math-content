@@ -16,7 +16,7 @@
 
     <extension-point id="dita.mathml.extensions" name="MathML file extension"/>
     
-    <feature extension="dita.conductor.lib.import" file="lib/MathMLToSVG-0.9.0.jar"/>
+    <feature extension="dita.conductor.lib.import" file="lib/MathMLToSVG-1.0.0.jar"/>
     
     <!--<feature extension="dita.conductor.lib.import" file="lib/latexToSVG.jar"/>
     <feature extension="dita.conductor.lib.import" file="lib/jlatexmath-1.0.7.jar"/>-->
@@ -46,8 +46,8 @@
     <feature extension="dita.xsl.strings" file="cfg/common/vars/strings.xml"/>
     <feature extension="dita.mathml.extensions" value=".mml"/>
     
-    <transtype name="base-html" extends="base-html"
-        desc="Math content parameters for HTML output">
+    <transtype name="base-html"
+        desc="Math content parameters for HTML output"><!-- extends="base-html" -->
         <param name="args.eqnlink.style"
             desc="Specifies how cross references to equations are styled." type="enum">
             <val default="true">abbr</val>
@@ -63,8 +63,8 @@
         </param>
     </transtype>
     
-    <transtype name="pdf" extends="pdf" 
-        desc="Math content parameters for PDF output">
+    <transtype name="pdf" 
+        desc="Math content parameters for PDF output"><!-- extends="pdf" -->
         <param name="args.eqnlink.style"
             desc="Specifies how cross references to equations are styled." type="enum">
             <val default="true">full</val>

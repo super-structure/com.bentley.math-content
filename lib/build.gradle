@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.bentley"
-version = '0.9.0'
+version = '1.0.0'
 
 repositories {
    mavenCentral()
@@ -37,8 +37,8 @@ java {
 }
 
 jar {
-    archivesBaseName = 'MathMLToSVG'
-    
+    //archivesBaseName = 'MathMLToSVG'
+    archiveBaseName = 'MathMLToSVG'
 }
 
 tasks.named('jar') {
@@ -58,10 +58,10 @@ task copyTask(type: Copy) {
     into layout.buildDirectory.dir("libs")
 }
 
-tasks.named('test') {
-    // Use JUnit Platform for unit tests.
-    //useJUnitPlatform()
-}
+// tasks.named('test') {
+//     // Use JUnit Platform for unit tests.
+//     //useJUnitPlatform()
+// }
 
 task dist(type: Zip) {
     // TODO refer to https://github.com/jelovirt/org.lwdita/blob/master/build.gradle

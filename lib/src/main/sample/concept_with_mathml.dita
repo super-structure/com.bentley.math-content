@@ -262,8 +262,8 @@
                 </dl>
             </equation-figure>
         </section>
-        <!--<section>
-            <title>Math References</title>
+        <section>
+    <title>Math References</title>
             <p>An <xmlelement>mathref</xmlelement> element to an external <filepath>.mml</filepath> file:</p>
             <equation-block>
                 <mathml>
@@ -271,6 +271,6 @@
                 </mathml>
             </equation-block>
                 
-        </section>-->
+        </section>
     </conbody>
 </concept>

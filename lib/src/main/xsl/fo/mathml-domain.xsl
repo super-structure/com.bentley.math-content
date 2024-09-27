@@ -24,47 +24,109 @@
     
     <xsl:template match="*[contains(@class, ' mathml-d/mathml ')]">
         <xsl:message>MATH-PROC: [<xsl:value-of select="$MATH-PROC"/>]</xsl:message>
-        <xsl:variable name="element-type">
+        <!--<xsl:variable name="element-type">
             <xsl:choose>
                 <xsl:when test="parent::*[contains(@class,' equation-d/equation-inline ')]">span</xsl:when>
                 <xsl:otherwise>div</xsl:otherwise>
             </xsl:choose>
-        </xsl:variable>
+        </xsl:variable>-->
+         <xsl:choose>
+             <xsl:when test="parent::*[contains(@class,' equation-d/equation-inline ')]">
+                <fo:inline>
+                    <xsl:call-template name="apply-mathml"/>
+                </fo:inline>
+             </xsl:when>
+             <xsl:otherwise>
+                 <fo:block>
+                     <xsl:call-template name="apply-mathml"/>
+                </fo:block>
+             </xsl:otherwise>
+         </xsl:choose>
         
-        <xsl:if test="child::*">
+        <!--<xsl:if test="child::*">
             <fo:instream-foreign-object>
                 <xsl:if test="ancestor::equation-figure/@scale">
                     <xsl:attribute name="content-width" select="ancestor::equation-figure/@scale || '%'"/>
                 </xsl:if>
                 <xsl:if test="ancestor::equation-block/equation-number">
-                    <xsl:attribute name="alignment-baseline">middle</xsl:attribute> <!-- centers the eqn numbering -->
+                    <xsl:attribute name="alignment-baseline">middle</xsl:attribute> <!-\- centers the eqn numbering -\->
                 </xsl:if>
-                <!--<xsl:apply-templates mode="dita-ot:mathml"/>-->                
+                <!-\-<xsl:apply-templates mode="dita-ot:mathml"/>-\->                
                 <xsl:choose>
                     <xsl:when test="$MATH-PROC = 'mathjax-pre' or $MATH-PROC = 'jeuclid'">
                         <xsl:apply-templates mode="mathjax:mathml"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <!-- or just do nothing (let the FO rendering deal with MathML) -->
+                        <!-\- or just do nothing (let the FO rendering deal with MathML) -\->
                         <xsl:apply-templates mode="dita-ot:mathml"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </fo:instream-foreign-object>
-        </xsl:if>
+        </xsl:if>-->
+    </xsl:template>
+    
+    <xsl:template name="apply-mathml">
+        <fo:instream-foreign-object alignment-baseline="mathematical">
+            <xsl:if test="ancestor::equation-figure/@scale">
+                <xsl:attribute name="content-width" select="ancestor::equation-figure/@scale || '%'"/>
+            </xsl:if>
+            <xsl:if test="ancestor::equation-block/equation-number">
+                <xsl:attribute name="alignment-baseline">middle</xsl:attribute> <!-- centers the eqn numbering -->
+            </xsl:if>
+            <!-- pick a template mode based on the processing specified -->
+            <xsl:choose>
+                <xsl:when test="$MATH-PROC = 'mathjax-pre' or $MATH-PROC = 'jeuclid'">
+                    <xsl:apply-templates mode="mathjax:mathml"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- or just do nothing (let the FO rendering deal with MathML) -->
+                    <xsl:apply-templates mode="dita-ot:mathml"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </fo:instream-foreign-object>
     </xsl:template>
     
     <xsl:template match="m:*" mode="dita-ot:mathml" priority="10">
-        <xsl:element name="m:{local-name()}" namespace="http://www.w3.org/1998/Math/MathML">
-            <xsl:if test="local-name()='math'">
-                <xsl:attribute name="mode">inline</xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates select="@* | node()" mode="#current"/>
+        <xsl:element name="{local-name()}" namespace="http://www.w3.org/1998/Math/MathML">
+            <xsl:apply-templates select="* | @* | text()" mode="#current"/>
         </xsl:element>
-    </xsl:template>    
+    </xsl:template>
+    
+    <xsl:template match="m:*/@*" mode="dita-ot:mathml" priority="10">
+        <xsl:copy-of select="."/>
+    </xsl:template>
     
     <xsl:template match="m:math" mode="mathjax:mathml">
         <!-- apply either mathjax-pre or jeuclid function on this filename; return SVG -->
-        <xsl:variable name="mathml" select="."/>
+        <xsl:variable name="mathml" select="."/>        
+        <xsl:call-template name="convert-mathml2svg-mathjax">
+            <xsl:with-param name="mathml">
+                <xsl:copy-of select="."/>
+            </xsl:with-param>
+        </xsl:call-template>
+    </xsl:template>
+    
+    <xsl:template match="*[contains(@class, ' mathml-d/mathmlref ')]" mode="dita-ot:mathml" priority="10">
+        <xsl:variable name="mathml">
+            <xsl:copy-of select="document(@href)/*"/>
+        </xsl:variable>
+        <xsl:call-template name="convert-mathml2svg-mathjax">
+            <xsl:with-param name="mathml" select="document(@href)/*"/>
+        </xsl:call-template>
+    </xsl:template>
+    
+    <xsl:template match="*[contains(@class, ' mathml-d/mathmlref ')]" mode="mathjax:mathml" priority="10">
+        <xsl:variable name="mathml">
+            <xsl:copy-of select="document(@href)/*"/>
+        </xsl:variable>        
+        <xsl:call-template name="convert-mathml2svg-mathjax">
+            <xsl:with-param name="mathml" select="document(@href)/*"/>
+        </xsl:call-template>
+    </xsl:template>
+    
+    <xsl:template name="convert-mathml2svg-mathjax">
+        <xsl:param name="mathml"/>
+        <!-- apply either mathjax-pre or jeuclid function on this filename -->
         <xsl:choose>
             <xsl:when test="$MATH-PROC = 'mathjax-pre'">
                 <!-- use custom java function 'mathjax:mml2svg'-->
@@ -77,10 +139,6 @@
                 <xsl:message>**JEuclid support for transforming MathML to be completed.**</xsl:message>
             </xsl:when>
         </xsl:choose>
-    </xsl:template>
-    
-    <xsl:template match="*[contains(@class, ' mathml-d/mathmlref ')]" mode="dita-ot:mathml" priority="10">
-        <xsl:apply-templates select="document(@href)/*" mode="dita-ot:mathml"/>    
     </xsl:template>
     
 </xsl:stylesheet>

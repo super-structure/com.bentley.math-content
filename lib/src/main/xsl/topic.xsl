@@ -13,11 +13,21 @@
     <xsl:param name="MATH-PROC"/>
     <!--<xsl:param name="MATHJAX-DIR"/>-->
     
-    <!-- ref: https://www.dita-ot.org/dev/topics/html-customization-plugin-javascript -->
-    <xsl:template match="*[contains(@class,' topic/body ')][descendant::mathml]" mode="processFTR">
+    <xsl:template match="/ | @* | node()" mode="processHDF">
+        <xsl:variable name="relpath">
+    <xsl:choose>
+        <xsl:when test="$FILEDIR='.'">
+                    <xsl:text>.</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="replace(replace($FILEDIR, '\\', '/') ,'[^/]+','..')"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        
         <xsl:choose>
             <xsl:when test="$MATH-PROC = 'mathjax-cdn'">
-                <xsl:message>Adding MathJax CDN script element…</xsl:message>
+                <xsl:message>Adding MathJax CDN script element...</xsl:message>
                 <script>
                     MathJax = {
                         tex: {
@@ -29,12 +39,18 @@
                         }
                     };
                 </script>
-                <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"><xsl:text> </xsl:text></script>
                 <script type="text/javascript" id="MathJax-script" async="true"
                     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"><xsl:text> </xsl:text></script>
             </xsl:when>
             <!-- use a local mathjax copy for 'mathjax-local' -->
+        <xsl:when test="$MATH-PROC = 'mathjax-local'">
+                <xsl:message>Adding local MathJax script element...</xsl:message>
+                <script type="text/javascript" id="MathJax-script"
+                    src="{$relpath}/js/tex-mml-svg.js"><xsl:text> </xsl:text></script>
+            </xsl:when>
         </xsl:choose>
-    </xsl:template>
+    <xsl:next-match/>
+    
+</xsl:template>
     
 </xsl:stylesheet>

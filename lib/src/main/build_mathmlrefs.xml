@@ -3,7 +3,7 @@
 Copyright © Bentley Systems, Incorporated. All rights reserved
 -->
 <project xmlns:dita="http://dita-ot.sourceforge.net"
-   name="equation-and-math-handling">
+   name="equation-and-math-handling" xmlns:if="ant:if" xmlns:unless="ant:unless">
    
    <target name="bentley:math-content-init" depends="bentley:node.check">      
       <!-- set default parameter values: -->
@@ -34,7 +34,7 @@ Copyright © Bentley Systems, Incorporated. All rights reserved
                <contains string="${transtype}" substring="PDF" casesensitive="no"/>
             </and>
          </condition>
-      </dita-ot-fail>
+      </dita-ot-fail>      
       
       <!-- are these logged in the main input echo? -->
       <echo level="info">*****************************************************************</echo>
@@ -43,7 +43,18 @@ Copyright © Bentley Systems, Incorporated. All rights reserved
       <echo level="info">*    args.eqnlink.style = ${args.eqnlink.style}</echo>
       <echo level="info">*****************************************************************</echo>
       <echo level="info">*    node.installed = ${node.installed}</echo>
-      <echo level="info">*****************************************************************</echo>      
+      <echo level="info">*****************************************************************</echo>
+      
+      <condition property="copy.mathjax-files">
+         <contains string="${args.mathml.processing}" substring="mathjax-local" />
+      </condition>
+      <echo level="info" if:set="copy.mathjax-files">*    Copying MathJax JS files...</echo>
+      <copy
+         if:set="copy.mathjax-files"
+         file="${dita.plugin.com.bentley.math-content.dir}/lib/node_modules/mathjax/es5/tex-mml-svg.js"
+         toFile="${dita.output.dir}/js/tex-mml-svg.js"
+         overwrite="true"
+      />
    </target>
 
    <target name="bentley:mathmlrefs" depends="bentley:copy-mathml-files"
@@ -61,22 +72,8 @@ Copyright © Bentley Systems, Incorporated. All rights reserved
       </copy>
    </target>
    
-
-   
-   <!--<target name="bentley:equations" depends="bentley:equations-init"/>-->
-   
-   <!--<target name="bentley:equations-init">
-      <condition property="mathml.processing" value="none">
-         <not>
-            <isset property="args.mathml.processing"/>
-         </not>
-       </condition>
-      <echo level="info">*****************************************************************</echo>
-      <echo level="info">* Log the MathML &amp; equation processing arguments:</echo>
-      <echo level="info">*    args.mathml.processing = ${args.mathml.processing}</echo>
-      <echo level="info">*    args.eqnlink.style = ${args.eqnlink.style}</echo>
-      <echo level="info">*****************************************************************</echo>      
-   </target>-->
+   <target name="bentley:copy-local-mathjax">
+   </target>
    
    <target name="bentley:node.check">
       <!-- copied from fox.jason.prismjs -->
@@ -98,7 +95,6 @@ Copyright © Bentley Systems, Incorporated. All rights reserved
          <equals arg1="${node.result}" arg2="0"/>
       </condition>
    </target>
-   
    
    <target name="bentley:math.css">
       <property name="math-content.css.file" value="${dita.plugin.com.bentley.math-content.dir}/css/math-content.css"/>
