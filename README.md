@@ -67,6 +67,10 @@ Specifies method for processing MathML.
 - mathjax-local - Use MathML markup in resulting HTML and add link to local copy of MathJax in footer.
 - mathjax-cdn - Use MathML markup in resulting HTML and add MathJax CDN in footer.
 
+### Nomenclature Lists
+
+This plugin also contains some output customization for generating nomenclature lists from definition lists which are included within an `<equation-figure>` parent. Simply placing a `<dl>` within a `<equation-figure>` element to generate a series of `<dt>` = `<dd>` lines (i.e., formatted with the equality symbol). If the `<dl>` is preceeded by an `<equation-block>`, the string "Where" is automatically generated between the two.
+
 ## Roadmap
 
 Refer to [TODO.md](docs/TODO.md) for details.
