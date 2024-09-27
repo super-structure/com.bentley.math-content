@@ -88,32 +88,32 @@
             <!-- TODO: handle dlhead -->
             <!--<xsl:apply-templates select="*[contains(@class, ' topic/dlhead ')]"/>-->
             <fo:table-body xsl:use-attribute-sets="dl-eqn__body">
-                <xsl:apply-templates select="*[contains(@class, ' topic/dlentry ')]"/>
+                <xsl:apply-templates select="*[contains(@class, ' topic/dlentry ')]" mode="eqn-fig-dl"/>
             </fo:table-body>
         </fo:table>
         <xsl:apply-templates select="*[contains(@class,' ditaot-d/ditaval-endprop ')]" mode="outofline"/>
     </xsl:template>
     
-    <xsl:template match="*[contains(@class, ' topic/dlentry ')]">
+    <xsl:template match="*[contains(@class, ' topic/dlentry ')]" mode="eqn-fig-dl">
         <fo:table-row xsl:use-attribute-sets="dlentry-eqn">
             <!-- TODO: vertical alignment of table cells (or baselines within cells) -->
             <!-- TODO: Replace with mode="commonattributes" -->
             <xsl:call-template name="commonattributes"/>
             <fo:table-cell xsl:use-attribute-sets="dlentry.dt-eqn">
-                <xsl:apply-templates select="*[contains(@class, ' topic/dt ')]"/>
+                <xsl:apply-templates select="*[contains(@class, ' topic/dt ')]" mode="eqn-fig-dl"/>
                 <xsl:if test="empty(*[contains(@class, ' topic/dt ')])"><fo:block/></xsl:if>
             </fo:table-cell>
             <fo:table-cell>
                 <fo:block xsl:use-attribute-sets="common.table.body.entry">=</fo:block>
             </fo:table-cell>
             <fo:table-cell xsl:use-attribute-sets="dlentry.dd-eqn">
-                <xsl:apply-templates select="*[contains(@class, ' topic/dd ')]"/>
+                <xsl:apply-templates select="*[contains(@class, ' topic/dd ')]" mode="eqn-fig-dl"/>
                 <xsl:if test="empty(*[contains(@class, ' topic/dd ')])"><fo:block/></xsl:if>
             </fo:table-cell>
         </fo:table-row>
     </xsl:template>
     
-    <xsl:template match="*[contains(@class, ' topic/dt ')]">
+    <xsl:template match="*[contains(@class, ' topic/dt ')]" mode="eqn-fig-dl">
         <fo:block xsl:use-attribute-sets="dlentry.dt-eqn__content">
             <xsl:if test="not(preceding-sibling::*[contains(@class,' topic/dt ')])">
                 <xsl:apply-templates select="../*[contains(@class,' ditaot-d/ditaval-startprop ')]" mode="outofline"/>
@@ -122,7 +122,7 @@
         </fo:block>
     </xsl:template>
     
-    <xsl:template match="*[contains(@class, ' topic/dd ')]">
+    <xsl:template match="*[contains(@class, ' topic/dd ')]" mode="eqn-fig-dl">
         <fo:block xsl:use-attribute-sets="dlentry.dd-eqn__content">
             <!-- TODO: Replace with mode="commonattributes" -->
             <xsl:call-template name="commonattributes"/>
