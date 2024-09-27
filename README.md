@@ -39,7 +39,26 @@ To build the com.bentley.math-content plugin from the source:
 
 ## Usage
 
-(Coming soon…)
+### Parameters
+
+* `args.eqnlink.style`
+    Specifies how cross references to equations are styled. Use `abbr` (default) to use the abbreviation "Eqn." or use `full` to spell out "Equation".
+
+* `args.mathml.processing`
+    Specifies method for processing MathML. Accepts one of the following values:
+    
+    `none` (default) - use MathML mark up in the resulting HTML/FO. For FO (PDF), the FO processor must be able to handle MathML (Apache FOP does _not_).
+    
+    `mathjax-pre` - Use MathJax-Node to pre-render the MathML into SVG in the resulting HTML/FO.
+    
+    `mathjax-local` - (HTML output only) Use MathML markup in resulting HTML and add link to local copy of MathJax in footer
+    
+    `mathjax-cdn` - (HTML output only) Use MathML markup in resulting HTML and add MathJax CDN in footer
+
+
+### Nomenclature Lists
+
+This plugin also contains some output customization for generating nomenclature lists from definition lists which are included within an `<equation-figure>` parent. Simply placing a `<dl>` within a `<equation-figure>` element to generate a series of `<dt>` = `<dd>` lines (i.e., formatted with the equality symbol). If the `<dl>` is preceeded by an `<equation-block>`, the string "Where" is automatically generated between the two.
 
 ## Roadmap
 
@@ -54,6 +73,5 @@ Refer to [TODO.md](docs/TODO.md) for details.
 Copyright © Bentley Systems, Incorporated. All rights reserved.
 
 ## License
-
 
 **MathJax 3.x** distribution is licensed under an Apache v2.0 license. See the included license file for details.
