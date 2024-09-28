@@ -18,6 +18,9 @@
     version="3.0">
 
     <xsl:param name="MATH-PROC"/>
+    <xsl:param name="MATHML-SVG-FILE"/>
+    
+    <xsl:output name="svg" method="xml" doctype-public="-//W3C//DTD SVG 1.1//EN" doctype-system="http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" indent="no" encoding="UTF-8"/>
     
     <xsl:mode on-no-match="shallow-copy"/>
     
@@ -49,6 +52,7 @@
         </xsl:choose>
     </xsl:template>
     
+    <!-- ============ Client Side MathML Processing (dita-ot:mathml mode) ============ -->
     <!-- strip out the namespace for HTML5 -->
     <xsl:template match="m:*" mode="dita-ot:mathml" priority="10">
         <xsl:element name="{local-name()}" namespace="http://www.w3.org/1998/Math/MathML">
@@ -60,28 +64,6 @@
         <xsl:copy-of select="."/>
     </xsl:template>
     
-    <xsl:template match="m:math" mode="mathjax:mathml">
-        <!-- apply either mathjax-pre or jeuclid function on this filename; return SVG -->
-        <xsl:variable name="mathml" select="."/>
-        <xsl:call-template name="convert-mathml2svg-mathjax">
-            <xsl:with-param name="mathml">
-                <xsl:copy-of select="."/>
-            </xsl:with-param>
-        </xsl:call-template>
-        <!--<xsl:choose>
-            <xsl:when test="$MATH-PROC = 'mathjax-pre'">
-                <!-\- use custom java function 'mathjax:mml2svg'-\->
-                <xsl:message>Transforming MathML to SVG using MathJax</xsl:message>
-                <xsl:copy-of select="parse-xml(mathjax:mml2svg($mathml))" use-when="not(function-available('saxon:parse'))"/>
-                <xsl:copy-of select="saxon:parse(mathjax:mml2svg($mathml))" use-when="function-available('saxon:parse')"/>
-            </xsl:when>
-            <xsl:when test="$MATH-PROC = 'jeuclid'">
-                <!-\- use custom java function 'jeuclid:mml2svg' -\->
-                <xsl:message>**JEuclid support for transforming MathML to be completed.**</xsl:message>
-            </xsl:when>
-        </xsl:choose>-->
-    </xsl:template>
-    
     <!-- to prevent breaks between equation content and line number -->
     <xsl:template match="@display" mode="dita-ot:mathml" priority="10"/>  
 
@@ -90,38 +72,63 @@
         <xsl:apply-templates select="document(@href)/*" mode="dita-ot:mathml"/>
     </xsl:template>
     
+    <!-- ============ DITO OT MathML Pre-Processing (mathjax:mathml mode) ============ -->
+    
+    <xsl:template match="m:math" mode="mathjax:mathml">
+        <xsl:call-template name="convert-mathml2svg-mathjax">
+            <xsl:with-param name="mathml">
+                <xsl:copy-of select="."/>
+            </xsl:with-param>
+            <xsl:with-param name="filename" select="'MathML_' || generate-id(.) || '.mml'"/>
+        <xsl:with-param name="img-alttext" select="./@alttext"/>
+        </xsl:call-template>
+    </xsl:template>
+    
     <xsl:template match="*[contains(@class, ' mathml-d/mathmlref ')]" mode="mathjax:mathml" priority="10">
         <xsl:variable name="mathml">
             <xsl:copy-of select="document(@href)/*"/>
         </xsl:variable>
-        <!--<xsl:message>Root element of file: <xsl:value-of select="name($mathml/*)"/></xsl:message>-->
         
         <xsl:call-template name="convert-mathml2svg-mathjax">
             <xsl:with-param name="mathml" select="document(@href)/*"/>
+            <xsl:with-param name="filename" select="@href"/>
+            <xsl:with-param name="img-alttext" select="$mathml/*/@alttext"/>
         </xsl:call-template>
-        <!--<xsl:choose>
-            <xsl:when test="$MATH-PROC = 'mathjax-pre'">
-                <!-\- use custom java function 'mathjax:mml2svg'-\->
-                <xsl:message>Transforming MathML to SVG using MathJax</xsl:message>
-                <xsl:copy-of select="parse-xml(mathjax:mml2svg($mathml))" use-when="not(function-available('saxon:parse'))"/>
-                <xsl:copy-of select="saxon:parse(mathjax:mml2svg($mathml))" use-when="function-available('saxon:parse')"/>
-            </xsl:when>
-            <xsl:when test="$MATH-PROC = 'jeuclid'">
-                <!-\- use custom java function 'jeuclid:mml2svg' -\->
-                <xsl:message>**JEuclid support for transforming MathML to be completed.**</xsl:message>
-            </xsl:when>
-        </xsl:choose>-->
     </xsl:template>
+    <!-- apply either mathjax-pre or jeuclid function on the MathML markup; return SVG -->
     
     <xsl:template name="convert-mathml2svg-mathjax">
         <xsl:param name="mathml"/>
-        <!-- apply either mathjax-pre or jeuclid function on this filename -->
+        <xsl:param name="filename"/>
+        <xsl:param name="img-alttext"/>
+        
         <xsl:choose>
-            <xsl:when test="$MATH-PROC = 'mathjax-pre'">
-                <!-- use custom java function 'mathjax:mml2svg'-->
-                <xsl:message>Transforming MathML to SVG using MathJax</xsl:message>
+            <!-- use custom java function 'mathjax:mml2svg'-->
+            <xsl:when test="$MATH-PROC = 'mathjax-pre' and $MATHML-SVG-FILE = 'no'">
+                <xsl:message>&#010; transforming MathML to SVG using MathJax</xsl:message>
                 <xsl:copy-of select="parse-xml(mathjax:mml2svg($mathml))" use-when="not(function-available('saxon:parse'))"/>
                 <xsl:copy-of select="saxon:parse(mathjax:mml2svg($mathml))" use-when="function-available('saxon:parse')"/>
+            </xsl:when>
+            <xsl:when test="$MATH-PROC = 'mathjax-pre' and $MATHML-SVG-FILE = 'yes'">
+                <xsl:variable name="svg-filename" select="substring-before($filename,'.mml') || '.svg'"/>
+                <!-- writes the resulting SVG file to the *output* directory -->
+                <xsl:result-document href="{$svg-filename}" format="svg">
+                    <xsl:copy-of select="parse-xml(mathjax:mml2svg($mathml))" use-when="not(function-available('saxon:parse'))"/>
+                    <xsl:copy-of select="saxon:parse(mathjax:mml2svg($mathml))" use-when="function-available('saxon:parse')"/>
+                </xsl:result-document>
+                <img class="math" src="{$svg-filename}">
+                    <xsl:choose>
+                        <xsl:when test="not($img-alttext = '')">
+                            <xsl:attribute name="alt" select="$img-alttext"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <!-- TODO: improve this message with some identifier to the specific m:math element -->
+                            <xsl:call-template name="output-message">
+                                <xsl:with-param name="id" select="'MJXX001W'"/>
+                            </xsl:call-template>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </img>
             </xsl:when>
             <xsl:when test="$MATH-PROC = 'jeuclid'">
                 <!-- use custom java function 'jeuclid:mml2svg' -->
@@ -129,12 +136,5 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-    
-    <!-- identify function just in case -->
-    <!--<xsl:template match="@* | node()" mode="dita-ot:mathml">
-        <xsl:copy>
-            <xsl:apply-templates select="@* | node()" mode="#current"/>
-        </xsl:copy>
-    </xsl:template>-->
     
 </xsl:stylesheet>

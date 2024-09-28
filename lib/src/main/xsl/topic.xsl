@@ -15,8 +15,8 @@
     
     <xsl:template match="/ | @* | node()" mode="processHDF">
         <xsl:variable name="relpath">
-    <xsl:choose>
-        <xsl:when test="$FILEDIR='.'">
+            <xsl:choose>
+                <xsl:when test="$FILEDIR='.'">
                     <xsl:text>.</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
@@ -43,14 +43,14 @@
                     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"><xsl:text> </xsl:text></script>
             </xsl:when>
             <!-- use a local mathjax copy for 'mathjax-local' -->
-        <xsl:when test="$MATH-PROC = 'mathjax-local'">
+            <xsl:when test="$MATH-PROC = 'mathjax-local'">
                 <xsl:message>Adding local MathJax script element...</xsl:message>
                 <script type="text/javascript" id="MathJax-script"
                     src="{$relpath}/js/tex-mml-svg.js"><xsl:text> </xsl:text></script>
             </xsl:when>
         </xsl:choose>
-    <xsl:next-match/>
-    
-</xsl:template>
+        
+        <xsl:next-match/>
+    </xsl:template>
     
 </xsl:stylesheet>
