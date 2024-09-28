@@ -11,4 +11,9 @@
         expression="${args.eqnlink.style}"
         if:set="args.eqnlink.style"
         />
+<param 
+        name="MATHML-SVG-FILE"
+        expression="${args.mathml.svg2file}"
+        if:set="args.mathml.svg2file"
+        />
 </parameters>

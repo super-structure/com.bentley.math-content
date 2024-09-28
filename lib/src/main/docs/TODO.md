@@ -4,17 +4,17 @@ Track these issues & features in ADO or in GitHub?
 
 * [ ] Review [MathML specs](https://w3c.github.io/mathml-core/) and document usage for the plug-in
 * [ ] Review [AMSMath Package User's Guide](https://www.ams.org/arc/tex/amsmath/amsldoc.pdf) and document LaTeX usage
-* [ ] Add L10N strings (`/cfg/common/vars/`)
+* [ ] Include parameter to fetch latest MathJax build? Other 3rd party softare?
+* [ ] Use an external config file for MathJax SVG parameters? [https://docs.mathjax.org/en/latest/options/output/svg.html#the-configuration-block](https://docs.mathjax.org/en/latest/options/output/svg.html#the-configuration-block)
+* [ ] Does FOP support LaTeX? Verify PDF rendering engine.
+* [x] Add L10N strings (`/cfg/common/vars/`)
 * [x] Support for [&lt;mathmlref&gt;](https://docs.oasis-open.org/dita/dita/v1.3/os/part2-tech-content/langRef/technicalContent/mathmlref.html) element (looks like it works out-of-the-box!)
 * [x] Parameters
     - Math rendering option (none / MathJax-Node / MathJax CDN / MathJax Local / JEuclid)
     - Equation linking style (~~number / title / number & title~~) An equation block element doesn't have a title, but it may be useful to allow for using 'Equation' or 'eqn.' ( full / abbr )
-* [ ] Include parameter to fetch latest MathJax build? Other 3rd party softare?
-* [ ] Does FOP support LaTeX? Verify PDF rendering engine.
 * [x] Pass params to XSL
     - rendering method will affect: mode for `<mathml>` and `<mathref>` processing
     - rendering also affects `processFTR` mode (if MathJax CDN or Local is used)
-* [ ] Use an external config file for MathJax SVG parameters? [https://docs.mathjax.org/en/latest/options/output/svg.html#the-configuration-block](https://docs.mathjax.org/en/latest/options/output/svg.html#the-configuration-block)
 
 ## Issues
 

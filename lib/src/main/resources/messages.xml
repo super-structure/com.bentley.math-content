@@ -9,4 +9,8 @@
     <reason>PDF processing cannot use MathJax client-side rendering.</reason>
     <response/>
   </message>
+  <!-- XSLT -->
+  <message id="MJXX001W" type="INFO">
+    <reason>MathML is converted to referenced SVG but no alt text is available.</reason>
+    <response>To include 'alt' text for your resulting image, add an @alttext description to the m:math element in your DITA or MathML source file.</response>
 </messages>  

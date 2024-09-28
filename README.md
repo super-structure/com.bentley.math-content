@@ -3,14 +3,13 @@
 
 DITA Open Toolkit plugin for math content (MathML ~~and LaTeX~~) integration with DITA v1.3.
 
-2023-06-22
+2024-09-27
 
 This plugin includes stylesheets for HTML5/XHTML and PDF/FO transformations by means of DITA Open Toolkit extensions.
 
 - XSL transformations for equation and math domain elements; not included in DITA Open Toolkit standard plugins
 - While browsers have included some support for MathML in recent years, rendering of anything but very basic math content is severely limited even as of late 2023. However, SVG support is well established in all modern browsers. Therefore, in addition to general stylesheets to support MathML content, this plugin also "pre-renders" the `<mathml>` elements into SVG using MathJax 3.x.
 
-**In Development**: Refer to [docs](docs/index.md) for roadmap and To Do list.
 
 ## Prerequisites
 
@@ -67,6 +66,11 @@ Specifies method for processing MathML.
 - mathjax-local - Use MathML markup in resulting HTML and add link to local copy of MathJax in footer.
 - mathjax-cdn - Use MathML markup in resulting HTML and add MathJax CDN in footer.
 
+**args.mathml.svg2file**
+Specifies if resulting SVG should be saved to reference files.
+- no (default)
+- yes
+
 ### Nomenclature Lists
 
 This plugin also contains some output customization for generating nomenclature lists from definition lists which are included within an `<equation-figure>` parent. Simply placing a `<dl>` within a `<equation-figure>` element to generate a series of `<dt>` = `<dd>` lines (i.e., formatted with the equality symbol). If the `<dl>` is preceeded by an `<equation-block>`, the string "Where" is automatically generated between the two.
@@ -74,6 +78,8 @@ This plugin also contains some output customization for generating nomenclature 
 ## Roadmap
 
 Refer to [TODO.md](docs/TODO.md) for details.
+
+**In Development**: Refer to [docs](docs/index.md) for roadmap and To Do list.
 
 ## Reference
 * [&lt;math&gt; on MDN](https://developer.mozilla.org/en-US/docs/Web/MathML/Element/math)

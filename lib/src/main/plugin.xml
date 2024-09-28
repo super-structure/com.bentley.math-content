@@ -5,8 +5,8 @@
 * Copyright © Bentley Systems, Incorporated. All rights reserved.
 *
 ****************************************************************************** -->
-<plugin id="com.bentley.math-content" version="0.9.0">
-    <feature extension="package.version" value="0.9.0"/>
+<plugin id="com.bentley.math-content" version="1.1.0">
+    <feature extension="package.version" value="1.1.0"/>
     <feature extension="package.support.name" value="Jason Coleman"/>
     <feature extension="package.support.email" value="jason.coleman@bentley.com"/>
     
@@ -29,7 +29,7 @@
     <feature extension="dita.xsl.messages" file="resource/messages.xml"/>
     
     <feature extension="depend.preprocess.pre" value="bentley:math-content-init"/>
-    <feature extension="depend.preprocess.copy-files.pre" value="bentley:mathmlrefs"/>
+    <feature extension="depend.preprocess.post" value="bentley:mathmlrefs"/>
     <!--<feature extension="ant.import" file="process_mathjax.xml" />
     <feature extension="depend.preprocess.pre" value="bentley:mathjax.init" />
     <feature extension="depend.preprocess.post" value="bentley:mathjax.post" />-->
@@ -60,6 +60,11 @@
             <val desc="Use MathML markup in resulting HTML and add link to local copy of MathJax in footer">mathjax-local</val>
             <val desc="Use MathML markup in resulting HTML and add MathJax CDN in footer">mathjax-cdn</val>
             <!--<val desc="Use JEuclid Java library to pre-render the MathML into SVG">jeuclid</val>-->
+        </param>
+    <param name="args.mathml.svg2file" desc="Specifies if resulting SVG should be saved to reference files."
+            type="enum">
+            <val default="true" desc="Embed converted SVG data within HTML.">no</val>
+            <val desc="Save converted SVG data to external files.">yes</val>
         </param>
     </transtype>
     
