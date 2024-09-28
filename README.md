@@ -39,22 +39,33 @@ To build the com.bentley.math-content plugin from the source:
 
 ## Usage
 
-### Parameters
+The following parameters are available in this plugin:
 
-* `args.eqnlink.style`
-    Specifies how cross references to equations are styled. Use `abbr` (default) to use the abbreviation "Eqn." or use `full` to spell out "Equation".
+### PDF
 
-* `args.mathml.processing`
-    Specifies method for processing MathML. Accepts one of the following values:
-    
-    `none` (default) - use MathML mark up in the resulting HTML/FO. For FO (PDF), the FO processor must be able to handle MathML (Apache FOP does _not_).
-    
-    `mathjax-pre` - Use MathJax-Node to pre-render the MathML into SVG in the resulting HTML/FO.
-    
-    `mathjax-local` - (HTML output only) Use MathML markup in resulting HTML and add link to local copy of MathJax in footer
-    
-    `mathjax-cdn` - (HTML output only) Use MathML markup in resulting HTML and add MathJax CDN in footer
+**args.eqnlink.style**
+Specifies how cross references to equations are styled.
+- abbr (default)
+- full
 
+**args.mathml.processing**
+Specifies method for processing MathML.
+- none (default) - Use MathML mark up in the resulting FO (i.e., relies of FO processor to render the MathML).
+- mathjax-pre - Use MathJax-Node to pre-render the MathML into SVG.
+
+### HTML
+
+**args.eqnlink.style**
+Specifies how cross references to equations are styled.
+- abbr (default)
+- full
+
+**args.mathml.processing**
+Specifies method for processing MathML.
+- none (default) - Use MathML mark up in the resulting HTML (i.e., relies on browser rendering of MathML).
+- mathjax-pre - Use MathJax-Node to pre-render the MathML into SVG.
+- mathjax-local - Use MathML markup in resulting HTML and add link to local copy of MathJax in footer.
+- mathjax-cdn - Use MathML markup in resulting HTML and add MathJax CDN in footer.
 
 ### Nomenclature Lists
 
