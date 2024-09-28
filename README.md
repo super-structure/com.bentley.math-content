@@ -3,14 +3,13 @@
 
 DITA Open Toolkit plugin for math content (MathML ~~and LaTeX~~) integration with DITA v1.3.
 
-2023-06-22
+2024-09-27
 
 This plugin includes stylesheets for HTML5/XHTML and PDF/FO transformations by means of DITA Open Toolkit extensions.
 
 - XSL transformations for equation and math domain elements; not included in DITA Open Toolkit standard plugins
 - While browsers have included some support for MathML in recent years, rendering of anything but very basic math content is severely limited even as of late 2023. However, SVG support is well established in all modern browsers. Therefore, in addition to general stylesheets to support MathML content, this plugin also "pre-renders" the `<mathml>` elements into SVG using MathJax 3.x.
 
-**In Development**: Refer to [docs](docs/index.md) for roadmap and To Do list.
 
 ## Prerequisites
 
@@ -39,22 +38,38 @@ To build the com.bentley.math-content plugin from the source:
 
 ## Usage
 
-### Parameters
+The following parameters are available in this plugin:
 
-* `args.eqnlink.style`
-    Specifies how cross references to equations are styled. Use `abbr` (default) to use the abbreviation "Eqn." or use `full` to spell out "Equation".
+### PDF
 
-* `args.mathml.processing`
-    Specifies method for processing MathML. Accepts one of the following values:
-    
-    `none` (default) - use MathML mark up in the resulting HTML/FO. For FO (PDF), the FO processor must be able to handle MathML (Apache FOP does _not_).
-    
-    `mathjax-pre` - Use MathJax-Node to pre-render the MathML into SVG in the resulting HTML/FO.
-    
-    `mathjax-local` - (HTML output only) Use MathML markup in resulting HTML and add link to local copy of MathJax in footer
-    
-    `mathjax-cdn` - (HTML output only) Use MathML markup in resulting HTML and add MathJax CDN in footer
+**args.eqnlink.style**
+Specifies how cross references to equations are styled.
+- abbr (default)
+- full
 
+**args.mathml.processing**
+Specifies method for processing MathML.
+- none (default) - Use MathML mark up in the resulting FO (i.e., relies of FO processor to render the MathML).
+- mathjax-pre - Use MathJax-Node to pre-render the MathML into SVG.
+
+### HTML
+
+**args.eqnlink.style**
+Specifies how cross references to equations are styled.
+- abbr (default)
+- full
+
+**args.mathml.processing**
+Specifies method for processing MathML.
+- none (default) - Use MathML mark up in the resulting HTML (i.e., relies on browser rendering of MathML).
+- mathjax-pre - Use MathJax-Node to pre-render the MathML into SVG.
+- mathjax-local - Use MathML markup in resulting HTML and add link to local copy of MathJax in footer.
+- mathjax-cdn - Use MathML markup in resulting HTML and add MathJax CDN in footer.
+
+**args.mathml.svg2file**
+Specifies if resulting SVG should be saved to reference files.
+- no (default)
+- yes
 
 ### Nomenclature Lists
 
@@ -63,6 +78,8 @@ This plugin also contains some output customization for generating nomenclature 
 ## Roadmap
 
 Refer to [TODO.md](docs/TODO.md) for details.
+
+**In Development**: Refer to [docs](docs/index.md) for roadmap and To Do list.
 
 ## Reference
 * [&lt;math&gt; on MDN](https://developer.mozilla.org/en-US/docs/Web/MathML/Element/math)
