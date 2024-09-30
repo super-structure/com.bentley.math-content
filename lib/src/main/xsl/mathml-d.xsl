@@ -124,7 +124,7 @@
                         <xsl:otherwise>
                             <!-- TODO: improve this message with some identifier to the specific m:math element -->
                             <xsl:call-template name="output-message">
-                                <xsl:with-param name="id" select="'MJXX001W'"/>
+                                <xsl:with-param name="id" select="'MJXX001I'"/>
                             </xsl:call-template>
                         </xsl:otherwise>
                     </xsl:choose>
