@@ -36,6 +36,10 @@ To build the com.bentley.math-content plugin from the source:
    ```gradle dist build```
    The distribution package is located in `lib/build/distributions/`.
 
+## Changelog
+
+**v1.1 - 2025-04-28** - XREFs to equation-blocks and equation-figures which contain equation-numbers will use the equation number as the link text. If an equation number is manually specified, then that value is used. Otherwise, the calculated equation number for the topic (HTML) or document (PDF) is used.
+
 ## Usage
 
 The following parameters are available in this plugin:
@@ -44,8 +48,8 @@ The following parameters are available in this plugin:
 
 **args.eqnlink.style**
 Specifies how cross references to equations are styled.
-- abbr (default)
-- full
+- abbr (default) - Use "Eqn. " for the link text prefix
+- full - Use "Equation " for the link text prefix
 
 **args.mathml.processing**
 Specifies method for processing MathML.
@@ -56,8 +60,8 @@ Specifies method for processing MathML.
 
 **args.eqnlink.style**
 Specifies how cross references to equations are styled.
-- abbr (default)
-- full
+- abbr (default) - Use "Eqn. " for the link text prefix
+- full - Use "Equation " for the link text prefix
 
 **args.mathml.processing**
 Specifies method for processing MathML.

@@ -6,27 +6,60 @@
 * 2023-06-22 Jason Coleman
 * Copyright © Bentley Systems, Incorporated. All rights reserved.
 *
+* Rev 1: 2025-04-25 JTC: added xref using equation number; fixed minor layout issues
+*
 ****************************************************************************** -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:fo="http://www.w3.org/1999/XSL/Format"
     xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/"
+    xmlns:dita-ot="http://dita-ot.sourceforge.net/ns/201007/dita-ot"
     exclude-result-prefixes="xs ditaarch"
     version="3.0">
     
     <xsl:import href="mathml-domain.xsl"/>
     
+    <xsl:param name="EQN-PREFIX" select="'abbr'"/>
+    
+    <xsl:variable name="equationlink.lead">
+        <xsl:choose>
+            <xsl:when test="$EQN-PREFIX = 'full'">
+                <xsl:call-template name="getVariable">
+                    <xsl:with-param name="id" select="'Equation'"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="getVariable">
+                    <xsl:with-param name="id" select="'EqnAbbr'"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     <xsl:variable name="math-indent">10mm</xsl:variable>
     
     <xsl:template match="*[contains(@class,' equation-d/equation-block ')]" name="topic.equation-d.equation-block">
-        <fo:block xsl:use-attribute-sets="font.math math-indent">
+        <fo:block xsl:use-attribute-sets="eqn-block">
+            <xsl:if test="not(ancestor::*[contains(@class,' topic/dd ')] or ancestor::*[contains(@class,' topic/entry ')])">
+                <xsl:attribute name="margin-left" select="$math-indent"/>
+            </xsl:if>
+            <!-- the following use the leading spaces to adjust the equation number to the right edge -->
+            <xsl:if test="child::*[contains(@class, ' equation-d/equation-number ')]">
+                <xsl:attribute name="text-align-last">justify</xsl:attribute>
+            </xsl:if>
             <xsl:call-template name="commonattributes"/>
-            <xsl:apply-templates/>
+            <fo:inline text-align-last="start">
+                <xsl:apply-templates select="*[not(contains(@class, ' equation-d/equation-number '))] | text()"/>
+            </fo:inline>
+            <fo:inline/>
+            <xsl:apply-templates select="*[contains(@class, ' equation-d/equation-number ')]"/>
         </fo:block>
     </xsl:template>
     
     <xsl:template match="*[contains(@class,' equation-d/equation-figure ')]" name="topic.equation-d.equation-figure">
-        <fo:block>
+        <fo:block xsl:use-attribute-sets="eqn-fig">
+            <xsl:if test="parent::*[contains(@class,' topic/dd ')]">
+                <xsl:attribute name="space-before">15pt</xsl:attribute><!-- TODO: remove hard-coded padding -->
+            </xsl:if>
             <xsl:call-template name="commonattributes"/>
             <xsl:apply-templates/>
         </fo:block>
@@ -40,23 +73,29 @@
     </xsl:template>
     
     <xsl:template match="*[contains(@class,' equation-d/equation-number ')]" name="topic.equation-d.equation-number">
-        <xsl:variable name="prev-eqn-num-count" select="count(preceding::*[contains(@class, ' equation-d/equation-number ')])"/>
-        <xsl:variable name="eqn-count-actual" select="$prev-eqn-num-count + 1"/>
-        <!-- TODO: equation numbers are on a new line; should be in same block.  -->
-        <fo:inline>
-            <xsl:call-template name="commonattributes"/>
-            <xsl:attribute name="font-style">normal</xsl:attribute>
+        <fo:leader leader-pattern="space" />
+        <fo:inline xsl:use-attribute-sets="eqn-num">
+            <xsl:if test="ancestor::*[contains(@class,' topic/dd ')]">
+                <xsl:attribute name="padding-right"><xsl:value-of select="$math-indent"/></xsl:attribute>
+            </xsl:if>
             <xsl:text>(</xsl:text>
-            <xsl:choose>
-                <xsl:when test="child::* or child::text()">
-                    <xsl:apply-templates/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$eqn-count-actual"/>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:apply-templates select="." mode="eqn.title-number"/>
             <xsl:text>)</xsl:text>
         </fo:inline>
+    </xsl:template>
+    
+    <xsl:template match="*[contains(@class,' equation-d/equation-number ')]" mode="eqn.title-number">
+        <!-- 2025-04-25 JTC: This is a different approach that using 'key's; which is how tables and figures are handled -->
+        <xsl:variable name="prev-eqn-num-count" select="count(preceding::*[contains(@class, ' equation-d/equation-number ')][not(ancestor::draft-comment) and not(child::* or child::text())])"/>
+        <xsl:variable name="eqn-count-actual" select="$prev-eqn-num-count + 1"/>
+        <xsl:choose>
+            <xsl:when test="child::* or child::text()">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$eqn-count-actual"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <!-- definition lists contained within an equation-figured are formatted as a symbols and notation list -->
@@ -76,12 +115,11 @@
             </fo:block>
         </xsl:if>
         <xsl:apply-templates select="*[contains(@class,' ditaot-d/ditaval-startprop ')]" mode="outofline"/>
-        <fo:table xsl:use-attribute-sets="dl-eqn" table-layout="fixed">
-            <!-- TODO: Replace with mode="commonattributes" -->
-            <xsl:call-template name="commonattributes"/>
+        <fo:table xsl:use-attribute-sets="dl-eqn">
             <xsl:if test="$follows-eqn-block = true()">
                 <xsl:attribute name="margin-left" select="$math-indent"/>
             </xsl:if>
+            <xsl:call-template name="commonattributes"/>
             <fo:table-column column-number="1" column-width="proportional-column-width(1)"/>
             <fo:table-column column-number="2" column-width="proportional-column-width(1)"/>
             <fo:table-column column-number="3" column-width="proportional-column-width(10)"/>
@@ -97,7 +135,6 @@
     <xsl:template match="*[contains(@class, ' topic/dlentry ')]" mode="eqn-fig-dl">
         <fo:table-row xsl:use-attribute-sets="dlentry-eqn">
             <!-- TODO: vertical alignment of table cells (or baselines within cells) -->
-            <!-- TODO: Replace with mode="commonattributes" -->
             <xsl:call-template name="commonattributes"/>
             <fo:table-cell xsl:use-attribute-sets="dlentry.dt-eqn">
                 <xsl:apply-templates select="*[contains(@class, ' topic/dt ')]" mode="eqn-fig-dl"/>
@@ -124,7 +161,6 @@
     
     <xsl:template match="*[contains(@class, ' topic/dd ')]" mode="eqn-fig-dl">
         <fo:block xsl:use-attribute-sets="dlentry.dd-eqn__content">
-            <!-- TODO: Replace with mode="commonattributes" -->
             <xsl:call-template name="commonattributes"/>
             <xsl:apply-templates/>
             <xsl:if test="not(following-sibling::*[contains(@class,' topic/dd ')])">
@@ -133,27 +169,39 @@
         </fo:block>
     </xsl:template>
     
+    <xsl:template match="*[contains(@class, ' equation-d/equation-figure ')][descendant::*[contains(@class, ' equation-d/equation-number ')]] | 
+                         *[contains(@class, ' equation-d/equation-block ')][child::*[contains(@class, ' equation-d/equation-number ')]]" 
+                  mode="retrieveReferenceTitle">
+        <xsl:value-of select="$equationlink.lead"/>
+        <xsl:text> </xsl:text>
+        <xsl:apply-templates select="current()//*[contains(@class, ' equation-d/equation-number ')][1]" mode="eqn.title-number"/>
+    </xsl:template>
     
-    <xsl:attribute-set name="font.math" use-attribute-sets="font.serif">
-        <xsl:attribute name="font-weight">400</xsl:attribute>
-        <xsl:attribute name="font-style">italic</xsl:attribute>
+    <xsl:attribute-set name="eqn-fig">
     </xsl:attribute-set>
     
-    <xsl:attribute-set name="math-content">
-        <xsl:attribute name="font-weight">400</xsl:attribute>
-        <xsl:attribute name="font-style">italic</xsl:attribute>
+    <xsl:attribute-set name="eqn-block" use-attribute-sets="font.math">
     </xsl:attribute-set>
     
-    <xsl:attribute-set name="math-indent">
-        <xsl:attribute name="margin-left"><xsl:value-of select="$math-indent"/></xsl:attribute>
+    <xsl:attribute-set name="eqn-num" use-attribute-sets="font.san-serif">
+        <xsl:attribute name="font-style">normal</xsl:attribute>
+        <xsl:attribute name="font-weight">normal</xsl:attribute>
+    </xsl:attribute-set>
+    
+    <xsl:attribute-set name="font.math">
+        <xsl:attribute name="font-family">Georgia</xsl:attribute>
+        <xsl:attribute name="font-weight">400</xsl:attribute>
+        <xsl:attribute name="font-style">italic</xsl:attribute>
     </xsl:attribute-set>
     
     <!-- attribute sets (taken from table-atts.xsl) -->
     <xsl:attribute-set name="dl-eqn">
         <!--DL is a table-->
+        <xsl:attribute name="table-layout">fixed</xsl:attribute><!-- required by Apache FOP; does not support 'auto' layout -->
         <xsl:attribute name="width">100%</xsl:attribute>
         <xsl:attribute name="space-before">5pt</xsl:attribute>
         <xsl:attribute name="space-after">5pt</xsl:attribute>
+        <xsl:attribute name="text-align-last">start</xsl:attribute><!-- reset 'justify' for equation numbering? -->
     </xsl:attribute-set>
     
     <xsl:attribute-set name="dl-eqn__body">

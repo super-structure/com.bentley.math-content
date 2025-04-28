@@ -20,11 +20,11 @@
     - [TexZilla](http://fred-wang.github.io/TeXZilla/) ([on GitHub](https://github.com/fred-wang/TeXZilla)) - TeX 2 MathML 2 SVG
 * [ ] Provide fetch mechanism for equation number for links to an equation-block or equation-figure (without title)
 * [x] Automatic equation numbering (when `<equation-number>` element is empty)
-* [ ] Special transformation & rendering of definition lists as equation symbols
+* [x] Special transformation & rendering of definition lists as equation symbols
 * [ ] Provide anchor links for each equation number
 * [ ] Support `<mathref>` to "pull" in external equation content (i.e., .mml files)
-* [ ] Links to `<equation-blocks>` and `<equation-figures>` (without titles) reference the `<equation-number>` (sim. to how tables and figures behave).
-* [ ] Account for combined empty & filled `<equation-number>` elements.
+* [x] Links to `<equation-blocks>` and `<equation-figures>` (without titles) reference the `<equation-number>` (sim. to how tables and figures behave).
+* [x] Account for combined empty & filled `<equation-number>` elements.
 
 ## To Do
 

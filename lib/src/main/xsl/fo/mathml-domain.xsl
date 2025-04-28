@@ -24,13 +24,7 @@
     
     <xsl:template match="*[contains(@class, ' mathml-d/mathml ')]">
         <xsl:message>MATH-PROC: [<xsl:value-of select="$MATH-PROC"/>]</xsl:message>
-        <!--<xsl:variable name="element-type">
-            <xsl:choose>
-                <xsl:when test="parent::*[contains(@class,' equation-d/equation-inline ')]">span</xsl:when>
-                <xsl:otherwise>div</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>-->
-         <xsl:choose>
+         <!--<xsl:choose>
              <xsl:when test="parent::*[contains(@class,' equation-d/equation-inline ')]">
                 <fo:inline>
                     <xsl:call-template name="apply-mathml"/>
@@ -41,7 +35,10 @@
                      <xsl:call-template name="apply-mathml"/>
                 </fo:block>
              </xsl:otherwise>
-         </xsl:choose>
+         </xsl:choose>-->
+        <fo:inline>
+            <xsl:call-template name="apply-mathml"/>
+        </fo:inline>
         
         <!--<xsl:if test="child::*">
             <fo:instream-foreign-object>
@@ -70,9 +67,9 @@
             <xsl:if test="ancestor::equation-figure/@scale">
                 <xsl:attribute name="content-width" select="ancestor::equation-figure/@scale || '%'"/>
             </xsl:if>
-            <xsl:if test="ancestor::equation-block/equation-number">
-                <xsl:attribute name="alignment-baseline">middle</xsl:attribute> <!-- centers the eqn numbering -->
-            </xsl:if>
+           <!-- <xsl:if test="ancestor::equation-block/equation-number">
+                <xsl:attribute name="alignment-baseline">middle</xsl:attribute> <!-\- centers the eqn numbering -\->
+            </xsl:if>-->
             <!-- pick a template mode based on the processing specified -->
             <xsl:choose>
                 <xsl:when test="$MATH-PROC = 'mathjax-pre' or $MATH-PROC = 'jeuclid'">

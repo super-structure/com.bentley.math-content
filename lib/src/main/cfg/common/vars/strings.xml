@@ -33,6 +33,8 @@
   <lang xml:lang="pt-pt" filename="strings-pt-pt.xml"/>
   <lang xml:lang="ru"    filename="strings-ru-ru.xml"/>
   <lang xml:lang="ru-ru" filename="strings-ru-ru.xml"/>
+  <lang xml:lang="tr"    filename="strings-tr-tr.xml"/>
+  <lang xml:lang="tr-tr" filename="strings-tr-tr.xml"/>
   <lang xml:lang="zh"    filename="strings-zh-cn.xml"/>
   <lang xml:lang="zh-cn" filename="strings-zh-cn.xml"/>
   <lang xml:lang="zh-hans" filename="strings-zh-cn.xml"/>

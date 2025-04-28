@@ -6,6 +6,7 @@ resource/node_modules
 *.7z
 *.code-workspace
 *.class
+.vscode
 
 # OS generated files #
 ######################

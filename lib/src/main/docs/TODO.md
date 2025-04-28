@@ -22,7 +22,7 @@ Track these issues & features in ADO or in GitHub?
     - Copy over .mml files to temp *first* using depend.preprocess.topicpull.pre
     - Is there a possibility that .mml files have different extension? Have different namespace inside?
     - Different extensions can be in a dita extension for file types?
-* [ ] Need to use dita.xsl.topicpull extension point; still not working with empty eqn numbers
+* [x] Need to use dita.xsl.topicpull extension point; still not working with empty eqn numbers
     - need to have the topicpull steps count up the equation-numbers?
 
 ## Won't Do
