@@ -49,14 +49,6 @@
     
     <!-- Determine the number of the equation being linked to -->
     <xsl:template match="*[contains(@class,' equation-d/equation-number ')]" mode="topicpull:eqnnumber">
-        <!--<xsl:call-template name="compute-number">
-            <xsl:with-param name="all">
-              <xsl:number from="/*" count="key('count.topic.equations','include')" level="any"/>
-            </xsl:with-param>
-            <xsl:with-param name="except">
-              <xsl:number from="/*" count="key('count.topic.equations','exclude')" level="any"/>
-            </xsl:with-param>
-          </xsl:call-template>-->
         <!-- 2025-04-25 JTC: This is a different approach that using 'key's; which is how tables and figures are handled -->
         <xsl:variable name="prev-eqn-num-count" select="count(preceding::*[contains(@class, ' equation-d/equation-number ')][not(ancestor::draft-comment) and not(child::* or child::text())])"/>
         <xsl:variable name="eqn-count-actual" select="$prev-eqn-num-count + 1"/>

@@ -21,7 +21,6 @@
     
     <xsl:param name="MATH-PROC"/>
     <xsl:param name="EQN-PREFIX" select="'abbr'"/>
-    <!--<xsl:param name="equationlink.style" select="'NUMBER'"/>-->
     
     <xsl:variable name="equationlink.lead">
         <xsl:choose>
@@ -171,13 +170,8 @@
         mode="topicpull:resolvelinktext"
         priority="10">
         <xsl:param name="linkElement" as="element()"/>
-       <!-- <xsl:variable name="fig-count-actual">
-            <xsl:apply-templates select="*[contains(@class,' equation-d/equation-number ')][1]" mode="topicpull:eqnnumber"/>
-        </xsl:variable>-->
-        <xsl:message>******** Equation Link Text ************</xsl:message>
         <xsl:value-of select="$equationlink.lead"/>
         <xsl:text> </xsl:text>
-        <!--<xsl:apply-templates select="$targetElement//*[contains(@class, ' equation-d/equation-number ')][1]" mode="eqn.title-number"/>-->
         <xsl:apply-templates select="*[contains(@class,' equation-d/equation-number ')][1]" mode="topicpull:eqnnumber"/>
     </xsl:template>
     
@@ -192,24 +186,6 @@
             </xsl:with-param>
         </xsl:call-template>
     </xsl:template>
-    
-    <!--<xsl:template match="*" mode="topicpull:equation-linktext">
-        <xsl:param name="eqncount"/>
-        
-        <xsl:choose>
-            <xsl:when test="$FIGURELINK = 'TITLE'">
-                <xsl:apply-templates select="$figtitle" mode="text-only"/>
-            </xsl:when>
-            <!-\- $FIGURELINK = 'NUMBER' -\->
-            <xsl:otherwise>
-                <xsl:value-of select="$figtext"/>
-                <xsl:call-template name="getVariable">
-                    <xsl:with-param name="id" select="'figure-number-separator'"/>
-                </xsl:call-template>
-                <xsl:value-of select="$figcount"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>-->
     
     <!-- If a link is to an equation number, assume the parent is the real target, process accordingly -->
     <xsl:template match="*[contains(@class,' equation-d/equation-number ')]" mode="topicpull:resolvelinktext">

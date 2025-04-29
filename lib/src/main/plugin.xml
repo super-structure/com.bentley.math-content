@@ -5,8 +5,8 @@
 * Copyright © Bentley Systems, Incorporated. All rights reserved.
 *
 ****************************************************************************** -->
-<plugin id="com.bentley.math-content" version="1.1.0">
-    <feature extension="package.version" value="1.1.0"/>
+<plugin id="com.bentley.math-content" version="1.2.0">
+    <feature extension="package.version" value="1.2.0"/>
     <feature extension="package.support.name" value="Jason Coleman"/>
     <feature extension="package.support.email" value="jason.coleman@bentley.com"/>
     
@@ -60,7 +60,7 @@
             <val desc="Use MathML markup in resulting HTML and add MathJax CDN in footer">mathjax-cdn</val>
             <!--<val desc="Use JEuclid Java library to pre-render the MathML into SVG">jeuclid</val>-->
         </param>
-    <param name="args.mathml.svg2file" desc="Specifies if resulting SVG should be saved to reference files."
+        <param name="args.mathml.svg2file" desc="Specifies if resulting SVG should be saved to reference files."
             type="enum">
             <val default="true" desc="Embed converted SVG data within HTML.">no</val>
             <val desc="Save converted SVG data to external files.">yes</val>
@@ -79,6 +79,12 @@
             <val default="true" desc="use MathML mark up in the resulting FO">none</val>
             <val desc="Use MathJax-Node to pre-render the MathML into SVG">mathjax-pre</val>
             <!--<val desc="Use JEuclid Java library to pre-render the MathML into SVG">jeuclid</val>-->
+        </param>
+        <param name="args.eqns.number.chapter" 
+            desc="Specifies is equations should be numbered by chapter/appendix or by the full document"
+            type="enum">
+            <val default="true">yes</val>
+            <val>no</val>
         </param>
     </transtype>
     <feature extension="dita.conductor.html5.toc.param" file="InsertParams.xml"/>

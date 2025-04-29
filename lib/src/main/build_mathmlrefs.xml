@@ -10,6 +10,7 @@ Copyright © Bentley Systems, Incorporated. All rights reserved
       <property name="args.eqnlink.style" value="abbr"/>
       <property name="args.mathml.processing" value="none"/>
       <property name="args.mathml.svg2file" value="no"/>
+      <property name="args.eqns.number.chapter" value="yes"/>
       
       <dita-ot-fail id="MJXA001W">
          <condition>
@@ -37,12 +38,12 @@ Copyright © Bentley Systems, Incorporated. All rights reserved
          </condition>
       </dita-ot-fail>      
       
-      <!-- are these logged in the main input echo? -->
       <echo level="info">*****************************************************************</echo>
       <echo level="info">* Log the MathML &amp; equation processing arguments:</echo>
       <echo level="info">*    args.mathml.processing = ${args.mathml.processing}</echo>
       <echo level="info">*    args.eqnlink.style = ${args.eqnlink.style}</echo>
       <echo level="info">*    args.mathml.svg2file = ${args.mathml.svg2file}</echo>
+      <echo level="info">*    args.eqns.number.chapter = ${args.eqns.number.chapter}</echo>
       <echo level="info">*****************************************************************</echo>
       <echo level="info">*    node.installed = ${node.installed}</echo>
       <echo level="info">*****************************************************************</echo>
