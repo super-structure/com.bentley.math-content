@@ -118,8 +118,9 @@
     <xsl:template name="convert-mathml2svg-jeuclid">
         <xsl:param name="mathml"/>
         <!-- apply jeuclid function on this filename using custom java function 'jeuclid:mml2svg' -->
-        <xsl:message>**JEuclid support for transforming MathML to be completed.**</xsl:message>
-        <svg/>
+        <xsl:message>Transforming MathML to SVG using JEuclid</xsl:message>
+        <xsl:copy-of select="parse-xml(jeuclid:mml2svg($mathml))" use-when="not(function-available('saxon:parse'))"/>
+        <xsl:copy-of select="saxon:parse(jeuclid:mml2svg($mathml))" use-when="function-available('saxon:parse')"/>
     </xsl:template>
     
 </xsl:stylesheet>

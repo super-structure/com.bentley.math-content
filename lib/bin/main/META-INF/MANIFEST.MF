@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Created-By: 17.0.9 (Microsoft)
-Main-Class: com.bentley.mathml.svg.MathMLToSVG
-
+Main-Class: com.bentley.mathml.svg.MathMLToSVGMathJax
+Main-Class: com.bentley.mathml.svg.MathMLToSVGJEuclid

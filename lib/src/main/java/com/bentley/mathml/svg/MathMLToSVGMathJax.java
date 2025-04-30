@@ -45,7 +45,7 @@ import net.sf.saxon.om.TreeModel;
 // import net.sf.saxon.TransformerFactoryImpl;
 // import net.sf.saxon.BasicTransformerFactory;
 
-public class MathMLToSVG extends ExtensionFunctionDefinition {
+public class MathMLToSVGMathJax extends ExtensionFunctionDefinition {
 /**
  * Returns SVG contents as a string for using in an XSLT stylesheet.
  * Takes an input MathML string and returns the SVG rendering of that
@@ -56,7 +56,7 @@ public class MathMLToSVG extends ExtensionFunctionDefinition {
  * use in XSLT stylesheets in a DITA Open Toolkit plugin.
  * 
  * @author	Jason T. Coleman
- * @version 1.10, 15 Februar, 2024
+ * @version 1.10, 15 February, 2024
  */
 	  @Override
 	  public StructuredQName getFunctionQName() {
@@ -77,7 +77,7 @@ public class MathMLToSVG extends ExtensionFunctionDefinition {
 		/**Return the File URI of the Jar file
 		 * Source: https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file
 		 */
-		return new File(MathMLToSVG.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+		return new File(MathMLToSVGMathJax.class.getProtectionDomain().getCodeSource().getLocation().toURI());
 	  }
 
 	  @Override
@@ -203,7 +203,7 @@ public class MathMLToSVG extends ExtensionFunctionDefinition {
 				// https://www.saxonica.com/documentation12/index.html#!using-xsl/embedding/s9api-transformation
 				Processor processor = new Processor(false);
 				XsltCompiler compiler = processor.newXsltCompiler();
-				InputStream stream = MathMLToSVG.class.getResourceAsStream("/mj-svg-clean.xsl");
+				InputStream stream = MathMLToSVGMathJax.class.getResourceAsStream("/mj-svg-clean.xsl");
 				XsltExecutable stylesheet = compiler.compile(new StreamSource(stream));
 				Serializer outString = processor.newSerializer(new StringWriter());
 				//https://www.saxonica.com/documentation12/index.html#!javadoc/net.sf.saxon.s9api/Serializer@serializeNodeToString

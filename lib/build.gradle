@@ -27,6 +27,12 @@ dependencies {
     implementation group: 'net.sf.saxon', name: 'Saxon-HE', version: '12.3'
     // https://mvnrepository.com/artifact/org.xmlresolver/xmlresolver
     implementation group: 'org.xmlresolver', name: 'xmlresolver', version: '5.2.0'
+    // https://mvnrepository.com/artifact/net.sourceforge.jeuclid/jeuclid-core
+    // implementation("net.sourceforge.jeuclid:jeuclid-core:3.1.9") 
+    // https://mvnrepository.com/artifact/de.rototor.jeuclid/jeuclid-core
+    implementation group: 'de.rototor.jeuclid', name: 'jeuclid-core', version: '3.1.14'
+    // https://mvnrepository.com/artifact/org.w3c/dom
+    implementation group: 'org.w3c', name: 'dom', version: '2.3.0-jaxb-1.0.6'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -46,7 +52,7 @@ tasks.named('jar') {
         attributes('Implementation-Title': project.name,
                    'Implementation-Version': project.version)
     }
-    exclude('call-mathjax.js','messages.xml','package-lock.json','package.json','node_modules')
+    exclude('call-mathjax.js','messages.xml','package-lock.json','package.json','node_modules', 'jeuclid-core-3.1.9.jar')
 }
 
 task copyTask(type: Copy) {

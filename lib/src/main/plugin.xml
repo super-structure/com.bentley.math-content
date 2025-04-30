@@ -16,13 +16,13 @@
 
     <extension-point id="dita.mathml.extensions" name="MathML file extension"/>
     
-    <feature extension="dita.conductor.lib.import" file="lib/MathMLToSVG-1.0.0.jar"/>
+    <feature extension="dita.conductor.lib.import" file="lib/MathMLToSVG-1.1.0.jar"/>
     
     <!--<feature extension="dita.conductor.lib.import" file="lib/latexToSVG.jar"/>
     <feature extension="dita.conductor.lib.import" file="lib/jlatexmath-1.0.7.jar"/>-->
     <!-- include JEuclid for FOP -->
-    <!--<feature extension="dita.conductor.lib.import" file="lib/jeuclid-core-3.1.9.jar"/>
-    <feature extension="dita.conductor.lib.import" file="lib/jeuclid-fop-3.1.9.jar"/>-->
+    <feature extension="dita.conductor.lib.import" file="lib/jeuclid-core-3.1.9.jar"/>
+    <!--<feature extension="dita.conductor.lib.import" file="lib/jeuclid-fop-3.1.9.jar"/>-->
     
     <feature extension="dita.preprocess.topicpull.param" file="InsertParams.xml"/>
     <feature extension="dita.conductor.html5.param" file="InsertParams.xml"/>
@@ -31,9 +31,6 @@
     
     <feature extension="depend.preprocess.pre" value="bentley:math-content-init"/>
     <feature extension="depend.preprocess.post" value="bentley:mathmlrefs"/>
-    <!--<feature extension="ant.import" file="process_mathjax.xml" />
-    <feature extension="depend.preprocess.pre" value="bentley:mathjax.init" />
-    <feature extension="depend.preprocess.post" value="bentley:mathjax.post" />-->
 
     <feature extension="dita.xsl.topicpull" value="xsl/preprocess/topicpull-equation-d.xsl" type="file"/>
     <feature extension="dita.xsl.xhtml" value="xsl/equation-d.xsl" type="file"/>
